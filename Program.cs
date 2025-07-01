@@ -1,7 +1,7 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
-using ProjectR.Backend.API.Middleware;
+using ProjectR.Backend.Middleware;
 using ProjectR.Backend.Application.AppSettings;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using Serilog;

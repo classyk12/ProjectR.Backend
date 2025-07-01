@@ -3,7 +3,7 @@ using System.Net.Mime;
 using System.Text.Json;
 using ProjectR.Backend.Application.Models;
 
-namespace ProjectR.Backend.API.Middleware
+namespace ProjectR.Backend.Middleware
 {
     public class ExceptionMiddleware
     {
