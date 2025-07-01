@@ -1,0 +1,6 @@
+//Setup Database Context
+//Setup Logging
+//Setup Validation
+//Setup Custom/Global Exception handler
+//Setup Generic Response Models
+//Seup Constants
