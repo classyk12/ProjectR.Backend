@@ -1,7 +1,9 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.EntityFrameworkCore;
 using ProjectR.Backend.API.Middleware;
 using ProjectR.Backend.Application.AppSettings;
+using ProjectR.Backend.Persistence.DatabaseContext;
 using Serilog;
 
 namespace ProjectR.Backend.API
@@ -28,9 +30,19 @@ namespace ProjectR.Backend.API
                    .AddJsonFile("appsettings.json", optional: false)
                    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true);
 
+            string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
+
             builder.Services.Configure<TestSettings>(builder.Configuration.GetSection("ProcessingSettings"));
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseNpgsql(connectionString));
 
             WebApplication app = builder.Build();
+
+            using (IServiceScope scope = app.Services.CreateScope())
+            {
+                AppDbContext db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                db.Database.Migrate();  // Apply any pending migrations
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

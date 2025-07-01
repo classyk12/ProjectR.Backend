@@ -1,0 +1,14 @@
+2025-07-01 14:04:17.700 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-01 14:04:18.117 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-01 14:04:18.138 +00:00 [DBG] Creating DbConnection.
+2025-07-01 14:04:18.190 +00:00 [DBG] Created DbConnection. (49ms).
+2025-07-01 14:04:18.197 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 14:04:24.519 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 14:08:03.970 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-01 14:08:04.500 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-01 14:08:04.524 +00:00 [DBG] Creating DbConnection.
+2025-07-01 14:08:04.582 +00:00 [DBG] Created DbConnection. (57ms).
+2025-07-01 14:08:04.588 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 14:08:10.864 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 14:08:55.922 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-01 14:09:02.206 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None

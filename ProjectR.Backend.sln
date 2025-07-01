@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend.API", "ProjectR.Backend.API.csproj", "{9CB0D30E-7031-4705-8860-EDC4F655744F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend", "ProjectR.Backend.csproj", "{9CB0D30E-7031-4705-8860-EDC4F655744F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend.Infrastructure", "ProjectR.Backend.Infrastructure\ProjectR.Backend.Infrastructure.csproj", "{53C9795F-BCE4-4108-BF78-90B573566E84}"
 EndProject

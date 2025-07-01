@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: yourpassword
+      POSTGRES_DB: projectr
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      
+    networks:
+      - mynetwork
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: projectr-api
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+    ports:
+      - "5001:8080"
+
+volumes:
+  postgres_data:
+
+networks:
+  mynetwork:
