@@ -6,7 +6,7 @@ using ProjectR.Backend.Application.AppSettings;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using Serilog;
 
-namespace ProjectR.Backend.API
+namespace ProjectR.Backend
 {
     public static class Program
     {
@@ -36,12 +36,22 @@ namespace ProjectR.Backend.API
             builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(connectionString));
 
+            builder.Services.AddHealthChecks();
+
             WebApplication app = builder.Build();
 
             using (IServiceScope scope = app.Services.CreateScope())
             {
-                AppDbContext db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-                db.Database.Migrate();  // Apply any pending migrations
+                try
+                {
+                    AppDbContext db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                    db.Database.Migrate();
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                } // Apply any pending migrations
             }
 
             // Configure the HTTP request pipeline.

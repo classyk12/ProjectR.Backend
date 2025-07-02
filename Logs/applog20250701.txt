@@ -12,3 +12,285 @@
 2025-07-01 14:08:10.864 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://postgres:5432'.
 2025-07-01 14:08:55.922 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
 2025-07-01 14:09:02.206 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-01 17:07:36.557 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-01 17:07:37.194 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-01 17:07:37.247 +00:00 [DBG] Creating DbConnection.
+2025-07-01 17:07:37.327 +00:00 [DBG] Created DbConnection. (76ms).
+2025-07-01 17:07:37.341 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 17:07:42.790 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 17:09:27.379 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-01 17:09:27.916 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-01 17:09:27.944 +00:00 [DBG] Creating DbConnection.
+2025-07-01 17:09:27.991 +00:00 [DBG] Created DbConnection. (45ms).
+2025-07-01 17:09:27.998 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 17:09:32.787 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 17:14:20.066 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-01 17:14:20.614 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-01 17:14:20.639 +00:00 [DBG] Creating DbConnection.
+2025-07-01 17:14:20.691 +00:00 [DBG] Created DbConnection. (49ms).
+2025-07-01 17:14:20.701 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 17:14:25.843 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 17:15:28.869 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-01 17:15:29.422 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-01 17:15:29.450 +00:00 [DBG] Creating DbConnection.
+2025-07-01 17:15:29.496 +00:00 [DBG] Created DbConnection. (43ms).
+2025-07-01 17:15:29.503 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 17:15:34.889 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 17:17:37.752 +00:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2025-07-01 17:17:37.887 +00:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-07-01 17:19:40.216 +00:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2025-07-01 17:19:40.286 +00:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-07-01 17:19:40.297 +00:00 [DBG] Hosting starting
+2025-07-01 17:19:40.439 +00:00 [DBG] Using development certificate: CN=localhost (Thumbprint: 7D3AA525EF2E582EA7E6EE944EACBCC2ABEB2365)
+2025-07-01 17:19:40.660 +00:00 [INF] Now listening on: http://[::]:8080
+2025-07-01 17:19:40.661 +00:00 [INF] Now listening on: https://[::]:8081
+2025-07-01 17:19:40.662 +00:00 [DBG] Loaded hosting startup assembly ProjectR.Backend
+2025-07-01 17:19:40.664 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-01 17:19:40.665 +00:00 [INF] Hosting environment: Development
+2025-07-01 17:19:40.666 +00:00 [INF] Content root path: /app
+2025-07-01 17:19:40.666 +00:00 [DBG] Hosting started
+2025-07-01 17:19:41.581 +00:00 [DBG] Connection id "0HNDOODRKF05I" accepted.
+2025-07-01 17:19:41.584 +00:00 [DBG] Connection id "0HNDOODRKF05J" accepted.
+2025-07-01 17:19:41.584 +00:00 [DBG] Connection id "0HNDOODRKF05I" started.
+2025-07-01 17:19:41.602 +00:00 [DBG] Connection id "0HNDOODRKF05J" started.
+2025-07-01 17:19:41.714 +00:00 [DBG] Connection id "0HNDOODRKF05I" received FIN.
+2025-07-01 17:19:41.743 +00:00 [DBG] Connection 0HNDOODRKF05J established using the following protocol: "Tls13"
+2025-07-01 17:19:41.743 +00:00 [DBG] Connection 0HNDOODRKF05I established using the following protocol: "Tls13"
+2025-07-01 17:19:41.806 +00:00 [DBG] Connection id "0HNDOODRKF05I" is closed. The last processed stream ID was 0.
+2025-07-01 17:19:41.808 +00:00 [DBG] Connection id "0HNDOODRKF05I" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-07-01 17:19:41.819 +00:00 [DBG] The connection queue processing loop for 0HNDOODRKF05I completed.
+2025-07-01 17:19:41.830 +00:00 [DBG] Connection id "0HNDOODRKF05I" stopped.
+2025-07-01 17:19:41.872 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32774/swagger - null null
+2025-07-01 17:19:41.875 +00:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2025-07-01 17:19:41.886 +00:00 [DBG] No candidates found for the request path '/swagger'
+2025-07-01 17:19:41.889 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:19:41.925 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32774/swagger - 301 0 null 48.6112ms
+2025-07-01 17:19:41.936 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32774/swagger/index.html - null null
+2025-07-01 17:19:41.937 +00:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2025-07-01 17:19:41.938 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:19:42.085 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32774/swagger/index.html - 200 null text/html;charset=utf-8 149.5979ms
+2025-07-01 17:19:42.116 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32774/swagger/swagger-ui.css - null null
+2025-07-01 17:19:42.158 +00:00 [DBG] No candidates found for the request path '/swagger/swagger-ui.css'
+2025-07-01 17:19:42.159 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:19:42.159 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32774/swagger/swagger-ui-standalone-preset.js - null null
+2025-07-01 17:19:42.159 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32774/swagger/swagger-ui-bundle.js - null null
+2025-07-01 17:19:42.163 +00:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-standalone-preset.js'
+2025-07-01 17:19:42.164 +00:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-bundle.js'
+2025-07-01 17:19:42.164 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:19:42.165 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:19:42.261 +00:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-07-01 17:19:42.263 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32774/swagger/swagger-ui.css - 200 143943 text/css 146.8211ms
+2025-07-01 17:19:42.296 +00:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-07-01 17:19:42.297 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32774/swagger/swagger-ui-standalone-preset.js - 200 339486 text/javascript 137.8792ms
+2025-07-01 17:19:42.398 +00:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-07-01 17:19:42.399 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32774/swagger/swagger-ui-bundle.js - 200 1096145 text/javascript 240.9672ms
+2025-07-01 17:19:42.803 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32774/swagger/v1/swagger.json - null null
+2025-07-01 17:19:42.829 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32774/swagger/favicon-32x32.png - null null
+2025-07-01 17:19:42.829 +00:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2025-07-01 17:19:42.840 +00:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2025-07-01 17:19:42.842 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:19:42.846 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:19:42.851 +00:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-07-01 17:19:42.854 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32774/swagger/favicon-32x32.png - 200 628 image/png 26.3829ms
+2025-07-01 17:19:42.891 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32774/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 88.0083ms
+2025-07-01 17:31:15.529 +00:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2025-07-01 17:31:15.599 +00:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-07-01 17:31:15.609 +00:00 [DBG] Hosting starting
+2025-07-01 17:31:15.768 +00:00 [DBG] Using development certificate: CN=localhost (Thumbprint: 7D3AA525EF2E582EA7E6EE944EACBCC2ABEB2365)
+2025-07-01 17:31:16.000 +00:00 [INF] Now listening on: http://[::]:8080
+2025-07-01 17:31:16.001 +00:00 [INF] Now listening on: https://[::]:8081
+2025-07-01 17:31:16.002 +00:00 [DBG] Loaded hosting startup assembly ProjectR.Backend
+2025-07-01 17:31:16.003 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-01 17:31:16.004 +00:00 [INF] Hosting environment: Development
+2025-07-01 17:31:16.005 +00:00 [INF] Content root path: /app
+2025-07-01 17:31:16.005 +00:00 [DBG] Hosting started
+2025-07-01 17:31:16.780 +00:00 [DBG] Connection id "0HNDOOKAQDDE7" accepted.
+2025-07-01 17:31:16.788 +00:00 [DBG] Connection id "0HNDOOKAQDDE7" started.
+2025-07-01 17:31:16.788 +00:00 [DBG] Connection id "0HNDOOKAQDDE8" accepted.
+2025-07-01 17:31:16.791 +00:00 [DBG] Connection id "0HNDOOKAQDDE8" started.
+2025-07-01 17:31:16.897 +00:00 [DBG] Connection id "0HNDOOKAQDDE7" received FIN.
+2025-07-01 17:31:16.930 +00:00 [DBG] Connection 0HNDOOKAQDDE8 established using the following protocol: "Tls13"
+2025-07-01 17:31:16.930 +00:00 [DBG] Connection 0HNDOOKAQDDE7 established using the following protocol: "Tls13"
+2025-07-01 17:31:16.976 +00:00 [DBG] Connection id "0HNDOOKAQDDE7" is closed. The last processed stream ID was 0.
+2025-07-01 17:31:16.977 +00:00 [DBG] Connection id "0HNDOOKAQDDE7" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-07-01 17:31:16.989 +00:00 [DBG] The connection queue processing loop for 0HNDOOKAQDDE7 completed.
+2025-07-01 17:31:16.997 +00:00 [DBG] Connection id "0HNDOOKAQDDE7" stopped.
+2025-07-01 17:31:17.025 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32776/swagger - null null
+2025-07-01 17:31:17.027 +00:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2025-07-01 17:31:17.037 +00:00 [DBG] No candidates found for the request path '/swagger'
+2025-07-01 17:31:17.039 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:31:17.062 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32776/swagger - 301 0 null 33.728ms
+2025-07-01 17:31:17.073 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32776/swagger/index.html - null null
+2025-07-01 17:31:17.074 +00:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2025-07-01 17:31:17.074 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:31:17.210 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32776/swagger/index.html - 200 null text/html;charset=utf-8 136.9336ms
+2025-07-01 17:31:17.238 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32776/swagger/swagger-ui.css - null null
+2025-07-01 17:31:17.239 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32776/swagger/swagger-ui-bundle.js - null null
+2025-07-01 17:31:17.259 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32776/swagger/swagger-ui-standalone-preset.js - null null
+2025-07-01 17:31:17.260 +00:00 [DBG] No candidates found for the request path '/swagger/swagger-ui.css'
+2025-07-01 17:31:17.262 +00:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-bundle.js'
+2025-07-01 17:31:17.264 +00:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-standalone-preset.js'
+2025-07-01 17:31:17.266 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:31:17.268 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:31:17.269 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:31:17.322 +00:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-07-01 17:31:17.323 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32776/swagger/swagger-ui.css - 200 143943 text/css 84.4904ms
+2025-07-01 17:31:17.398 +00:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-07-01 17:31:17.399 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32776/swagger/swagger-ui-standalone-preset.js - 200 339486 text/javascript 160.2793ms
+2025-07-01 17:31:17.499 +00:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-07-01 17:31:17.500 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32776/swagger/swagger-ui-bundle.js - 200 1096145 text/javascript 261.3196ms
+2025-07-01 17:31:17.799 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32776/swagger/v1/swagger.json - null null
+2025-07-01 17:31:17.800 +00:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2025-07-01 17:31:17.800 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:31:17.827 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32776/swagger/favicon-32x32.png - null null
+2025-07-01 17:31:17.830 +00:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2025-07-01 17:31:17.831 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32776/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 32.2394ms
+2025-07-01 17:31:17.833 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:31:17.838 +00:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-07-01 17:31:17.839 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32776/swagger/favicon-32x32.png - 200 628 image/png 12.5726ms
+2025-07-01 17:32:47.870 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-01 17:32:48.454 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-01 17:32:48.491 +00:00 [DBG] Creating DbConnection.
+2025-07-01 17:32:48.552 +00:00 [DBG] Created DbConnection. (59ms).
+2025-07-01 17:32:48.561 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 17:32:53.821 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 17:37:08.695 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-01 17:37:09.272 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-01 17:37:09.300 +00:00 [DBG] Creating DbConnection.
+2025-07-01 17:37:09.351 +00:00 [DBG] Created DbConnection. (49ms).
+2025-07-01 17:37:09.359 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 17:37:14.842 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 17:51:15.851 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-01 17:51:16.395 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-01 17:51:16.423 +00:00 [DBG] Creating DbConnection.
+2025-07-01 17:51:16.474 +00:00 [DBG] Created DbConnection. (49ms).
+2025-07-01 17:51:16.482 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 17:51:21.801 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 17:54:02.482 +00:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2025-07-01 17:54:02.563 +00:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-07-01 17:54:02.578 +00:00 [DBG] Hosting starting
+2025-07-01 17:54:02.755 +00:00 [DBG] Using development certificate: CN=localhost (Thumbprint: 7D3AA525EF2E582EA7E6EE944EACBCC2ABEB2365)
+2025-07-01 17:54:02.987 +00:00 [INF] Now listening on: http://[::]:8080
+2025-07-01 17:54:02.989 +00:00 [INF] Now listening on: https://[::]:8081
+2025-07-01 17:54:02.991 +00:00 [DBG] Loaded hosting startup assembly ProjectR.Backend
+2025-07-01 17:54:02.992 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-01 17:54:02.994 +00:00 [INF] Hosting environment: Development
+2025-07-01 17:54:02.994 +00:00 [INF] Content root path: /app
+2025-07-01 17:54:02.995 +00:00 [DBG] Hosting started
+2025-07-01 17:54:04.722 +00:00 [DBG] Connection id "0HNDOP12G4B44" accepted.
+2025-07-01 17:54:04.732 +00:00 [DBG] Connection id "0HNDOP12G4B44" started.
+2025-07-01 17:54:04.732 +00:00 [DBG] Connection id "0HNDOP12G4B45" accepted.
+2025-07-01 17:54:04.760 +00:00 [DBG] Connection id "0HNDOP12G4B45" started.
+2025-07-01 17:54:04.871 +00:00 [DBG] Connection 0HNDOP12G4B44 established using the following protocol: "Tls13"
+2025-07-01 17:54:04.871 +00:00 [DBG] Connection 0HNDOP12G4B45 established using the following protocol: "Tls13"
+2025-07-01 17:54:05.022 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32780/swagger - null null
+2025-07-01 17:54:05.026 +00:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2025-07-01 17:54:05.046 +00:00 [DBG] No candidates found for the request path '/swagger'
+2025-07-01 17:54:05.047 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:54:05.083 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32780/swagger - 301 0 null 62.1839ms
+2025-07-01 17:54:05.102 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32780/swagger/index.html - null null
+2025-07-01 17:54:05.102 +00:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2025-07-01 17:54:05.105 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:54:05.333 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32780/swagger/index.html - 200 null text/html;charset=utf-8 231.3765ms
+2025-07-01 17:54:05.347 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32780/swagger/swagger-ui.css - null null
+2025-07-01 17:54:05.349 +00:00 [DBG] No candidates found for the request path '/swagger/swagger-ui.css'
+2025-07-01 17:54:05.350 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:54:05.355 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32780/swagger/swagger-ui-bundle.js - null null
+2025-07-01 17:54:05.359 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32780/swagger/swagger-ui-standalone-preset.js - null null
+2025-07-01 17:54:05.380 +00:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-bundle.js'
+2025-07-01 17:54:05.381 +00:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-standalone-preset.js'
+2025-07-01 17:54:05.384 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:54:05.390 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:54:05.481 +00:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-07-01 17:54:05.482 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32780/swagger/swagger-ui.css - 200 143943 text/css 135.8127ms
+2025-07-01 17:54:05.694 +00:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-07-01 17:54:05.696 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32780/swagger/swagger-ui-standalone-preset.js - 200 339486 text/javascript 336.7774ms
+2025-07-01 17:54:05.907 +00:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-07-01 17:54:05.911 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32780/swagger/swagger-ui-bundle.js - 200 1096145 text/javascript 555.9284ms
+2025-07-01 17:54:06.410 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32780/swagger/v1/swagger.json - null null
+2025-07-01 17:54:06.452 +00:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2025-07-01 17:54:06.473 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32780/swagger/favicon-32x32.png - null null
+2025-07-01 17:54:06.474 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:54:06.475 +00:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2025-07-01 17:54:06.477 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 17:54:06.479 +00:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-07-01 17:54:06.482 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32780/swagger/favicon-32x32.png - 200 628 image/png 8.5679ms
+2025-07-01 17:54:06.525 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32780/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 157.6553ms
+2025-07-01 17:55:07.882 +00:00 [DBG] Connection id "0HNDOP12G4B44" received FIN.
+2025-07-01 17:55:07.895 +00:00 [DBG] The connection queue processing loop for 0HNDOP12G4B44 completed.
+2025-07-01 17:55:07.898 +00:00 [DBG] Connection id "0HNDOP12G4B44" is closed. The last processed stream ID was 0.
+2025-07-01 17:55:07.899 +00:00 [DBG] Connection id "0HNDOP12G4B44" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-07-01 17:55:07.915 +00:00 [DBG] Connection id "0HNDOP12G4B44" stopped.
+2025-07-01 18:02:47.620 +00:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2025-07-01 18:02:47.686 +00:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-07-01 18:02:47.695 +00:00 [DBG] Hosting starting
+2025-07-01 18:02:47.829 +00:00 [DBG] Using development certificate: CN=localhost (Thumbprint: 7D3AA525EF2E582EA7E6EE944EACBCC2ABEB2365)
+2025-07-01 18:02:48.058 +00:00 [INF] Now listening on: http://[::]:8080
+2025-07-01 18:02:48.059 +00:00 [INF] Now listening on: https://[::]:8081
+2025-07-01 18:02:48.060 +00:00 [DBG] Loaded hosting startup assembly ProjectR.Backend
+2025-07-01 18:02:48.061 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-01 18:02:48.062 +00:00 [INF] Hosting environment: Development
+2025-07-01 18:02:48.063 +00:00 [INF] Content root path: /app
+2025-07-01 18:02:48.063 +00:00 [DBG] Hosting started
+2025-07-01 18:02:48.826 +00:00 [DBG] Connection id "0HNDOP5UMBV12" accepted.
+2025-07-01 18:02:48.830 +00:00 [DBG] Connection id "0HNDOP5UMBV12" started.
+2025-07-01 18:02:48.833 +00:00 [DBG] Connection id "0HNDOP5UMBV13" accepted.
+2025-07-01 18:02:48.859 +00:00 [DBG] Connection id "0HNDOP5UMBV13" started.
+2025-07-01 18:02:48.933 +00:00 [DBG] Connection id "0HNDOP5UMBV12" received FIN.
+2025-07-01 18:02:48.946 +00:00 [DBG] Connection 0HNDOP5UMBV12 established using the following protocol: "Tls13"
+2025-07-01 18:02:48.946 +00:00 [DBG] Connection 0HNDOP5UMBV13 established using the following protocol: "Tls13"
+2025-07-01 18:02:49.009 +00:00 [DBG] Connection id "0HNDOP5UMBV12" is closed. The last processed stream ID was 0.
+2025-07-01 18:02:49.011 +00:00 [DBG] Connection id "0HNDOP5UMBV12" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-07-01 18:02:49.028 +00:00 [DBG] The connection queue processing loop for 0HNDOP5UMBV12 completed.
+2025-07-01 18:02:49.039 +00:00 [DBG] Connection id "0HNDOP5UMBV12" stopped.
+2025-07-01 18:02:49.082 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32782/swagger - null null
+2025-07-01 18:02:49.085 +00:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2025-07-01 18:02:49.094 +00:00 [DBG] No candidates found for the request path '/swagger'
+2025-07-01 18:02:49.095 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 18:02:49.128 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32782/swagger - 301 0 null 40.6965ms
+2025-07-01 18:02:49.138 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32782/swagger/index.html - null null
+2025-07-01 18:02:49.139 +00:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2025-07-01 18:02:49.140 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 18:02:49.280 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32782/swagger/index.html - 200 null text/html;charset=utf-8 142.0101ms
+2025-07-01 18:02:49.314 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32782/swagger/swagger-ui.css - null null
+2025-07-01 18:02:49.314 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32782/swagger/swagger-ui-standalone-preset.js - null null
+2025-07-01 18:02:49.314 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32782/swagger/swagger-ui-bundle.js - null null
+2025-07-01 18:02:49.319 +00:00 [DBG] No candidates found for the request path '/swagger/swagger-ui.css'
+2025-07-01 18:02:49.320 +00:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-standalone-preset.js'
+2025-07-01 18:02:49.320 +00:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-bundle.js'
+2025-07-01 18:02:49.321 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 18:02:49.323 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 18:02:49.324 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 18:02:49.457 +00:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-07-01 18:02:49.459 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32782/swagger/swagger-ui.css - 200 143943 text/css 144.8302ms
+2025-07-01 18:02:49.488 +00:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-07-01 18:02:49.490 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32782/swagger/swagger-ui-standalone-preset.js - 200 339486 text/javascript 175.52ms
+2025-07-01 18:02:49.625 +00:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-07-01 18:02:49.626 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32782/swagger/swagger-ui-bundle.js - 200 1096145 text/javascript 312.4861ms
+2025-07-01 18:02:49.913 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32782/swagger/v1/swagger.json - null null
+2025-07-01 18:02:49.914 +00:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2025-07-01 18:02:49.915 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 18:02:49.953 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32782/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 40.5795ms
+2025-07-01 18:02:49.957 +00:00 [INF] Request starting HTTP/2 GET https://localhost:32782/swagger/favicon-32x32.png - null null
+2025-07-01 18:02:49.983 +00:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2025-07-01 18:02:49.988 +00:00 [DBG] Request did not match any endpoints
+2025-07-01 18:02:49.996 +00:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-07-01 18:02:49.999 +00:00 [INF] Request finished HTTP/2 GET https://localhost:32782/swagger/favicon-32x32.png - 200 628 image/png 41.6045ms
+2025-07-01 18:03:35.488 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-01 18:03:36.110 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-01 18:03:36.145 +00:00 [DBG] Creating DbConnection.
+2025-07-01 18:03:36.204 +00:00 [DBG] Created DbConnection. (57ms).
+2025-07-01 18:03:36.216 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 18:03:41.828 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 19:13:24.826 +01:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-01 19:13:25.610 +01:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-01 19:13:25.644 +01:00 [DBG] Creating DbConnection.
+2025-07-01 19:13:25.740 +01:00 [DBG] Created DbConnection. (94ms).
+2025-07-01 19:13:25.746 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 19:13:28.801 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://postgres:5432'.
+2025-07-01 18:23:39.542 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-01 18:23:40.131 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-01 18:23:40.161 +00:00 [DBG] Creating DbConnection.
+2025-07-01 18:23:40.214 +00:00 [DBG] Created DbConnection. (50ms).
+2025-07-01 18:23:40.223 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://db:5432'.
+2025-07-01 18:23:45.867 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://db:5432'.

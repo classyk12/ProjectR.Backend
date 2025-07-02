@@ -8,6 +8,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: yourpassword
       POSTGRES_DB: projectr
+    
     ports:
       - "5432:5432"
     volumes:
@@ -29,12 +30,15 @@ services:
 
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=projectr;Username=myuser;Password=mypassword
 
     ports:
-      - "5001:8080"
+    - "8080:80"
+    - "8081:443"
 
 volumes:
   postgres_data:
 
 networks:
   mynetwork:
+
