@@ -27,31 +27,50 @@ namespace ProjectR.Backend
             builder.Services.AddSwaggerGen();
 
             builder.Configuration
-                   .AddJsonFile("appsettings.json", optional: false)
-                   .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true);
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+            .AddEnvironmentVariables();
 
             string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
+            Console.WriteLine($"Connection Srting: {connectionString}");
 
             builder.Services.Configure<TestSettings>(builder.Configuration.GetSection("ProcessingSettings"));
             builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(connectionString));
+            options.UseNpgsql(connectionString, options =>
+            {
+                options.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorCodesToAdd: []);
+            }));
 
             builder.Services.AddHealthChecks();
 
             WebApplication app = builder.Build();
 
-            using (IServiceScope scope = app.Services.CreateScope())
+            using IServiceScope scope = app.Services.CreateScope();
+            AppDbContext dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            int retry = 0;
+            bool connected = false;
+
+            while (!connected && retry < 10)
             {
                 try
                 {
-                    AppDbContext db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-                    db.Database.Migrate();
+                    Console.WriteLine($"⏳ Attempt {retry + 1}: Applying migrations...");
+                    dbContext.Database.Migrate();
+                    connected = true;
+                    Console.WriteLine("Migrations applied, DB ready.");
                 }
                 catch (Exception ex)
                 {
+                    retry++;
+                    Console.WriteLine($"DB not ready yet: {ex.Message}");
+                    Thread.Sleep(2000);
+                }
+            }
 
-                    throw ex;
-                } // Apply any pending migrations
+            if (!connected)
+            {
+                throw new Exception("Could not connect to database after multiple retries.");
             }
 
             // Configure the HTTP request pipeline.

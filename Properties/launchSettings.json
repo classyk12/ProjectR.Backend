@@ -28,13 +28,6 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    // "Docker Compose": {
-    //   "commandName": "DockerCompose",
-    //   "commandVersion": "1.0",
-    //   "serviceActions": {
-    //     "api": "StartDebugging"
-    //   }
-    // }
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
@@ -45,8 +38,17 @@
       },
       "publishAllPorts": true,
       "useSSL": true,
-        "serviceActions": {
+      "serviceActions": {
         "api": "StartDebugging"
+      }
+    },
+    "api": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:8081;http://localhost:8080",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   },

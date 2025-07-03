@@ -1,5 +1,5 @@
-//Setup Database Context
 //Setup Validation
 //Setup Generic Response Models
 //Seup Constants
 //Setup API versioning
+//Setup Docker compose per env

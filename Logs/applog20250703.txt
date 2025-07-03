@@ -1,0 +1,277 @@
+2025-07-03 08:11:56.430 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-03 08:11:56.990 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-03 08:11:57.010 +00:00 [DBG] Creating DbConnection.
+2025-07-03 08:11:57.070 +00:00 [DBG] Created DbConnection. (58ms).
+2025-07-03 08:11:57.076 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://db:5432'.
+2025-07-03 08:12:03.808 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://db:5432'.
+2025-07-03 08:19:26.197 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-03 08:19:26.608 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-03 08:19:26.628 +00:00 [DBG] Creating DbConnection.
+2025-07-03 08:19:26.684 +00:00 [DBG] Created DbConnection. (54ms).
+2025-07-03 08:19:26.690 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://db:5432'.
+2025-07-03 08:19:33.432 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://db:5432'.
+2025-07-03 08:20:37.210 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-03 08:20:37.679 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-03 08:20:37.701 +00:00 [DBG] Creating DbConnection.
+2025-07-03 08:20:37.743 +00:00 [DBG] Created DbConnection. (41ms).
+2025-07-03 08:20:37.749 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://host.docker.internal:5432'.
+2025-07-03 08:20:37.802 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://host.docker.internal:5432'.
+2025-07-03 08:22:02.749 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-03 08:22:03.169 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-03 08:22:03.189 +00:00 [DBG] Creating DbConnection.
+2025-07-03 08:22:03.233 +00:00 [DBG] Created DbConnection. (42ms).
+2025-07-03 08:22:03.241 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 08:22:03.275 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 10:16:32.475 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-03 10:16:32.928 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-03 10:16:32.946 +00:00 [DBG] Creating DbConnection.
+2025-07-03 10:16:32.994 +00:00 [DBG] Created DbConnection. (45ms).
+2025-07-03 10:16:32.999 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 10:16:33.036 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 10:26:53.508 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-03 10:26:53.922 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-03 10:26:53.941 +00:00 [DBG] Creating DbConnection.
+2025-07-03 10:26:53.987 +00:00 [DBG] Created DbConnection. (44ms).
+2025-07-03 10:26:53.992 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 10:26:54.032 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 10:28:42.156 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-03 10:28:42.581 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-03 10:28:42.599 +00:00 [DBG] Creating DbConnection.
+2025-07-03 10:28:42.645 +00:00 [DBG] Created DbConnection. (44ms).
+2025-07-03 10:28:42.651 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 10:28:42.685 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 10:34:35.920 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-03 10:34:36.306 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-03 10:34:36.324 +00:00 [DBG] Creating DbConnection.
+2025-07-03 10:34:36.366 +00:00 [DBG] Created DbConnection. (39ms).
+2025-07-03 10:34:36.370 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 10:34:36.407 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 10:35:42.475 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-03 10:35:42.847 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-03 10:35:42.865 +00:00 [DBG] Creating DbConnection.
+2025-07-03 10:35:42.907 +00:00 [DBG] Created DbConnection. (40ms).
+2025-07-03 10:35:42.912 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://xx:5432'.
+2025-07-03 10:35:49.646 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://xx:5432'.
+2025-07-03 10:58:31.464 +00:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-03 10:58:31.858 +00:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-03 10:58:31.879 +00:00 [DBG] Creating DbConnection.
+2025-07-03 10:58:31.925 +00:00 [DBG] Created DbConnection. (44ms).
+2025-07-03 10:58:31.931 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://xx:5432'.
+2025-07-03 10:58:38.666 +00:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://xx:5432'.
+2025-07-03 10:58:40.678 +00:00 [DBG] Opening connection to database 'projectr' on server 'tcp://xx:5432'.
+2025-07-03 12:12:16.375 +01:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-03 12:12:16.781 +01:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-03 12:12:16.802 +01:00 [DBG] Creating DbConnection.
+2025-07-03 12:12:16.853 +01:00 [DBG] Created DbConnection. (49ms).
+2025-07-03 12:12:16.860 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:12:16.951 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:12:18.978 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:12:18.992 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:12:21.011 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:12:21.024 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:12:23.039 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:12:23.059 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:12:25.072 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:12:25.086 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:12:27.110 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:12:27.122 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:12:29.147 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:12:29.159 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:12:31.185 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:12:31.197 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:13.391 +01:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-03 12:13:13.739 +01:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-03 12:13:13.757 +01:00 [DBG] Creating DbConnection.
+2025-07-03 12:13:13.789 +01:00 [DBG] Created DbConnection. (30ms).
+2025-07-03 12:13:13.795 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:13.863 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:15.883 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:15.896 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:17.918 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:17.932 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:19.959 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:19.972 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:21.993 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:22.006 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:24.023 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:24.050 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:26.078 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:26.091 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:28.115 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:28.124 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:30.155 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:30.174 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:32.191 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:13:32.204 +01:00 [ERR] An error occurred using the connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:16:35.826 +01:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-07-03 12:16:36.139 +01:00 [DBG] Entity Framework Core 9.0.1 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-07-03 12:16:36.159 +01:00 [DBG] Creating DbConnection.
+2025-07-03 12:16:36.196 +01:00 [DBG] Created DbConnection. (36ms).
+2025-07-03 12:16:36.203 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:16:36.286 +01:00 [DBG] Opened connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:16:36.291 +01:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-03 12:16:36.299 +01:00 [DBG] Created DbCommand for 'ExecuteReader' (7ms).
+2025-07-03 12:16:36.302 +01:00 [DBG] Initialized DbCommand for 'ExecuteReader' (12ms).
+2025-07-03 12:16:36.308 +01:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-03 12:16:36.334 +01:00 [ERR] Failed executing DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-03 12:16:36.341 +01:00 [DBG] Closing connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:16:36.349 +01:00 [DBG] Closed connection to database 'projectr' on server 'tcp://localhost:5432' (5ms).
+2025-07-03 12:16:36.357 +01:00 [INF] No migrations were found in assembly 'ProjectR.Backend.Persistence'. A migration needs to be added before the database can be updated.
+2025-07-03 12:16:36.360 +01:00 [DBG] Migrating using database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:16:36.364 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:16:36.369 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:16:36.382 +01:00 [DBG] Opened connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:16:36.384 +01:00 [DBG] Closing connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:16:36.388 +01:00 [DBG] Closed connection to database 'projectr' on server 'tcp://localhost:5432' (4ms).
+2025-07-03 12:16:36.391 +01:00 [DBG] Opening connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:16:36.394 +01:00 [DBG] Opened connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:16:36.457 +01:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-03 12:16:36.460 +01:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-03 12:16:36.462 +01:00 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (4ms).
+2025-07-03 12:16:36.464 +01:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-07-03 12:16:36.477 +01:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-07-03 12:16:36.484 +01:00 [DBG] Beginning transaction with isolation level 'Unspecified'.
+2025-07-03 12:16:36.487 +01:00 [DBG] Began transaction with isolation level 'ReadCommitted'.
+2025-07-03 12:16:36.490 +01:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-07-03 12:16:36.492 +01:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-07-03 12:16:36.494 +01:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-07-03 12:16:36.500 +01:00 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (8ms).
+2025-07-03 12:16:36.504 +01:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-07-03 12:16:36.510 +01:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-07-03 12:16:36.514 +01:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-07-03 12:16:36.516 +01:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-07-03 12:16:36.518 +01:00 [DBG] Initialized DbCommand for 'ExecuteReader' (4ms).
+2025-07-03 12:16:36.520 +01:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-03 12:16:36.524 +01:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-07-03 12:16:36.529 +01:00 [DBG] Closing data reader to 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:16:36.534 +01:00 [DBG] A data reader for 'projectr' on server 'tcp://localhost:5432' is being disposed after spending 5ms reading results.
+2025-07-03 12:16:36.539 +01:00 [INF] No migrations were applied. The database is already up to date.
+2025-07-03 12:16:36.541 +01:00 [DBG] Committing transaction.
+2025-07-03 12:16:36.547 +01:00 [DBG] Committed transaction.
+2025-07-03 12:16:36.551 +01:00 [DBG] Disposing transaction.
+2025-07-03 12:16:36.552 +01:00 [DBG] Closing connection to database 'projectr' on server 'tcp://localhost:5432'.
+2025-07-03 12:16:36.554 +01:00 [DBG] Closed connection to database 'projectr' on server 'tcp://localhost:5432' (1ms).
+2025-07-03 12:16:36.647 +01:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2025-07-03 12:16:36.687 +01:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-07-03 12:16:36.698 +01:00 [DBG] Hosting starting
+2025-07-03 12:16:36.715 +01:00 [DBG] Middleware loaded
+2025-07-03 12:16:36.718 +01:00 [DBG] Middleware loaded. Script /_framework/aspnetcore-browser-refresh.js (16517 B).
+2025-07-03 12:16:36.721 +01:00 [DBG] Middleware loaded. Script /_framework/blazor-hotreload.js (799 B).
+2025-07-03 12:16:36.882 +01:00 [DBG] Middleware loaded: DOTNET_MODIFIABLE_ASSEMBLIES=debug, __ASPNETCORE_BROWSER_TOOLS=true
+2025-07-03 12:16:36.945 +01:00 [DBG] Using development certificate: CN=localhost (Thumbprint: AFC534A7F1A1D102E7A4992364CC2A6E4DE299B3)
+2025-07-03 12:16:37.004 +01:00 [INF] Now listening on: https://localhost:8081
+2025-07-03 12:16:37.005 +01:00 [INF] Now listening on: http://localhost:8080
+2025-07-03 12:16:37.007 +01:00 [DBG] Loaded hosting startup assembly ProjectR.Backend
+2025-07-03 12:16:37.008 +01:00 [DBG] Loaded hosting startup assembly Microsoft.WebTools.ApiEndpointDiscovery
+2025-07-03 12:16:37.010 +01:00 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2025-07-03 12:16:37.012 +01:00 [DBG] Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2025-07-03 12:16:37.063 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-03 12:16:37.065 +01:00 [INF] Hosting environment: Development
+2025-07-03 12:16:37.067 +01:00 [INF] Content root path: C:\Users\fsodipe\ProjectR.Backend
+2025-07-03 12:16:37.073 +01:00 [DBG] Hosting started
+2025-07-03 12:16:37.185 +01:00 [DBG] Connection id "0HNDQ4C9PGQPS" received FIN.
+2025-07-03 12:16:37.185 +01:00 [DBG] Connection id "0HNDQ4C9PGQPR" received FIN.
+2025-07-03 12:16:37.191 +01:00 [DBG] Connection id "0HNDQ4C9PGQPS" accepted.
+2025-07-03 12:16:37.191 +01:00 [DBG] Connection id "0HNDQ4C9PGQPR" accepted.
+2025-07-03 12:16:37.194 +01:00 [DBG] Connection id "0HNDQ4C9PGQPS" started.
+2025-07-03 12:16:37.196 +01:00 [DBG] Connection id "0HNDQ4C9PGQPR" started.
+2025-07-03 12:16:37.211 +01:00 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2025-07-03 12:16:37.211 +01:00 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2025-07-03 12:16:37.257 +01:00 [DBG] Connection id "0HNDQ4C9PGQPS" stopped.
+2025-07-03 12:16:37.259 +01:00 [DBG] Connection id "0HNDQ4C9PGQPR" stopped.
+2025-07-03 12:16:37.263 +01:00 [DBG] Connection id "0HNDQ4C9PGQPR" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-07-03 12:16:37.263 +01:00 [DBG] Connection id "0HNDQ4C9PGQPS" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-07-03 12:16:37.665 +01:00 [DBG] Connection id "0HNDQ4C9PGQPT" accepted.
+2025-07-03 12:16:37.666 +01:00 [DBG] Connection id "0HNDQ4C9PGQPT" started.
+2025-07-03 12:16:37.685 +01:00 [DBG] Connection id "0HNDQ4C9PGQPU" accepted.
+2025-07-03 12:16:37.687 +01:00 [DBG] Connection id "0HNDQ4C9PGQPU" started.
+2025-07-03 12:16:37.703 +01:00 [DBG] Connection id "0HNDQ4C9PGQPU" received FIN.
+2025-07-03 12:16:37.709 +01:00 [DBG] Connection 0HNDQ4C9PGQPU established using the following protocol: "Tls13"
+2025-07-03 12:16:37.710 +01:00 [DBG] Connection 0HNDQ4C9PGQPT established using the following protocol: "Tls13"
+2025-07-03 12:16:37.720 +01:00 [DBG] Connection id "0HNDQ4C9PGQPU" is closed. The last processed stream ID was 0.
+2025-07-03 12:16:37.722 +01:00 [DBG] Connection id "0HNDQ4C9PGQPU" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-07-03 12:16:37.726 +01:00 [DBG] The connection queue processing loop for 0HNDQ4C9PGQPU completed.
+2025-07-03 12:16:37.730 +01:00 [DBG] Connection id "0HNDQ4C9PGQPU" stopped.
+2025-07-03 12:16:37.754 +01:00 [INF] Request starting HTTP/2 GET https://localhost:8081/ - null null
+2025-07-03 12:16:37.899 +01:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2025-07-03 12:16:37.908 +01:00 [DBG] No candidates found for the request path '/'
+2025-07-03 12:16:37.911 +01:00 [DBG] Request did not match any endpoints
+2025-07-03 12:16:37.919 +01:00 [DBG] The request path  does not match the path filter
+2025-07-03 12:16:37.925 +01:00 [INF] HTTP GET / responded 404 in 1.8928 ms
+2025-07-03 12:16:37.931 +01:00 [INF] Request finished HTTP/2 GET https://localhost:8081/ - 404 0 null 182.0482ms
+2025-07-03 12:16:37.936 +01:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:8081/, Response status code: 404
+2025-07-03 12:16:44.612 +01:00 [INF] Request starting HTTP/2 GET https://localhost:8081/swagger - null null
+2025-07-03 12:16:44.620 +01:00 [DBG] No candidates found for the request path '/swagger'
+2025-07-03 12:16:44.622 +01:00 [DBG] Request did not match any endpoints
+2025-07-03 12:16:44.625 +01:00 [INF] Request finished HTTP/2 GET https://localhost:8081/swagger - 301 0 null 12.8341ms
+2025-07-03 12:16:44.628 +01:00 [INF] Request starting HTTP/2 GET https://localhost:8081/swagger/index.html - null null
+2025-07-03 12:16:44.635 +01:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2025-07-03 12:16:44.637 +01:00 [DBG] Request did not match any endpoints
+2025-07-03 12:16:44.671 +01:00 [DBG] Response markup is scheduled to include Browser Link script injection.
+2025-07-03 12:16:44.673 +01:00 [DBG] Response markup is scheduled to include browser refresh script injection.
+2025-07-03 12:16:44.688 +01:00 [DBG] Response markup was updated to include Browser Link script injection.
+2025-07-03 12:16:44.689 +01:00 [DBG] Response markup was updated to include browser refresh script injection.
+2025-07-03 12:16:44.690 +01:00 [INF] Request finished HTTP/2 GET https://localhost:8081/swagger/index.html - 200 null text/html;charset=utf-8 62.63ms
+2025-07-03 12:16:44.711 +01:00 [INF] Request starting HTTP/2 GET https://localhost:8081/swagger/swagger-ui.css - null null
+2025-07-03 12:16:44.711 +01:00 [INF] Request starting HTTP/2 GET https://localhost:8081/swagger/swagger-ui-standalone-preset.js - null null
+2025-07-03 12:16:44.712 +01:00 [INF] Request starting HTTP/2 GET https://localhost:8081/_vs/browserLink - null null
+2025-07-03 12:16:44.711 +01:00 [INF] Request starting HTTP/2 GET https://localhost:8081/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-03 12:16:44.711 +01:00 [INF] Request starting HTTP/2 GET https://localhost:8081/swagger/swagger-ui-bundle.js - null null
+2025-07-03 12:16:44.725 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-standalone-preset.js'
+2025-07-03 12:16:44.722 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui.css'
+2025-07-03 12:16:44.748 +01:00 [DBG] No candidates found for the request path '/swagger/swagger-ui-bundle.js'
+2025-07-03 12:16:44.753 +01:00 [DBG] Script injected: /_framework/aspnetcore-browser-refresh.js
+2025-07-03 12:16:44.756 +01:00 [DBG] Request did not match any endpoints
+2025-07-03 12:16:44.758 +01:00 [DBG] Request did not match any endpoints
+2025-07-03 12:16:44.759 +01:00 [DBG] Request did not match any endpoints
+2025-07-03 12:16:44.762 +01:00 [INF] Request finished HTTP/2 GET https://localhost:8081/_framework/aspnetcore-browser-refresh.js - 200 16517 application/javascript; charset=utf-8 50.9084ms
+2025-07-03 12:16:44.795 +01:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-07-03 12:16:44.795 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-07-03 12:16:44.799 +01:00 [INF] Request finished HTTP/2 GET https://localhost:8081/swagger/swagger-ui-standalone-preset.js - 200 339486 text/javascript 88.7272ms
+2025-07-03 12:16:44.803 +01:00 [INF] Request finished HTTP/2 GET https://localhost:8081/swagger/swagger-ui.css - 200 143943 text/css 92.7969ms
+2025-07-03 12:16:44.807 +01:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-07-03 12:16:44.817 +01:00 [INF] Request finished HTTP/2 GET https://localhost:8081/swagger/swagger-ui-bundle.js - 200 1096145 text/javascript 106.0165ms
+2025-07-03 12:16:44.822 +01:00 [INF] Request finished HTTP/2 GET https://localhost:8081/_vs/browserLink - 200 null text/javascript; charset=UTF-8 110.5033ms
+2025-07-03 12:16:44.913 +01:00 [INF] Request starting HTTP/2 GET https://localhost:8081/swagger/v1/swagger.json - null null
+2025-07-03 12:16:44.917 +01:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2025-07-03 12:16:44.919 +01:00 [DBG] Request did not match any endpoints
+2025-07-03 12:16:44.922 +01:00 [INF] Request finished HTTP/2 GET https://localhost:8081/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 9.0539ms
+2025-07-03 12:16:44.928 +01:00 [INF] Request starting HTTP/2 GET https://localhost:8081/swagger/favicon-32x32.png - null null
+2025-07-03 12:16:44.932 +01:00 [DBG] No candidates found for the request path '/swagger/favicon-32x32.png'
+2025-07-03 12:16:44.933 +01:00 [DBG] Request did not match any endpoints
+2025-07-03 12:16:44.935 +01:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-07-03 12:16:44.937 +01:00 [INF] Request finished HTTP/2 GET https://localhost:8081/swagger/favicon-32x32.png - 200 628 image/png 9.8477ms
