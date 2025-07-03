@@ -28,6 +28,13 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    // "Docker Compose": {
+    //   "commandName": "DockerCompose",
+    //   "commandVersion": "1.0",
+    //   "serviceActions": {
+    //     "api": "StartDebugging"
+    //   }
+    // }
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
@@ -37,7 +44,10 @@
         "ASPNETCORE_HTTP_PORTS": "8080"
       },
       "publishAllPorts": true,
-      "useSSL": true
+      "useSSL": true,
+        "serviceActions": {
+        "api": "StartDebugging"
+      }
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json",

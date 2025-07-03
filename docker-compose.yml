@@ -1,5 +1,25 @@
 version: "3.9"
 services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: projectr-api
+    depends_on:
+      - db:
+         condition: service_healthy
+         restart: true
+    
+    networks:
+      - mynetwork
+
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+    ports:
+      - "5001:8080"
+
   db:
     image: postgres:15
     container_name: postgres
@@ -12,26 +32,15 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
       
     networks:
       - mynetwork
-
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-
-    container_name: projectr-api
-    depends_on:
-      - db
-    networks:
-      - mynetwork
-
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-
-    ports:
-      - "5001:8080"
 
 volumes:
   postgres_data:

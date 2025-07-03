@@ -15,4 +15,8 @@
     <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectR.Backend.Domain\ProjectR.Backend.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
