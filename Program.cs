@@ -46,31 +46,10 @@ namespace ProjectR.Backend
 
             WebApplication app = builder.Build();
 
-            using IServiceScope scope = app.Services.CreateScope();
-            AppDbContext dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            int retry = 0;
-            bool connected = false;
-
-            while (!connected && retry < 10)
+            using (IServiceScope scope = app.Services.CreateScope())
             {
-                try
-                {
-                    Console.WriteLine($"⏳ Attempt {retry + 1}: Applying migrations...");
-                    dbContext.Database.Migrate();
-                    connected = true;
-                    Console.WriteLine("Migrations applied, DB ready.");
-                }
-                catch (Exception ex)
-                {
-                    retry++;
-                    Console.WriteLine($"DB not ready yet: {ex.Message}");
-                    Thread.Sleep(2000);
-                }
-            }
-
-            if (!connected)
-            {
-                throw new Exception("Could not connect to database after multiple retries.");
+                AppDbContext db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                db.Database.Migrate();
             }
 
             // Configure the HTTP request pipeline.
