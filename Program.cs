@@ -14,12 +14,12 @@ namespace ProjectR.Backend
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
             builder.Host.UseSerilog((context, services, loggerConfig) =>
-                    {
-                        loggerConfig
-                            .MinimumLevel.Debug()
-                            .WriteTo.Console()
-                            .WriteTo.File("Logs/applog.txt", rollingInterval: RollingInterval.Day);
-                    });
+            {
+                loggerConfig
+                    .MinimumLevel.Debug()
+                    .WriteTo.Console()
+                    .WriteTo.File("Logs/applog.txt", rollingInterval: RollingInterval.Day);
+            });
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -32,12 +32,9 @@ namespace ProjectR.Backend
             .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
             .AddEnvironmentVariables();
 
-            string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
-            Console.WriteLine($"Connection Srting: {connectionString}");
-
             builder.Services.Configure<TestSettings>(builder.Configuration.GetSection("ProcessingSettings"));
             builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(connectionString, options =>
+            options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")!, options =>
             {
                 options.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorCodesToAdd: []);
             }));
