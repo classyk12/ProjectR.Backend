@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProjectR.Backend.Domain.Entities
 {
-    public class User : BaseObject
+    public class Availability : BaseObject
     {
         [Required]
         public string? PhoneNumber { get; set; }
