@@ -42,4 +42,12 @@ namespace ProjectR.Backend.Domain
         Offsite = 2,
         Online
     }
+
+    public enum AppointmentStatus
+    {
+        Requested = 1,
+        Confirmed = 2,
+        Deffered,
+        Cancelled
+    }
 }

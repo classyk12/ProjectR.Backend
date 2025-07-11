@@ -5,12 +5,9 @@ namespace ProjectR.Backend.Domain.Entities
 {
     public class BusinessAvailability : BaseObject
     {
-        [Required]
         public Guid BusinessId { get; set; }
         public Business? Business { get; set; }
-        [Required]
         public DateOnly? StartDate { get; set; }
-        [Required]
         public DateOnly? EndDate { get; set; }
         /// <summary>
         /// This will be used in scenerios where we decide to use templating. 
