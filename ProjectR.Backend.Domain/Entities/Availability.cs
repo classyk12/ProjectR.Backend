@@ -1,18 +1,24 @@
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProjectR.Backend.Domain.Entities
 {
-    public class Availability : BaseObject
+    public class BusinessAvailability : BaseObject
     {
         [Required]
-        public string? PhoneNumber { get; set; }
+        public Guid BusinessId { get; set; }
+        public Business? Business { get; set; }
         [Required]
-        public string? PhoneCode { get; set; }
+        public DateOnly? StartDate { get; set; }
+        [Required]
+        public DateOnly? EndDate { get; set; }
         /// <summary>
-        /// This identifies a user type in the system [Business, Client, Admin etc]
+        /// This will be used in scenerios where we decide to use templating. 
+        /// Templating allows a business to reuse a previous availability without necessarily setting it all over again
         /// </summary>
-        public AccountType? AccountType { get; set; }
-        public RegistrationType? RegistrationType { get; set; }
+        public DateOnly? ValidFrom { get; set; }
+        public DateOnly? ValidTo { get; set; }
+        public Collection<BusinessAvailabilitySlot>? Slots { get; set; }
     }
 }
 
