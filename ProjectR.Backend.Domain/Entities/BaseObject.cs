@@ -1,3 +1,5 @@
+using ProjectR.Backend.Shared.Enums;
+
 namespace ProjectR.Backend.Domain.Entities
 {
     public class BaseObject

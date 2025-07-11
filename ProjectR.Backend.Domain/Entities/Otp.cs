@@ -1,3 +1,4 @@
+using ProjectR.Backend.Shared.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProjectR.Backend.Domain.Entities

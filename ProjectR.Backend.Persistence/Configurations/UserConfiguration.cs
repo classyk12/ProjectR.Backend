@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ProjectR.Backend.Domain;
 using ProjectR.Backend.Domain.Entities;
+using ProjectR.Backend.Shared.Enums;
 
 namespace ProjectR.Backend.Persistence.Configurations
 {
