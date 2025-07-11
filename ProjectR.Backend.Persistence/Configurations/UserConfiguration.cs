@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using ProjectR.Backend.Domain;
 using ProjectR.Backend.Domain.Entities;
 
 namespace ProjectR.Backend.Persistence.Configurations
@@ -22,10 +23,10 @@ namespace ProjectR.Backend.Persistence.Configurations
                 .IsRequired().HasMaxLength(4);
 
             builder.Property(b => b.AccountType)
-           .IsRequired().HasDefaultValue(1);
+           .IsRequired().HasDefaultValue(AccountType.Business);
 
             builder.Property(b => b.RegistrationType)
-           .IsRequired().HasDefaultValue(1);
+           .IsRequired().HasDefaultValue(RegistrationType.PhoneNumber);
         }
     }
 }
