@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace ProjectR.Backend.Domain
+namespace ProjectR.Backend.Shared.Enums
 {
     public enum RecordStatus
     {
