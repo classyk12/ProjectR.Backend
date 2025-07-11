@@ -4,9 +4,7 @@ namespace ProjectR.Backend.Domain.Entities
 {
     public class User : BaseObject
     {
-        [Required]
         public string? PhoneNumber { get; set; }
-        [Required]
         public string? PhoneCode { get; set; }
         /// <summary>
         /// This identifies a user type in the system [Business, Client, Admin etc]
