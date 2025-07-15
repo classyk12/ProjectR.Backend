@@ -9,7 +9,7 @@ namespace ProjectR.Backend.Middleware
     {
         private readonly ILogger<ExceptionMiddleware> _logger;
         private readonly RequestDelegate _next;
-       private static readonly JsonSerializerOptions Options = new()  { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+        private static readonly JsonSerializerOptions Options = new() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 
         public ExceptionMiddleware(ILogger<ExceptionMiddleware> logger, RequestDelegate next)
         {
@@ -25,7 +25,9 @@ namespace ProjectR.Backend.Middleware
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, message: ex.Message);
+                string serviceName = ex.TargetSite?.DeclaringType?.FullName ?? "UnknownService";
+                string methodName = ex.TargetSite?.Name ?? "UnknownMethod";
+                _logger.LogError(ex, "Exception in {Service}.{Method}: {Message}", serviceName, methodName, ex.Message);
                 await HandleCustomExceptionResponseAsync(context, ex);
             }
         }
@@ -36,7 +38,7 @@ namespace ProjectR.Backend.Middleware
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
             ErrorModel response = new(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString());
-         
+
             string json = JsonSerializer.Serialize(response, Options);
             await context.Response.WriteAsync(json);
         }

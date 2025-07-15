@@ -1,6 +1,7 @@
 using ProjectR.Backend.Application.Interfaces.Managers;
 using ProjectR.Backend.Application.Interfaces.Repository;
 using ProjectR.Backend.Application.Models;
+using ProjectR.Backend.Domain.Entities;
 
 namespace ProjectR.Backend.Infrastructure.Managers
 {
@@ -24,39 +25,69 @@ namespace ProjectR.Backend.Infrastructure.Managers
             return await _appThemeRepository.GetAllAsync();
         }
 
-        public async Task<ResponseModel<AppThemeModel[]>> AddAsync(AppThemeModel[] appThemes)
+        public async Task<ResponseModel<AppThemeModel[]>> AddAsync(AddAppThemeModel[] appThemes)
         {
             if (appThemes.Length == 0)
             {
                 return new ResponseModel<AppThemeModel[]>(message: "No app themes provided to add.", status: false, data: Array.Empty<AppThemeModel>());
             }
 
-            return await _appThemeRepository.AddAsync(appThemes);
+            //TODO: Validate appThemes before adding
+            //TODO: check for duplicates 
+            AppThemeModel[] models = appThemes.Select(at => new AppThemeModel { Name = at.Name }).ToArray();
+            AppThemeModel[] result = await _appThemeRepository.AddAsync(models);
+            return new ResponseModel<AppThemeModel[]>(message: "App themes added successfully.", data: result, status: true);
         }
 
-        public async Task<AppThemeModel> AddAsync(AppThemeModel appTheme)
+        public async Task<ResponseModel<AppThemeModel>> AddAsync(AddAppThemeModel appTheme)
         {
-            return await _appThemeRepository.AddAsync(appTheme);
+            AppThemeModel model = new AppThemeModel { Name = appTheme.Name };
+            AppThemeModel result = await _appThemeRepository.AddAsync(model);
+            return new ResponseModel<AppThemeModel>(message: "App theme added successfully.", data: result, status: true);
         }
 
-        public async Task<AppThemeModel> UpdateAsync(AppThemeModel appTheme)
+        public async Task<ResponseModel<AppThemeModel>> UpdateAsync(AppThemeModel appTheme)
         {
-            return await _appThemeRepository.UpdateAsync(appTheme);
+            AppThemeModel existingTheme = await _appThemeRepository.GetByIdAsync(appTheme.Id);
+            if (existingTheme == null)
+            {
+                return new ResponseModel<AppThemeModel>(message: "App theme not found.", data: default, status: false);
+            }
+
+            AppThemeModel result = await _appThemeRepository.UpdateAsync(appTheme);
+            return new ResponseModel<AppThemeModel>(message: "App theme updated successfully.", data: result, status: true);
         }
 
-        public async Task<AppThemeModel[]> UpdateAsync(AppThemeModel[] appThemes)
+        public async Task<ResponseModel<AppThemeModel[]>> UpdateAsync(AppThemeModel[] appThemes)
         {
-            return await _appThemeRepository.UpdateAsync(appThemes);
+            if (appThemes.Length == 0)
+            {
+                return new ResponseModel<AppThemeModel[]>(message: "No app themes provided to add.", status: false, data: Array.Empty<AppThemeModel>());
+            }
+
+            //TODO: Validate appThemes before adding
+            //TODO: check for duplicates 
+
+            AppThemeModel[] result = await _appThemeRepository.UpdateAsync(appThemes);
+            return new ResponseModel<AppThemeModel[]>(message: "App themes updated successfully.", data: result, status: true);
         }
 
-        public async Task DeleteAsync(AppThemeModel[] appThemes)
+        public async Task<BaseResponseModel> DeleteAsync(AppThemeModel[] appThemes)
         {
             await _appThemeRepository.DeleteAsync(appThemes);
+            return new BaseResponseModel(message: "App theme updated successfully.", status: true);
         }
 
-        public async Task DeleteAsync(AppThemeModel appTheme)
+        public async Task<BaseResponseModel> DeleteAsync(Guid Id)
         {
-            await _appThemeRepository.DeleteAsync(appTheme);
+            AppThemeModel existingTheme = await _appThemeRepository.GetByIdAsync(Id);
+            if (existingTheme == null)
+            {
+                return new BaseResponseModel(message: "App theme not found.", status: false);
+            }
+
+            await _appThemeRepository.DeleteAsync(existingTheme);
+            return new BaseResponseModel(message: "App theme deleted successfully.", status: true);
         }
     }
 }
