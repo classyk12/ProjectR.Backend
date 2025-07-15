@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProjectR.Backend.Domain.Entities
 {
-    public class User : BaseObject
+    public class UserSetting : BaseObject
     {
         public string? PhoneNumber { get; set; }
         public string? PhoneCode { get; set; }
