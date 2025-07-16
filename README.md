@@ -1,5 +1,4 @@
-
-**Project Information:**
+<H1>Project Information</H1>
 
 This is a simple aapplication that helps businesses with managing service appointments. This backend will be powering another simple mobile application.
 
@@ -18,8 +17,8 @@ This is a simple aapplication that helps businesses with managing service appoin
 **Containarization:** Docker
 
 ---------------------------------------------------------
+<H2>Dev Rules</H2>
 
-**Dev Rules:**
 
 When a Dev is assigned a task, do the following:
 1. Create your branch locally using this format depending on if you are fixing, adding a new feature or doing a chore such as code cleanup. We will use the <features> tag to represent a new feature, <fix> tag to represent if you are making a fix and <chore> to if you are carrying out a routine cleanup.
