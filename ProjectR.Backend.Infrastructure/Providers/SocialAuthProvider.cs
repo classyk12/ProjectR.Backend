@@ -1,4 +1,4 @@
-using ProjectR.Backend.Application.Interfaces.Repository;
+using ProjectR.Backend.Application.Interfaces.Providers;
 using ProjectR.Backend.Application.Models;
 
 namespace ProjectR.Backend.Infrastructure.Providers

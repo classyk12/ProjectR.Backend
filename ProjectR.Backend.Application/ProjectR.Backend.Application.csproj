@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\" />
-    <Folder Include="Mappers\" />
+    <Compile Remove="Common\**" />
+    <Compile Remove="Mappers\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <EmbeddedResource Remove="Mappers\**" />
+    <None Remove="Common\**" />
+    <None Remove="Mappers\**" />
   </ItemGroup>
 
   <ItemGroup>
