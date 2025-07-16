@@ -12,6 +12,10 @@ using ProjectR.Backend.Application.Settings;
 using Microsoft.Extensions.DependencyInjection;
 using ProjectR.Backend.Infrastructure.Providers;
 using ProjectR.Backend.Application.Interfaces.Providers;
+using Microsoft.AspNetCore.Authentication.BearerToken;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ProjectR.Backend
 {
