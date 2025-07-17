@@ -5,16 +5,14 @@ namespace ProjectR.Backend.Application.Models
 {
     public class LoginWithPhoneNumberModel
     {
-        public RegistrationType RegistrationType { get; set; }
-        
+        public string? PhoneCode { get; set; }
+
         public string? PhoneNumber { get; set; }
         public string? Name { get; set; }
     }
 
     public class LoginWithSocialModel
     {
-        [Required(ErrorMessage = "Registration type is required.")]
-        public RegistrationType RegistrationType { get; set; }
         /// <summary>
         /// This is the token received from the social auth provider (e.g., Google, Facebook)
         /// </summary>
@@ -31,5 +29,26 @@ namespace ProjectR.Backend.Application.Models
         public string? AuthToken { get; set; }
         public string? RefreshToken { get; set; }
         public UserModel? User { get; set; }
+    }
+
+    public class PhoneNumberLoginResponseModel
+    {
+        /// <summary>
+        /// This is the OTP token for the atual sent to the user's phone number for verification.
+        /// It is used to verify the user's ownership of the phone number.
+        /// The validation of this token will contain a combination of the phone number and the OTP token.
+        /// </summary>
+        public string? OtpToken { get; set; }
+        public DateTimeOffset? ExpiresAt { get; set; }
+        /// <summary>
+        /// This is the phone number with the country code that the user has provided during login.
+        /// </summary>
+        public string? PhoneNumber { get; set; }
+    }
+
+    public class GoogleAuthenticationVerificationModel
+    {
+        public string? Email { get; set; }
+        public string? Name { get; set; }
     }
 }

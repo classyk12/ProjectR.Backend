@@ -12,7 +12,9 @@ namespace ProjectR.Backend.Shared.Enums
 
     public enum AccountType
     {
+        [Description("Business")]
         Business = 1,
+        [Description("Customer")]
         Customer
     }
 

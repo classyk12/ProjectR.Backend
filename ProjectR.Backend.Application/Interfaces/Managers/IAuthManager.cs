@@ -10,13 +10,14 @@ namespace ProjectR.Backend.Application.Interfaces.Managers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<BaseResponseModel> AuthenticateWithPhoneNumberAsync(LoginWithPhoneNumberModel model);
+        Task<ResponseModel<PhoneNumberLoginResponseModel>> AuthenticateWithPhoneNumberAsync(LoginWithPhoneNumberModel model);
         /// <summary>
         /// Authenticates a user using their social account (e.g., Google, Facebook) and genrates an auth token.
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<BaseResponseModel> AuthenticateWithSocialAsync(LoginWithSocialModel model);
+        Task<ResponseModel<LoginResponseModel>> AuthenticateWithSocialAsync(LoginWithSocialModel model);
+        
         string GenerateAuthTokenAsync(UserModel user);
     }
 }

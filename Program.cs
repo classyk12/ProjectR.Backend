@@ -9,10 +9,8 @@ using ProjectR.Backend.Persistence.Repository;
 using ProjectR.Backend.Application.Interfaces.Managers;
 using ProjectR.Backend.Infrastructure.Managers;
 using ProjectR.Backend.Application.Settings;
-using Microsoft.Extensions.DependencyInjection;
 using ProjectR.Backend.Infrastructure.Providers;
 using ProjectR.Backend.Application.Interfaces.Providers;
-using Microsoft.AspNetCore.Authentication.BearerToken;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -39,6 +37,7 @@ namespace ProjectR.Backend
 
             #region  Settings
             builder.Services.Configure<GoogleSettings>(builder.Configuration.GetSection("Google"));
+            builder.Services.Configure<GoogleSettings>(builder.Configuration.GetSection("Jwt"));
             #endregion
 
             #region  Providers
@@ -51,6 +50,7 @@ namespace ProjectR.Backend
 
             #region Managers
             builder.Services.AddScoped<IAppThemeManager, AppThemeManager>();
+            builder.Services.AddScoped<IAuthManager, AuthManager>();
             #endregion
 
             builder.Configuration
@@ -83,7 +83,7 @@ namespace ProjectR.Backend
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = builder.Configuration["Jwt:Issuer"],
                     ValidAudience = builder.Configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
                     ClockSkew = TimeSpan.Zero
                 };
             });
@@ -105,15 +105,10 @@ namespace ProjectR.Backend
             });
 
             app.UseSerilogRequestLogging();
-
             app.UseMiddleware<ExceptionMiddleware>();
-
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
             app.MapControllers();
-
             app.MapHealthChecks("/health", new HealthCheckOptions
             {
                 Predicate = _ => true,
