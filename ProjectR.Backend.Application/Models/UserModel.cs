@@ -6,7 +6,7 @@ namespace ProjectR.Backend.Application.Models
     public class UserModel
     {
         public Guid Id { get; set; }
-        public string? PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }     
         public string? PhoneCode { get; set; }
         public string? Email { get; set; }
         public AccountType? AccountType { get; set; }

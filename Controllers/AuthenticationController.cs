@@ -15,9 +15,9 @@ namespace ProjectR.Backend.Controllers
         }
 
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseModel<AppThemeModel>))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<AppThemeModel>))]
-        [HttpPost("ByPhoneNumber")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseModel<PhoneNumberLoginResponseModel>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<PhoneNumberLoginResponseModel>))]
+        [HttpPost("WithPhoneNumber")]
         public async Task<IActionResult> AuthenticateWithPhoneNumber([FromBody] LoginWithPhoneNumberModel model)
         {
             if (model == null || !ModelState.IsValid)
@@ -30,10 +30,10 @@ namespace ProjectR.Backend.Controllers
         }
 
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseModel<AppThemeModel>))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<AppThemeModel>))]
-        [HttpPost("BySocial")]
-        public async Task<IActionResult> AuthenticateWithPhoneNumber([FromBody] LoginWithSocialModel  model)
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseModel<LoginResponseModel>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<LoginResponseModel>))]
+        [HttpPost("WithSocial")]
+        public async Task<IActionResult> AuthenticateWithSocialMedia([FromBody] LoginWithSocialModel model)
         {
             if (model == null || !ModelState.IsValid)
             {
