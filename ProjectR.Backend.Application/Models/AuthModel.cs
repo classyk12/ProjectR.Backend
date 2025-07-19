@@ -33,7 +33,7 @@ namespace ProjectR.Backend.Application.Models
         public UserModel? User { get; set; }
     }
 
-    public class PhoneNumberLoginResponseModel 
+    public class PhoneNumberLoginResponseModel
     {
         /// <summary>
         /// This is the OTP token for the atual sent to the user's phone number for verification.
@@ -46,6 +46,7 @@ namespace ProjectR.Backend.Application.Models
         /// This is the phone number with the country code that the user has provided during login.
         /// </summary>
         public string? PhoneNumber { get; set; }
+        public OtpType? Type { get; set; }
     }
 
     public class GoogleAuthenticationVerificationModel

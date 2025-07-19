@@ -42,6 +42,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
             {
                 ExpiresAt = DateTime.UtcNow.AddMinutes(10),
                 OtpToken = Guid.NewGuid().ToString(),
+                Type = OtpType.Authentication,
                 PhoneNumber = model.PhoneNumber
             }, true);
         }

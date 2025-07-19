@@ -38,7 +38,7 @@ namespace ProjectR.Backend.Shared.Enums
 
     public enum OtpType
     {
-        Onboarding = 1,
+        Authentication = 1,
     }
 
     public enum DeliveryMode
