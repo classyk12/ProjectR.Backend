@@ -39,7 +39,7 @@ namespace ProjectR.Backend.Infrastructure.Providers
 
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error sending Twilio Message to {phoneNumber}");
+                _logger.LogError(ex, "Error sending Twilio Message to {phoneNumber}", phoneNumber);
                 return default;
             }
         }

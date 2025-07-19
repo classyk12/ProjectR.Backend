@@ -30,7 +30,7 @@ namespace ProjectR.Backend.Infrastructure.Providers
                 return new GoogleAuthenticationVerificationModel
                 {
                     Name = payload.FamilyName,
-                    Email = payload.Email
+                    Email = payload.Email,
                 };
 
             }

@@ -23,6 +23,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.Configure<GoogleSettings>(configuration.GetSection("Google"));
             services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
             services.Configure<TwilioSettings>(configuration.GetSection("Twilio"));
+            services.Configure<OtpSettings>(configuration.GetSection("Otp"));
             #endregion
 
             #region  Providers

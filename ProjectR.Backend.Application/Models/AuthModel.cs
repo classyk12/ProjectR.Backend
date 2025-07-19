@@ -5,10 +5,13 @@ namespace ProjectR.Backend.Application.Models
 {
     public class LoginWithPhoneNumberModel
     {
+        [Required(ErrorMessage = "Phone Code is required.")]
+        [RegularExpression(@"^\+\d{1,3}$", ErrorMessage = "Invalid phone code format. Use the format +[country code].")]
         public string? PhoneCode { get; set; }
 
+        [Required(ErrorMessage = "Phone Number is required.")]
+        [RegularExpression(@"^\d{10,15}$", ErrorMessage = "Invalid phone number format. It should be between 10 to 15 digits.")]
         public string? PhoneNumber { get; set; }
-        public string? Name { get; set; }
     }
 
     public class LoginWithSocialModel

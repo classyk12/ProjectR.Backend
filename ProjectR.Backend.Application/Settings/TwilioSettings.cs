@@ -8,6 +8,6 @@
         /// Content SID for OTP messages. This is used to specify the template for OTP messages sent via Twilio.
         /// </summary>
         public string OtpContentSid { get; set; } = string.Empty;
-        public bool UseMock { get; set; } = false;
+        public bool UseMock { get; set; }
     }
 }

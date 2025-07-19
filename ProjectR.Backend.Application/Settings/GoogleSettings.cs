@@ -4,6 +4,6 @@
     {
         public string Android { get; set; } = string.Empty;
         public string Ios { get; set; } = string.Empty;
-        public bool UseMock { get; set; } = false;
+        public bool UseMock { get; set; }
     }
 }

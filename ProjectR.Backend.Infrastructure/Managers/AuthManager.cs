@@ -32,8 +32,8 @@ namespace ProjectR.Backend.Infrastructure.Managers
 
             //TODO: notification manager is to be replaced by OTP manager 
             NotificationModel notificationModel = new([DeliveryMode.Whatsapp], model.PhoneNumber);
-            BaseResponseModel sendNotificationReult = await _notificationManager.SendNotificationAsync(notificationModel);
-            if (!sendNotificationReult.Status)
+            BaseResponseModel sendNotificationResult = await _notificationManager.SendNotificationAsync(notificationModel);
+            if (!sendNotificationResult.Status)
             {
                 return new ResponseModel<PhoneNumberLoginResponseModel>("Failed to send OTP.", default, false);
             }
@@ -50,28 +50,34 @@ namespace ProjectR.Backend.Infrastructure.Managers
         public async Task<ResponseModel<LoginResponseModel>> AuthenticateWithSocialAsync(LoginWithSocialModel model)
         {
             //check if the email of the uuser in the database
-            //if not, validate the social token
-            GoogleAuthenticationVerificationModel? verificationResult = await _socialAuthProvider.VerifyGoogleTokenAsync(model.Token!);
-            if (verificationResult == null)
+            UserModel? user = null;
+
+            if (user == null)
             {
-                return new ResponseModel<LoginResponseModel>("Invalid Social Authentication Token.", default, false);
+                //if not, validate the social token
+                GoogleAuthenticationVerificationModel? verificationResult = await _socialAuthProvider.VerifyGoogleTokenAsync(model.Token!);
+                if (verificationResult == null)
+                {
+                    return new ResponseModel<LoginResponseModel>("Invalid Social Authentication Token.", default, false);
+                }
+
+                //if valid, create a new user in the database
+                user = new()
+                {
+                    Id = Guid.NewGuid(), // This should be replaced with the actual user ID from the database
+                    Email = verificationResult.Email,
+                    AccountType = AccountType.Business,
+                    RegistrationType = RegistrationType.Socials
+                };
             }
 
-            //if valid, create a new user in the database
+            string generatedToken = GenerateAuthTokenAsync(user);
 
-            //if exist already, generate a new auth token
-            string generatedToken = GenerateAuthTokenAsync(new UserModel
-            {
-
-            });
-
+            //IsFirstLogin = true; // This should be set based on whether the user has created a business profile or not
             return new ResponseModel<LoginResponseModel>("User authenticated successfully.", new LoginResponseModel
             {
                 AuthToken = generatedToken,
-                User = new UserModel
-                {
-
-                }
+                User = user
             }, true);
         }
 
@@ -87,6 +93,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
                     new(ClaimTypes.Email, user.Email ?? string.Empty),
                     new(ClaimTypes.MobilePhone, user.PhoneCode + user.PhoneNumber ?? string.Empty),
                     new("AccountType", user.AccountType.ToString()!),
+                    new("RegistrationType", user.RegistrationType.ToString()!),
                 }),
 
                 Expires = DateTime.UtcNow.AddHours(1),
