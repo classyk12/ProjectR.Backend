@@ -8,11 +8,9 @@ namespace ProjectR.Backend.Infrastructure.Managers
     public class NotificationManager : INotificationManager
     {
         private readonly ITwilioProvider _twilioProvider;
-        private readonly INotificationManager _notificationManager;
 
-        public NotificationManager(ITwilioProvider twilioProvider, INotificationManager notificationManager)
+        public NotificationManager(ITwilioProvider twilioProvider)
         {
-            _notificationManager = notificationManager ?? throw new ArgumentNullException(nameof(notificationManager));
             _twilioProvider = twilioProvider ?? throw new ArgumentNullException(nameof(twilioProvider));
         }
 
