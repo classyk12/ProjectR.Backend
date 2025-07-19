@@ -47,6 +47,16 @@ namespace ProjectR.Backend.Infrastructure.Managers
             }, true);
         }
 
+        public Task<ResponseModel<LoginResponseModel>> CompletePhoneNumberAuthenticationAsync(CompleteLoginWithPhoneNumberModel model)
+        {
+            //validate the OTP token
+            //if valid, check if the user exists in the database
+            //if not, create a new user in the database
+            //generate an auth token and return it
+
+            throw new NotImplementedException("CompletePhoneNumberAuthenticationAsync is not implemented yet.");
+        }
+
         public async Task<ResponseModel<LoginResponseModel>> AuthenticateWithSocialAsync(LoginWithSocialModel model)
         {
             //check if the email of the uuser in the database
