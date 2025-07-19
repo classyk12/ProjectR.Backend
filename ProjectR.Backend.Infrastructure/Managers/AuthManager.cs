@@ -7,6 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using ProjectR.Backend.Application.Settings;
 using Microsoft.Extensions.Options;
 using ProjectR.Backend.Application.Interfaces.Providers;
+using ProjectR.Backend.Shared.Enums;
 
 namespace ProjectR.Backend.Infrastructure.Managers
 {
@@ -14,19 +15,35 @@ namespace ProjectR.Backend.Infrastructure.Managers
     {
         private readonly JwtSettings _options;
         private readonly ISocialAuthProvider _socialAuthProvider;
+        private readonly INotificationManager _notificationManager;
 
-        public AuthManager(IOptions<JwtSettings> options, ISocialAuthProvider socialAuthProvider)
+        public AuthManager(IOptions<JwtSettings> options, ISocialAuthProvider socialAuthProvider, INotificationManager notificationManager)
         {
+            _notificationManager = notificationManager ?? throw new ArgumentNullException(nameof(notificationManager));
             _socialAuthProvider = socialAuthProvider ?? throw new ArgumentNullException(nameof(socialAuthProvider));
             _options = options.Value ?? throw new ArgumentNullException(nameof(options));
         }
 
-        public Task<ResponseModel<PhoneNumberLoginResponseModel>> AuthenticateWithPhoneNumberAsync(LoginWithPhoneNumberModel model)
+        public async Task<ResponseModel<PhoneNumberLoginResponseModel>> AuthenticateWithPhoneNumberAsync(LoginWithPhoneNumberModel model)
         {
             //validate phone number and phone code
-            //if valid, generate an OTP token and send it to the user's phone number via whatsapp
+            //if valid, insert and create a new OTP instance in the database
+            // generate an OTP token and send it to the user's phone number via whatsapp
 
-            throw new NotImplementedException("Phone number authentication is not implemented yet.");
+            //TODO: notification manager is to be replaced by OTP manager 
+            NotificationModel notificationModel = new([DeliveryMode.Whatsapp], model.PhoneNumber);
+            BaseResponseModel sendNotificationReult = await _notificationManager.SendNotificationAsync(notificationModel);
+            if (!sendNotificationReult.Status)
+            {
+                return new ResponseModel<PhoneNumberLoginResponseModel>("Failed to send OTP.", default, false);
+            }
+
+            return new ResponseModel<PhoneNumberLoginResponseModel>("OTP sent successfully.", new PhoneNumberLoginResponseModel
+            {
+                ExpiresAt = DateTime.UtcNow.AddMinutes(10),
+                OtpToken = Guid.NewGuid().ToString(),
+                PhoneNumber = model.PhoneNumber
+            }, true);
         }
 
         public async Task<ResponseModel<LoginResponseModel>> AuthenticateWithSocialAsync(LoginWithSocialModel model)
@@ -36,16 +53,28 @@ namespace ProjectR.Backend.Infrastructure.Managers
             GoogleAuthenticationVerificationModel? verificationResult = await _socialAuthProvider.VerifyGoogleTokenAsync(model.Token!);
             if (verificationResult == null)
             {
-                return new ResponseModel<LoginResponseModel>("Invalid Social Authentication Token.", default, false);     
+                return new ResponseModel<LoginResponseModel>("Invalid Social Authentication Token.", default, false);
             }
 
             //if valid, create a new user in the database
 
             //if exist already, generate a new auth token
-            throw new NotImplementedException("Social authentication is not implemented yet.");
+            string generatedToken = GenerateAuthTokenAsync(new UserModel
+            {
+
+            });
+
+            return new ResponseModel<LoginResponseModel>("User authenticated successfully.", new LoginResponseModel
+            {
+                AuthToken = generatedToken,
+                User = new UserModel
+                {
+
+                }
+            }, true);
         }
 
-        public string GenerateAuthTokenAsync(UserModel user)
+        private string GenerateAuthTokenAsync(UserModel user)
         {
             JwtSecurityTokenHandler tokenHandler = new();
             byte[] key = Encoding.ASCII.GetBytes(_options.Key);

@@ -22,6 +22,8 @@ namespace ProjectR.Backend.Application.Models
         [Required(ErrorMessage = "Email is required.")]
         [EmailAddress(ErrorMessage = "Invalid email format.")]
         public string? Email { get; set; }
+
+        public SocialMediaProvider Type { get; set; }
     }
 
     public class LoginResponseModel
@@ -31,7 +33,7 @@ namespace ProjectR.Backend.Application.Models
         public UserModel? User { get; set; }
     }
 
-    public class PhoneNumberLoginResponseModel
+    public class PhoneNumberLoginResponseModel 
     {
         /// <summary>
         /// This is the OTP token for the atual sent to the user's phone number for verification.

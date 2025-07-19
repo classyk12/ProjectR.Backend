@@ -27,6 +27,7 @@ namespace ProjectR.Backend.Shared.Helpers
                 {
                     return false;
                 }
+
                 return phone.Length switch
                 {
                     < 11 or > 13 => false,
@@ -52,6 +53,7 @@ namespace ProjectR.Backend.Shared.Helpers
             {
                 phone = $"234{phone[1..]}";
             }
+
             return phone;
         }
 

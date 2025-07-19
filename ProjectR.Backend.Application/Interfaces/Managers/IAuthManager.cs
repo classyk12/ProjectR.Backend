@@ -17,7 +17,5 @@ namespace ProjectR.Backend.Application.Interfaces.Managers
         /// <param name="model"></param>
         /// <returns></returns>
         Task<ResponseModel<LoginResponseModel>> AuthenticateWithSocialAsync(LoginWithSocialModel model);
-        
-        string GenerateAuthTokenAsync(UserModel user);
     }
 }

@@ -26,6 +26,16 @@ namespace ProjectR.Backend.Shared.Enums
         Socials
     }
 
+    public enum SocialMediaProvider
+    {
+        [Description("Google")]
+        Google = 1,
+        [Description("Facebook")]
+        Facebook,
+        [Description("Apple")]
+        Apple
+    }
+
     public enum OtpType
     {
         Onboarding = 1,

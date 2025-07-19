@@ -9,7 +9,6 @@ namespace ProjectR.Backend.Infrastructure.Providers
 {
     public class SocialAuthProvider : ISocialAuthProvider
     {
-
         private readonly ILogger<SocialAuthProvider> _logger;
         private readonly GoogleSettings _googleSettings;
 
@@ -27,7 +26,7 @@ namespace ProjectR.Backend.Infrastructure.Providers
                 {
                     Audience = new[] { _googleSettings.Android, _googleSettings.Ios }
                 });
-                
+
                 return new GoogleAuthenticationVerificationModel
                 {
                     Name = payload.FamilyName,
