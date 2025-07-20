@@ -30,7 +30,7 @@ steps:
     inputs:
       containerregistrytype: "Container Registry"
       dockerComposeFile: "./docker-compose.yml"
-      projectName: "classyk12_ProjectR.Backend"
+      projectName: "classyk12_projectr_backend"
       action: "Build services"
       additionalArguments: "--build"
 
