@@ -1,0 +1,64 @@
+trigger:
+  # - gateway_test
+  - main
+# pr:
+#   - main
+
+pool:
+  name: "Default"
+  demands:
+    - Agent.Name -equals vm-pkw-db-monitor
+# pool:
+#   vmImage: 'ubuntu-latest'
+
+variables:
+  DOCKERHUB_USERNAME: "temilayon"
+  DOCKERHUB_ProR: "temilayon/projectr.backend"
+  DOCKER_TAG: "latest"
+
+steps:
+  - checkout: self
+
+  - task: Docker@2
+    displayName: "Login to Docker Hub"
+    inputs:
+      command: login
+      containerRegistry: "docker_svc_con_L"
+
+  - task: DockerCompose@0
+    displayName: "Build Docker Image"
+    inputs:
+      containerregistrytype: "Container Registry"
+      dockerComposeFile: "./docker-compose.yml"
+      projectName: "classyk12_ProjectR.Backend"
+      action: "Build services"
+      additionalArguments: "--build"
+
+  # Manually push the images
+  - script: |
+      echo "Pushing Gateway Docker image to Docker Hub..."
+      # docker push "${DOCKERHUB_USERNAME}/${DOCKERHUB_ProR}:${DOCKER_TAG}"
+      docker push temilayon/projectr.backend:latest
+
+    displayName: "Push Docker Images to Docker Hub"
+
+  - script: |
+      echo "Pulling Gateway Docker image to Docker Hub..."
+      # docker push "${DOCKERHUB_USERNAME}/${DOCKERHUB_ProR}:${DOCKER_TAG}"
+      docker pull temilayon/projectr.backend:latest
+
+    displayName: "Pull Docker Images from Docker Hub"
+
+  # Start containers using docker-compose up
+  - script: |
+      echo "Starting containers using Docker Compose..."
+      cd /home/tadeboye/classyk_msc
+      bash startsvcs.sh
+    displayName: "Start Docker Containers"
+# - task: DockerCompose@0
+#   displayName: 'Push Docker Image'
+#   inputs:
+#     containerregistrytype: 'Container Registry'
+#     dockerComposeFile: 'src/docker-compose.yml'
+#     projectName: 'classyk12_testapp'
+#     action: 'Push services'
