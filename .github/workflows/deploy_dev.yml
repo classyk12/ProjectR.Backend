@@ -19,7 +19,7 @@ jobs:
 
       - name: Docker Login
         run: |
-          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u temilayon --password-stdin
 
       - name: Build Docker Image
         run: |
