@@ -1,6 +1,6 @@
 trigger:
   # - gateway_test
-  - main
+  - pipeline
 # pr:
 #   - main
 
