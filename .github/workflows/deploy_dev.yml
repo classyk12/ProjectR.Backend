@@ -1,0 +1,66 @@
+name: Build and Deploy with Docker Compose + Rollback
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  IMAGE_TAG: v${{ github.run_number }}
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+
+    - name: Docker Login
+      run: |
+        echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+    - name: Build and Push Image with Tag
+      run: |
+        docker-compose build
+        docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
+        docker push $IMAGE_NAME:$IMAGE_TAG
+
+    - name: Setup SSH Key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+        ssh-keyscan -p ${{ secrets.SSH_PORT || '22' }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Deploy on Remote Server with Rollback
+      run: |
+        ssh -p ${{ secrets.SSH_PORT || '22' }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          set -e
+
+          # Navigate to the location of your compose file
+          cd /home/ubuntu/app
+
+          echo "Docker login to DockerHub..."
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+          echo "Updating docker-compose.yml to use new tag: ${IMAGE_TAG}"
+          sed -i "s|image: ${IMAGE_NAME}:.*|image: ${IMAGE_NAME}:${IMAGE_TAG}|" docker-compose.yml
+
+          echo "Pulling updated image..."
+          docker-compose pull
+
+          echo "Starting containers..."
+          if ! docker-compose up -d --remove-orphans; then
+            echo "Deployment failed. Rolling back to previous image tag: \$PREV_TAG"
+
+            mv docker-compose.yml.bak docker-compose.yml
+            docker pull ${IMAGE_NAME}:\$PREV_TAG
+            sed -i "s|image: ${IMAGE_NAME}:.*|image: ${IMAGE_NAME}:\$PREV_TAG|" docker-compose.yml
+            docker-compose up -d --remove-orphans
+            exit 1
+          fi
+
+          echo "Deployment succeeded."
+        EOF
