@@ -10,7 +10,7 @@ env:
   DEPLOY_PATH: /home/ubuntu/ProjectR/ProjectR.Backend
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,27 +21,33 @@ jobs:
         run: |
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-      - name: Build and Push Docker Image
+      - name: Build Docker Image
         run: |
           docker-compose build
+
+      - name: Tag Docker Image
+        run: |
           docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
+
+      - name: Push Docker Image
+        run: |
           docker push $IMAGE_NAME:$IMAGE_TAG
 
   deploy:
-    needs: build
+    needs: build-and-push
     runs-on: [self-hosted]
 
     steps:
-      - name: Setup SSH Key
+      - name: Setup SSH Key and Known Hosts
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy with Docker Compose and Rollback
+      - name: Deploy to Server
         run: |
-          ssh -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << EOF
+          ssh -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             set -e
 
             cd $DEPLOY_PATH
@@ -49,23 +55,23 @@ jobs:
             echo "Docker login to DockerHub..."
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-            PREV_TAG=\$(grep 'image:' docker-compose.yml | awk -F ':' '{print \$NF}')
+            PREV_TAG=$(grep 'image:' docker-compose.yml | awk -F ':' '{print $NF}')
 
-            echo "Backing up compose file..."
+            echo "Backing up docker-compose.yml..."
             cp docker-compose.yml docker-compose.yml.bak
 
-            echo "Updating docker-compose.yml to use new tag: ${IMAGE_TAG}"
-            sed -i "s|image: ${IMAGE_NAME}:.*|image: ${IMAGE_NAME}:${IMAGE_TAG}|" docker-compose.yml
+            echo "Updating docker-compose.yml to use new tag: $IMAGE_TAG"
+            sed -i "s|image: $IMAGE_NAME:.*|image: $IMAGE_NAME:$IMAGE_TAG|" docker-compose.yml
 
-            echo "Pulling updated image..."
+            echo "Pulling updated Docker image..."
             docker-compose pull
 
             echo "Starting containers..."
             if ! docker-compose up -d --remove-orphans; then
               echo "Deployment failed. Rolling back..."
               mv docker-compose.yml.bak docker-compose.yml
-              docker pull ${IMAGE_NAME}:\$PREV_TAG
-              sed -i "s|image: ${IMAGE_NAME}:.*|image: ${IMAGE_NAME}:\$PREV_TAG|" docker-compose.yml
+              docker pull $IMAGE_NAME:$PREV_TAG
+              sed -i "s|image: $IMAGE_NAME:.*|image: $IMAGE_NAME:$PREV_TAG|" docker-compose.yml
               docker-compose up -d --remove-orphans
               exit 1
             fi
