@@ -38,14 +38,14 @@ steps:
   - script: |
       echo "Pushing Gateway Docker image to Docker Hub..."
       # docker push "${DOCKERHUB_USERNAME}/${DOCKERHUB_ProR}:${DOCKER_TAG}"
-      docker push temilayon/projectr.backend:latest
+      docker push temilayon/projectr.backend:${DOCKER_TAG}
 
     displayName: "Push Docker Images to Docker Hub"
 
   - script: |
       echo "Pulling Gateway Docker image to Docker Hub..."
       # docker push "${DOCKERHUB_USERNAME}/${DOCKERHUB_ProR}:${DOCKER_TAG}"
-      docker pull temilayon/projectr.backend:latest
+      docker pull temilayon/projectr.backend:${DOCKER_TAG}
 
     displayName: "Pull Docker Images from Docker Hub"
 
