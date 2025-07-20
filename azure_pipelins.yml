@@ -37,8 +37,8 @@ steps:
   # Manually push the images
   - script: |
       echo "Pushing Gateway Docker image to Docker Hub..."
-      # docker push "${DOCKERHUB_USERNAME}/${DOCKERHUB_ProR}:${DOCKER_TAG}"
-      docker push temilayon/projectr.backend
+      docker push "${DOCKERHUB_USERNAME}/${DOCKERHUB_ProR}:${DOCKER_TAG}"
+      # docker push temilayon/projectr.backend
 
     displayName: "Push Docker Images to Docker Hub"
 
