@@ -1,6 +1,7 @@
 trigger:
-  # - gateway_test
   - pipeline
+
+# Uncomment if you want to trigger on PRs to main
 # pr:
 #   - main
 
@@ -8,8 +9,6 @@ pool:
   name: "Default"
   demands:
     - Agent.Name -equals vm-pkw-db-monitor
-# pool:
-#   vmImage: 'ubuntu-latest'
 
 variables:
   DOCKERHUB_USERNAME: "temilayon"
@@ -25,40 +24,40 @@ steps:
       command: login
       containerRegistry: "docker_svc_con_L"
 
-  - task: DockerCompose@0
-    displayName: "Build Docker Image"
+  - task: Docker@2
+    displayName: "Build and Tag Image"
     inputs:
-      containerregistrytype: "Container Registry"
-      dockerComposeFile: "./docker-compose.yml"
-      projectName: "classyk12_projectr_backend"
-      action: "Build services"
-      additionalArguments: "--build"
+      command: build
+      Dockerfile: "**/Dockerfile"
+      tags: |
+        $(DOCKER_TAG)
+      repository: $(DOCKERHUB_ProR)
+      buildContext: .
 
-  # Manually push the images
+  # Push the built image to Docker Hub
   - script: |
       echo "Pushing Docker image to Docker Hub..."
-      # docker push "${DOCKERHUB_USERNAME}/${DOCKERHUB_ProR}:latest"
-      docker push "temilayon/projectr.backend:latest"
+      docker push "$(DOCKERHUB_ProR):$(DOCKER_TAG)"
+    displayName: "Push Docker Image to Docker Hub"
 
-    displayName: "Push Docker Images to Docker Hub"
-
+  # Pull the image from Docker Hub (optional)
   - script: |
-      echo "Pulling  Docker image to Docker Hub..."
-      # docker push "${DOCKERHUB_USERNAME}/${DOCKERHUB_ProR}:${DOCKER_TAG}"
-      docker pull "temilayon/projectr.backend:${DOCKER_TAG}""
+      echo "Pulling Docker image from Docker Hub..."
+      docker pull "$(DOCKERHUB_ProR):$(DOCKER_TAG)"
+    displayName: "Pull Docker Image from Docker Hub"
 
-    displayName: "Pull Docker Images from Docker Hub"
-
-  # Start containers using docker-compose up
+  # Start containers using a custom shell script
   - script: |
       echo "Starting containers using Docker Compose..."
       cd /home/tadeboye/classyk_msc
       bash startsvcs.sh
     displayName: "Start Docker Containers"
+
+# Uncomment if you want to push services using DockerCompose task
 # - task: DockerCompose@0
-#   displayName: 'Push Docker Image'
+#   displayName: "Push Docker Image"
 #   inputs:
-#     containerregistrytype: 'Container Registry'
-#     dockerComposeFile: 'src/docker-compose.yml'
-#     projectName: 'classyk12_testapp'
-#     action: 'Push services'
+#     containerregistrytype: "Container Registry"
+#     dockerComposeFile: "src/docker-compose.yml"
+#     projectName: "classyk12_testapp"
+#     action: "Push services"
