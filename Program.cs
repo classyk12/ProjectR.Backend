@@ -5,6 +5,10 @@ using ProjectR.Backend.Middleware;
 using ProjectR.Backend.Application.AppSettings;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using Serilog;
+using ProjectR.Backend.Application.Interfaces.Repository;
+using ProjectR.Backend.Persistence.Repository;
+using ProjectR.Backend.Application.Interfaces.Managers;
+using ProjectR.Backend.Infrastructure.Managers;
 
 namespace ProjectR.Backend
 {
@@ -25,6 +29,14 @@ namespace ProjectR.Backend
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            #region  Repositories
+            builder.Services.AddScoped<IAppThemeRepository, AppThemeRepository>();
+            #endregion
+
+            #region Managers
+            builder.Services.AddScoped<IAppThemeManager, AppThemeManager>();
+            #endregion
 
             builder.Configuration
             .SetBasePath(Directory.GetCurrentDirectory())

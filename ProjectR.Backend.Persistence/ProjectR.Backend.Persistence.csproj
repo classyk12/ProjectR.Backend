@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProjectR.Backend.Application\ProjectR.Backend.Application.csproj" />
     <ProjectReference Include="..\ProjectR.Backend.Domain\ProjectR.Backend.Domain.csproj" />
   </ItemGroup>
 

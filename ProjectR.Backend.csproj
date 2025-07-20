@@ -10,6 +10,11 @@
     <DockerfileContext>.</DockerfileContext>
   </PropertyGroup>
 
+    <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>    
+    </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="ProjectR.Backend.Application\**" />
     <Compile Remove="ProjectR.Backend.Domain\**" />
@@ -50,6 +55,7 @@
 
   <ItemGroup>
     <ProjectReference Include="ProjectR.Backend.Application\ProjectR.Backend.Application.csproj" />
+    <ProjectReference Include="ProjectR.Backend.Infrastructure\ProjectR.Backend.Infrastructure.csproj" />
     <ProjectReference Include="ProjectR.Backend.Persistence\ProjectR.Backend.Persistence.csproj" />
   </ItemGroup>
 
