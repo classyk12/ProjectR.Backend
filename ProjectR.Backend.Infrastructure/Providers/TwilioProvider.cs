@@ -27,9 +27,8 @@ namespace ProjectR.Backend.Infrastructure.Providers
                 TwilioClient.Init(_settings.AccountSID, _settings.AuthToken);
 
                 MessageResource message = await MessageResource.CreateAsync(
-                  //  contentSid: _settings.OtpContentSid,
-                    to: new Twilio.Types.PhoneNumber(WhatsAppPrefix + phoneNumber),
-                    from: new Twilio.Types.PhoneNumber(WhatsAppPrefix + _settings.WhatsappSender),
+                    to: new Twilio.Types.PhoneNumber($"{WhatsAppPrefix}{phoneNumber}"),
+                    from: new Twilio.Types.PhoneNumber($"{WhatsAppPrefix}{_settings.WhatsappSender}"),
                    body: messageContent
                 );
 
