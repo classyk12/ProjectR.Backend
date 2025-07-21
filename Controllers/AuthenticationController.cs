@@ -29,6 +29,27 @@ namespace ProjectR.Backend.Controllers
             return result.Status ? Ok(result) : BadRequest(result);
         }
 
+        /// <summary>
+        /// This endppint is used to authenticate a user that has requested to login with phone number.
+        /// It validates the OTP and returns a response model containing the login details.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Successful Authentication Ack</returns>
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseModel<LoginResponseModel>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<LoginResponseModel>))]
+        [HttpPost("CompletePhoneNumberLogin")]
+        public async Task<IActionResult> AuthenticateWithSocialMedia([FromBody] CompleteLoginWithPhoneNumberModel model)
+        {
+            if (model == null || !ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ResponseModel<LoginResponseModel> result = await _authManager.CompletePhoneNumberAuthenticationAsync(model);
+            return result.Status ? Ok(result) : NotFound(result);
+        }
+
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseModel<LoginResponseModel>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<LoginResponseModel>))]

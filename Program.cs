@@ -4,16 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ProjectR.Backend.Middleware;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using Serilog;
-using ProjectR.Backend.Application.Interfaces.Repository;
-using ProjectR.Backend.Persistence.Repository;
-using ProjectR.Backend.Application.Interfaces.Managers;
-using ProjectR.Backend.Infrastructure.Managers;
-using ProjectR.Backend.Application.Settings;
-using ProjectR.Backend.Infrastructure.Providers;
-using ProjectR.Backend.Application.Interfaces.Providers;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using ProjectR.Backend.Infrastructure.ServiceConfigurations;
 
 namespace ProjectR.Backend
 {
@@ -35,23 +26,7 @@ namespace ProjectR.Backend
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            #region  Settings
-            builder.Services.Configure<GoogleSettings>(builder.Configuration.GetSection("Google"));
-            builder.Services.Configure<GoogleSettings>(builder.Configuration.GetSection("Jwt"));
-            #endregion
-
-            #region  Providers
-            builder.Services.AddScoped<ISocialAuthProvider, SocialAuthProvider>();
-            #endregion
-
-            #region  Repositories
-            builder.Services.AddScoped<IAppThemeRepository, AppThemeRepository>();
-            #endregion
-
-            #region Managers
-            builder.Services.AddScoped<IAppThemeManager, AppThemeManager>();
-            builder.Services.AddScoped<IAuthManager, AuthManager>();
-            #endregion
+            builder.Services.RegisterServices(builder.Configuration);
 
             builder.Configuration
             .SetBasePath(Directory.GetCurrentDirectory())
@@ -59,35 +34,11 @@ namespace ProjectR.Backend
             .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
             .AddEnvironmentVariables();
 
-            builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")!, options =>
-            {
-                options.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorCodesToAdd: []);
-            }));
+            builder.Services.RegisterDatabaseServices(builder.Configuration);
 
             builder.Services.AddHealthChecks();
 
-            #region Authentication
-            builder.Services.AddAuthentication(c =>
-            {
-                c.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                c.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                    ValidAudience = builder.Configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
-                    ClockSkew = TimeSpan.Zero
-                };
-            });
-            #endregion
+            builder.Services.RegisterAuthenticationService(builder.Configuration);
 
             WebApplication app = builder.Build();
 
