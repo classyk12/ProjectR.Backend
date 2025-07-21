@@ -1,7 +1,6 @@
 using ProjectR.Backend.Application.Interfaces.Managers;
 using ProjectR.Backend.Application.Interfaces.Repository;
 using ProjectR.Backend.Application.Models;
-using ProjectR.Backend.Domain.Entities;
 
 namespace ProjectR.Backend.Infrastructure.Managers
 {
