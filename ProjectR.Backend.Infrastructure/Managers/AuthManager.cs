@@ -71,6 +71,11 @@ namespace ProjectR.Backend.Infrastructure.Managers
                     return new ResponseModel<LoginResponseModel>("Invalid Social Authentication Token.", default, false);
                 }
 
+                if (!verificationResult.Email!.Equals(model.Email, StringComparison.OrdinalIgnoreCase))
+                {
+                    return new ResponseModel<LoginResponseModel>("Email Mismatch. Authentication failed", default, false);
+                }
+
                 //if valid, create a new user in the database
                 user = new()
                 {

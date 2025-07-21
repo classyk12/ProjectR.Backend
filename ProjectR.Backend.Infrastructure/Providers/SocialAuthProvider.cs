@@ -24,7 +24,7 @@ namespace ProjectR.Backend.Infrastructure.Providers
             {
                 Payload payload = await ValidateAsync(token, new ValidationSettings
                 {
-                    Audience = new[] { _googleSettings.Android, _googleSettings.Ios }
+                    Audience = new[] { _googleSettings.Android, _googleSettings.Ios, _googleSettings.Web }
                 });
 
                 return new GoogleAuthenticationVerificationModel
