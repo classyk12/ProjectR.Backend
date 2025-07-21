@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using ProjectR.Backend.Application.Interfaces.Providers;
 using ProjectR.Backend.Application.Models;
 using ProjectR.Backend.Application.Settings;
@@ -26,6 +27,8 @@ namespace ProjectR.Backend.Infrastructure.Providers
                 {
                     Audience = new[] { _googleSettings.Android, _googleSettings.Ios, _googleSettings.Web }
                 });
+
+                _logger.LogInformation("Google Token Validation Result: {Result}", JsonConvert.SerializeObject(payload));
 
                 return new GoogleAuthenticationVerificationModel
                 {
