@@ -47,7 +47,7 @@ namespace ProjectR.Backend.Controllers
             }
 
             ResponseModel<LoginResponseModel> result = await _authManager.CompletePhoneNumberAuthenticationAsync(model);
-            return result.Status ? Ok(result) : NotFound(result);
+            return result.Status ? Ok(result) : BadRequest(result);
         }
 
         [Produces("application/json")]
