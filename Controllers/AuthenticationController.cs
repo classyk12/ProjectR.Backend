@@ -26,7 +26,7 @@ namespace ProjectR.Backend.Controllers
             }
 
             ResponseModel<PhoneNumberLoginResponseModel> result = await _authManager.AuthenticateWithPhoneNumberAsync(model);
-            return result.Status ? Ok(result) : NotFound(result);
+            return result.Status ? Ok(result) : BadRequest(result);
         }
 
         [Produces("application/json")]
@@ -41,7 +41,7 @@ namespace ProjectR.Backend.Controllers
             }
 
             ResponseModel<LoginResponseModel> result = await _authManager.AuthenticateWithSocialAsync(model);
-            return result.Status ? Ok(result) : NotFound(result);
+            return result.Status ? Ok(result) : BadRequest(result);
         }
     }
 }
