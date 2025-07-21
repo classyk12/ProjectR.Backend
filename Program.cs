@@ -32,12 +32,10 @@ namespace ProjectR.Backend
 
             #region  Repositories
             builder.Services.AddScoped<IAppThemeRepository, AppThemeRepository>();
-            builder.Services.AddScoped<IBusinessRepository, BusinessRepository>();
             #endregion
 
             #region Managers
             builder.Services.AddScoped<IAppThemeManager, AppThemeManager>();
-            builder.Services.AddScoped<IBusinessManager, BusinessManager>();
             #endregion
 
             builder.Configuration
