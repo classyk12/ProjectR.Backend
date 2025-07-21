@@ -51,7 +51,7 @@ namespace ProjectR.Backend
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Vigipay CrossBorda Admin");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProjectR Backend");
                 c.RoutePrefix = string.Empty;
             });
 

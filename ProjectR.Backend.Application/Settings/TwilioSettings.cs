@@ -9,5 +9,7 @@
         /// </summary>
         public string OtpContentSid { get; set; } = string.Empty;
         public bool UseMock { get; set; }
+        public string? WhatsappSender { get; set; }
+        
     }
 }

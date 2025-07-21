@@ -31,7 +31,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
             // generate an OTP token and send it to the user's phone number via whatsapp
 
             //TODO: OTP manager is to be injected to handle OTP (creation etc) notification manager
-            NotificationModel notificationModel = new([DeliveryMode.Whatsapp], model.PhoneNumber);
+            NotificationModel notificationModel = new([DeliveryMode.Whatsapp], model.PhoneCode + model.PhoneNumber, "Test Notification");
             BaseResponseModel sendNotificationResult = await _notificationManager.SendNotificationAsync(notificationModel);
             if (!sendNotificationResult.Status)
             {
