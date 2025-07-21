@@ -14,7 +14,6 @@ namespace ProjectR.Backend.Application.Models
         public string? PhoneNumber { get; set; }
         public string? Industry { get; set; }
         public string? About { get; set; }
-
         public string? Location { get; set; }
         public string? Longitude { get; set; }
         public string? Latitude { get; set; }
@@ -22,8 +21,6 @@ namespace ProjectR.Backend.Application.Models
 
     public class AddBusinessModel
     {
-        
-
         public Guid UserId { get; set; }
         [Required(ErrorMessage = "Name is required")]
         public string? Name { get; set; }

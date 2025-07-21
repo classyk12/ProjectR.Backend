@@ -48,7 +48,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
         {
             if (businesses.Length == 0)
             {
-                return new ResponseModel<BusinessModel[]>(message: "Empty Business", status: false, data: Array.Empty<BusinessModel>());
+                return new ResponseModel<BusinessModel[]>(message: "Business list cannot be empty", status: false, data: Array.Empty<BusinessModel>());
             }
 
              foreach (AddBusinessModel b in businesses)
@@ -75,14 +75,14 @@ namespace ProjectR.Backend.Infrastructure.Managers
             }).ToArray();
 
             BusinessModel[] result = await _businessRepository.AddAsync(models);
-            return new ResponseModel<BusinessModel[]>(message: "Business Added Successfully", data: result, status: true);
+            return new ResponseModel<BusinessModel[]>(message: "Businesses Added Successfully", data: result, status: true);
 
         }
 
         public async Task<BaseResponseModel> DeleteAsync(BusinessModel[] businesses)
         {
             await _businessRepository.DeleteAsync(businesses);
-            return new BaseResponseModel(message: "Business succesfully deleted", status: true);
+            return new BaseResponseModel(message: "Businesses succesfully deleted", status: true);
         }
 
         public async Task<BaseResponseModel> DeleteAsync(Guid id)
