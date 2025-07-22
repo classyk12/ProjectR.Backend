@@ -70,6 +70,10 @@ namespace ProjectR.Backend.Application.Models
         /// </summary>
         public string? PhoneNumber { get; set; }
         public OtpType? Type { get; set; }
+        /// <summary>
+        /// For the sake of development, the OTP will be returned till proper whatsapp delivery is sorted
+        /// </summary>
+        public string? Otp { get; set; }
     }
 
     public class GoogleAuthenticationVerificationModel
