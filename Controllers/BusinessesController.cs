@@ -10,12 +10,14 @@ namespace ProjectR.Backend.Controllers
     {
         private readonly IBusinessManager _businessManager;
 
-        public BusinessesController(IBusinessManager businessManager) { 
+        public BusinessesController(IBusinessManager businessManager)
+        { 
             _businessManager = businessManager;
         }
 
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<BusinessModel>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BusinessModel[]))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BusinessModel[]))]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -25,6 +27,7 @@ namespace ProjectR.Backend.Controllers
 
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<BusinessModel>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseModel<BusinessModel>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
@@ -44,7 +47,7 @@ namespace ProjectR.Backend.Controllers
             }
 
             ResponseModel<BusinessModel> result = await _businessManager.AddAsync(business);
-            return result.Status ? Ok(result) : NotFound();
+            return result.Status ? Ok(result) : BadRequest(result);
         }
 
         [Produces("application/json")]
@@ -59,7 +62,7 @@ namespace ProjectR.Backend.Controllers
             }
 
             ResponseModel<BusinessModel> result = await _businessManager.UpdateAsync(business);
-            return result.Status ? Ok(result) : NotFound();
+            return result.Status ? Ok(result) : BadRequest(result);
 
         }
 
@@ -70,7 +73,7 @@ namespace ProjectR.Backend.Controllers
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             BaseResponseModel result = await _businessManager.DeleteAsync(id);
-            return result.Status ? Ok(result) : NotFound();
+            return result.Status ? Ok(result) : BadRequest(result);
 
         }
     }

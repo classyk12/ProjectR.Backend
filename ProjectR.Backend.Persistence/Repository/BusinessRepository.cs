@@ -3,19 +3,16 @@ using ProjectR.Backend.Application.Interfaces.Repository;
 using ProjectR.Backend.Application.Models;
 using ProjectR.Backend.Domain.Entities;
 using ProjectR.Backend.Persistence.DatabaseContext;
-using Serilog;
+
 namespace ProjectR.Backend.Persistence.Repository
 {
     public class BusinessRepository : IBusinessRepository
     {
         private readonly AppDbContext _context;
-       private readonly ILogger _logger;
 
-        public BusinessRepository(AppDbContext context, ILogger logger)
+        public BusinessRepository(AppDbContext context)
         {
             _context = context;
-            _logger = logger;
-            //_logger.Information("BusinessRepository initialized");
         }
 
         public async Task<BusinessModel[]> AddAsync(BusinessModel[] businessModels)
@@ -43,7 +40,7 @@ namespace ProjectR.Backend.Persistence.Repository
                 Longitude = businessModel.Longitude,
                 Latitude = businessModel.Latitude,
             };
-            // _logger.Information("Adding business: {@Entity}", entity);
+
             await _context.Businesses.AddAsync(entity);
             await _context.SaveChangesAsync();
             return businessModel;
@@ -103,7 +100,19 @@ namespace ProjectR.Backend.Persistence.Repository
 
         public async Task<BusinessModel[]> UpdateAsync(BusinessModel[] businessModels)
         {
-            List<Business> entities = businessModels.Select(c => new Business { Id = c.Id, Name = c.Name }).ToList();
+            List<Business> entities = businessModels.Select(c => new Business
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Type = c.Type,
+                PhoneCode = c.PhoneCode,
+                PhoneNumber = c.PhoneNumber,
+                Industry = c.Industry,
+                About = c.About,
+                Location = c.Location,
+                Longitude = c.Longitude,
+                Latitude = c.Latitude
+            }).ToList();
             _context.Businesses.UpdateRange(entities);
             await _context.SaveChangesAsync();
             return businessModels;
