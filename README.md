@@ -21,7 +21,7 @@ This is a simple aapplication that helps businesses with managing service appoin
 
 
 When a Dev is assigned a task, do the following:
-1. Create your branch locally using this format depending on if you are fixing, adding a new feature or doing a chore such as code cleanup. We will use the <features> tag to represent a new feature, <fix> tag to represent if you are making a fix and <chore> to if you are carrying out a routine cleanup.
+1. Create your branch locally using this format depending on if you are fixing, adding a new feature or doing a chore such as code cleanup. We will use the <features> tag to represent a new feature, <fix> tag to represent if you are making a fix and <chore> if you are carrying out a routine cleanup.
 This will follow the format of: <actionType>-<yourinitials>-<AssignedTaskTitle>. For example, If I was given a task to create CRUD operation for AppTheme, my branch name would be:
 **features-FS-AppThemeCRUD**
 2. Pull from the **develop** branch which is usually where all recent approved changes get merged into.
