@@ -70,6 +70,7 @@ namespace ProjectR.Backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
+
             BaseResponseModel result = await _appThemeManager.DeleteAsync(id);
             return result.Status ? Ok(result) : NotFound(result);
         }
