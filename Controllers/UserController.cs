@@ -31,7 +31,7 @@ namespace ProjectR.Backend.Controllers
         public async Task<IActionResult> Get([FromRoute] Guid id)
         {
             ResponseModel<UserModel> result = await _userManager.GetByIdAsync(id: id);
-            return result.Status ? Ok(result) : NotFound(result);
+            return result.Status ? Ok(result) : BadRequest(result);
         }
 
         [Produces("application/json")]
