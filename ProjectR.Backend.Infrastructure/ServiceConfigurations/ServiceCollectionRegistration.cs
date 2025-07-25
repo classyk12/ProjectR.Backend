@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,12 +34,14 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
 
             #region  Repositories
             services.AddScoped<IAppThemeRepository, AppThemeRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             #endregion
 
             #region Managers
             services.AddScoped<IAppThemeManager, AppThemeManager>();
             services.AddScoped<IAuthManager, AuthManager>();
             services.AddScoped<INotificationManager, NotificationManager>();
+            services.AddScoped<IUserManager, UserManager>();
             #endregion
         }
 
