@@ -18,12 +18,24 @@ namespace ProjectR.Backend.Persistence.Repository
         public async Task<UserModel[]> GetAllAsync()
         {
             List<User> entities = await _context.Users.ToListAsync();
-            return entities.Select(e => new UserModel { Id = e.Id, PhoneNumber = e.PhoneNumber }).ToArray();
+            return entities.Select(e => new UserModel
+            {
+                Id = e.Id,
+                PhoneNumber = e.PhoneNumber
+            }).ToArray();
         }
 
         public async Task<UserModel> AddAsync(UserModel user)
         {
-            User entity = new() { Id = user.Id, PhoneNumber = user.PhoneNumber, PhoneCode = user.PhoneCode, Email = user.Email, AccountType = user.AccountType, RegistrationType = user.RegistrationType };
+            User entity = new()
+            {
+                Id = user.Id,
+                PhoneNumber = user.PhoneNumber,
+                PhoneCode = user.PhoneCode,
+                Email = user.Email,
+                AccountType = user.AccountType,
+                RegistrationType = user.RegistrationType
+            };
             await _context.Users.AddAsync(entity);
             await _context.SaveChangesAsync();
             return user;
@@ -37,7 +49,15 @@ namespace ProjectR.Backend.Persistence.Repository
                 return null;
             }
 
-            return new UserModel { Id = id, Email = result?.Email, PhoneNumber = result?.PhoneNumber, PhoneCode = result?.PhoneCode, AccountType = result?.AccountType, RegistrationType = result?.RegistrationType };
+            return new UserModel
+            {
+                Id = id,
+                Email = result?.Email,
+                PhoneNumber = result?.PhoneNumber,
+                PhoneCode = result?.PhoneCode,
+                AccountType = result?.AccountType,
+                RegistrationType = result?.RegistrationType
+            };
         }
 
         public async Task<UserModel> UpdateAsync(UserModel user)

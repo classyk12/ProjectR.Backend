@@ -21,7 +21,9 @@ namespace ProjectR.Backend.Infrastructure.Managers
         public async Task<ResponseModel<UserModel>> GetByIdAsync(Guid id)
         {
             UserModel? result = await _userRepository.GetByIdAsync(id);
-            return new ResponseModel<UserModel>(message: result != null ? "User retrieved successfully." : "User not found.", result, result != null);
+            return new ResponseModel<UserModel>(message: result != null ?
+            "User retrieved successfully." :
+            "User not found.", result, result != null);
         }
 
         public async Task<ResponseModel<UserModel>> AddAsync(AddUserModel userModel)
@@ -32,7 +34,14 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 return new ResponseModel<UserModel>(message: "User already exists.", status: false, data: null);
             }
 
-            UserModel model = new UserModel { Email = userModel.Email, PhoneNumber = userModel.PhoneNumber, RegistrationType = userModel.RegistrationType, AccountType = userModel.AccountType, PhoneCode = userModel.PhoneCode };
+            UserModel model = new UserModel
+            {
+                Email = userModel.Email,
+                PhoneNumber = userModel.PhoneNumber,
+                RegistrationType = userModel.RegistrationType,
+                AccountType = userModel.AccountType,
+                PhoneCode = userModel.PhoneCode
+            };
             UserModel result = await _userRepository.AddAsync(model);
             return new ResponseModel<UserModel>(message: "User added successfully.", data: result, status: true);
         }

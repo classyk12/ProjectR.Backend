@@ -71,7 +71,7 @@ namespace ProjectR.Backend.Controllers
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             BaseResponseModel? result = await _userManager.DeleteAsync(id);
-            return NoContent();
+            return result!.Status ? Ok(result) : BadRequest();
         }
     }
 }

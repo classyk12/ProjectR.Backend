@@ -23,7 +23,10 @@ namespace ProjectR.Backend.Application.Models
         [EmailAddress(ErrorMessage = "Invalid email format.")]
         public string Email { get; set; } = string.Empty;
         [Required(ErrorMessage = "Phone number is required")]
+        [RegularExpression(@"^\d{10,15}$", ErrorMessage = "Invalid phone number format. It should be between 10 to 15 digits.")]
         public string PhoneNumber { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Phone Code is required.")]
+        [RegularExpression(@"^\+\d{1,3}$", ErrorMessage = "Invalid phone code format. Use the format +[country code].")]
         public string PhoneCode { get; set; } = string.Empty;
         [Required(ErrorMessage = "Account type is required")]
         public AccountType AccountType { get; set; }
