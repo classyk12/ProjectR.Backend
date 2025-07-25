@@ -12,7 +12,6 @@ namespace ProjectR.Backend.Controllers
         public UserController(IUserManager userManager)
         {
             _userManager = userManager;
-
         }
 
         [Produces("application/json")]
@@ -47,7 +46,7 @@ namespace ProjectR.Backend.Controllers
             }
 
             ResponseModel<UserModel> result = await _userManager.AddAsync(userModel);
-            return result.Status ? Ok(result) : NotFound(result);
+            return result.Status ? Ok(result) : BadRequest();
         }
 
         [Produces("application/json")]
@@ -62,7 +61,7 @@ namespace ProjectR.Backend.Controllers
             }
 
             ResponseModel<UserModel> result = await _userManager.UpdateAsync(userModel);
-            return result.Status ? Ok(result) : NotFound(result);
+            return result.Status ? Ok(result) : BadRequest();
         }
 
         [Produces("application/json")]
@@ -71,13 +70,7 @@ namespace ProjectR.Backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-
             BaseResponseModel? result = await _userManager.DeleteAsync(id);
-            if (result == null)
-            {
-                NotFound("Not Found");
-            }
-
             return NoContent();
         }
     }

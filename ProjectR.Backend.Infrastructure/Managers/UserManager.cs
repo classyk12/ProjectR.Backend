@@ -11,7 +11,6 @@ namespace ProjectR.Backend.Infrastructure.Managers
         public UserManager(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-
         }
 
         public async Task<UserModel[]> GetAllAsync()
@@ -40,14 +39,14 @@ namespace ProjectR.Backend.Infrastructure.Managers
 
         public async Task<ResponseModel<UserModel>> UpdateAsync(UserModel user)
         {
-            UserModel? existingTheme = await _userRepository.GetByIdAsync(user.Id);
-            if (existingTheme == null)
+            UserModel? existingUser = await _userRepository.GetByIdAsync(user.Id);
+            if (existingUser == null)
             {
                 return new ResponseModel<UserModel>(message: "User not found.", data: default, status: false);
             }
 
             UserModel result = await _userRepository.UpdateAsync(user);
-            return new ResponseModel<UserModel>(message: "App theme updated successfully.", data: result, status: true);
+            return new ResponseModel<UserModel>(message: "User updated successfully.", data: result, status: true);
         }
 
         public async Task<BaseResponseModel?> DeleteAsync(Guid id)
@@ -55,7 +54,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
             UserModel? existingUser = await _userRepository.GetByIdAsync(id);
             if (existingUser == null)
             {
-                return null;
+                return new BaseResponseModel(message: "User not found.", status: false);
             }
 
             await _userRepository.DeleteAsync(existingUser.Id);

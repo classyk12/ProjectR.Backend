@@ -12,7 +12,6 @@ namespace ProjectR.Backend.Persistence.Repository
         private readonly AppDbContext _context;
         public UserRepository(AppDbContext context)
         {
-
             _context = context;
         }
 
@@ -65,12 +64,11 @@ namespace ProjectR.Backend.Persistence.Repository
             _context.Users.Remove(entity!);
             await _context.SaveChangesAsync();
             return entity;
-
         }
 
         public Task<bool> UserExists(string email)
         {
-            return _context.Users.AnyAsync(user => user.Email == email);
+            return _context.Users.AnyAsync(user => user.Email!.ToLower() == email.ToLower());
         }
     }
 }
