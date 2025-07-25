@@ -59,7 +59,7 @@ Environment variables you might override:
 ConnectionStrings__DefaultConnection
 ASPNETCORE_ENVIRONMENT
 
-AppSettings changes have been delirately ignored here. If you need the files, I am more than happy to share with you.
+AppSettings changes have been deliberately ignored here. If you need the files, I am more than happy to share with you.
 
 📡 API
 Swagger: https://localhost:{port}/swagger when running in dev.
@@ -97,7 +97,7 @@ This project is licensed under the **MIT License**
 
 🙌 Acknowledgements
 
-Built with ❤️ by \[Your Name / Your Org]
+Built with ❤️ by Faith Sodipe
 Inspired by businesses that want **better time management** for customers and staff alike.
 
 ---
@@ -106,6 +106,7 @@ Inspired by businesses that want **better time management** for customers and st
 
 * Project maintainer: Faith Sodipe (faithsodipe@gmail.com)
 * LinkedIn: https://www.linkedin.com/in/sodipefaith/
+* Website: classykdigital.com
 
 ---
 
