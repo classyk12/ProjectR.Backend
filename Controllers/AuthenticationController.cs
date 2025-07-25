@@ -26,7 +26,7 @@ namespace ProjectR.Backend.Controllers
             }
 
             ResponseModel<PhoneNumberLoginResponseModel> result = await _authManager.AuthenticateWithPhoneNumberAsync(model);
-            return result.Status ? Ok(result) : NotFound(result);
+            return result.Status ? Ok(result) : BadRequest(result);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace ProjectR.Backend.Controllers
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseModel<LoginResponseModel>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<LoginResponseModel>))]
         [HttpPost("CompletePhoneNumberLogin")]
-        public async Task<IActionResult> AuthenticateWithSocialMedia([FromBody] CompleteLoginWithPhoneNumberModel model)
+        public async Task<IActionResult> CompletePhoneNumberLogin([FromBody] CompleteLoginWithPhoneNumberModel model)
         {
             if (model == null || !ModelState.IsValid)
             {
@@ -47,7 +47,7 @@ namespace ProjectR.Backend.Controllers
             }
 
             ResponseModel<LoginResponseModel> result = await _authManager.CompletePhoneNumberAuthenticationAsync(model);
-            return result.Status ? Ok(result) : NotFound(result);
+            return result.Status ? Ok(result) : BadRequest(result);
         }
 
         [Produces("application/json")]
@@ -62,7 +62,7 @@ namespace ProjectR.Backend.Controllers
             }
 
             ResponseModel<LoginResponseModel> result = await _authManager.AuthenticateWithSocialAsync(model);
-            return result.Status ? Ok(result) : NotFound(result);
+            return result.Status ? Ok(result) : BadRequest(result);
         }
     }
 }

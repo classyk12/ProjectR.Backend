@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProjectR.Backend.Application.Models
 {
-    public class LoginWithPhoneNumberModel
+    public class BasePhoneAuthModel
     {
         [Required(ErrorMessage = "Phone Code is required.")]
         [RegularExpression(@"^\+\d{1,3}$", ErrorMessage = "Invalid phone code format. Use the format +[country code].")]
@@ -13,16 +13,14 @@ namespace ProjectR.Backend.Application.Models
         [RegularExpression(@"^\d{10,15}$", ErrorMessage = "Invalid phone number format. It should be between 10 to 15 digits.")]
         public string? PhoneNumber { get; set; }
     }
-    public class CompleteLoginWithPhoneNumberModel
+
+    public class LoginWithPhoneNumberModel : BasePhoneAuthModel
     {
-        [Required(ErrorMessage = "Phone Code is required.")]
-        [RegularExpression(@"^\+\d{1,3}$", ErrorMessage = "Invalid phone code format. Use the format +[country code].")]
-        public string? PhoneCode { get; set; }
 
-        [Required(ErrorMessage = "Phone Number is required.")]
-        [RegularExpression(@"^\d{10,15}$", ErrorMessage = "Invalid phone number format. It should be between 10 to 15 digits.")]
-        public string? PhoneNumber { get; set; }
+    }
 
+    public class CompleteLoginWithPhoneNumberModel : BasePhoneAuthModel
+    {
         [Required(ErrorMessage = "OTP is required.")]
         [RegularExpression(@"^\d{6}$", ErrorMessage = "Invalid OTP format. It should be exactly 6 digits.")]
         public string? OTP { get; set; }
@@ -70,6 +68,10 @@ namespace ProjectR.Backend.Application.Models
         /// </summary>
         public string? PhoneNumber { get; set; }
         public OtpType? Type { get; set; }
+        /// <summary>
+        /// For the sake of development, the OTP will be returned till proper whatsapp delivery is sorted
+        /// </summary>
+        public string? Otp { get; set; }
     }
 
     public class GoogleAuthenticationVerificationModel

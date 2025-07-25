@@ -4,10 +4,11 @@ namespace ProjectR.Backend.Application.Models
 {
     public class NotificationModel
     {
-        public NotificationModel(DeliveryMode[] deliveryModes, string? recipient)
+        public NotificationModel(DeliveryMode[] deliveryModes, string? recipient, string? content)
         {
             DeliveryModes = deliveryModes;
             Recipient = recipient;
+            Content = content;
         }
 
         /// <summary>

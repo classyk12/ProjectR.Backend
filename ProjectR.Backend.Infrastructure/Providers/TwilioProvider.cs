@@ -10,11 +10,11 @@ namespace ProjectR.Backend.Infrastructure.Providers
 {
     public class TwilioProvider : ITwilioProvider
     {
-        private readonly ILogger<SocialAuthProvider> _logger;
+        private readonly ILogger<TwilioProvider> _logger;
         private readonly TwilioSettings _settings;
         private const string WhatsAppPrefix = "whatsapp:";
 
-        public TwilioProvider(ILogger<SocialAuthProvider> logger, IOptions<TwilioSettings> settings)
+        public TwilioProvider(ILogger<TwilioProvider> logger, IOptions<TwilioSettings> settings)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _settings = settings.Value ?? throw new ArgumentNullException(nameof(settings));
@@ -27,19 +27,19 @@ namespace ProjectR.Backend.Infrastructure.Providers
                 TwilioClient.Init(_settings.AccountSID, _settings.AuthToken);
 
                 MessageResource message = await MessageResource.CreateAsync(
-                    contentSid: _settings.OtpContentSid,
-                    to: new Twilio.Types.PhoneNumber($"{WhatsAppPrefix}:{phoneNumber}"),
+                    to: new Twilio.Types.PhoneNumber($"{WhatsAppPrefix}{phoneNumber}"),
+                    from: new Twilio.Types.PhoneNumber($"{WhatsAppPrefix}{_settings.WhatsappSender}"),
                    body: messageContent
                 );
 
-                _logger.LogInformation("Twilio Message response: {response}", JsonConvert.SerializeObject(message));
+                _logger.LogInformation("Twilio Message response: {Response}", JsonConvert.SerializeObject(message));
 
                 return message != null && message.ErrorCode == null && message.Status == MessageResource.StatusEnum.Queued;
             }
 
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error sending Twilio Message to {phoneNumber}", phoneNumber);
+                _logger.LogError(ex, "Error sending Twilio Message to {PhoneNumber}", phoneNumber);
                 return default;
             }
         }
