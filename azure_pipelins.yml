@@ -6,6 +6,7 @@ pr:
   - main
 push:
   - develop
+  - pipeline
 
 pool:
   name: "Default"
