@@ -1,5 +1,9 @@
 .vs
+.vscode
 **/bin/
 **/obj/
 **/bin/Debug/
 /Logs/
+appsettings.json
+appsettings.Development.json
+Properties/launchSettings.json

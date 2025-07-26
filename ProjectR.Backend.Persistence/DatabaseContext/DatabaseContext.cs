@@ -6,6 +6,7 @@ namespace ProjectR.Backend.Persistence.DatabaseContext
     public class AppDbContext : DbContext
     {
         public DbSet<User> Users => Set<User>();
+        public DbSet<AppTheme> AppThemes => Set<AppTheme>();
         public DbSet<Business> Businesses => Set<Business>();
         public DbSet<BusinessAvailability> BusinessAvailabilities => Set<BusinessAvailability>();
         public DbSet<BusinessAvailabilitySlot> BusinessAvailabilitySlots => Set<BusinessAvailabilitySlot>();

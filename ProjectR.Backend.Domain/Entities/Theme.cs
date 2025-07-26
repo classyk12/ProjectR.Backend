@@ -6,5 +6,6 @@ namespace ProjectR.Backend.Domain.Entities
     public class AppTheme
     {
         public Guid Id { get; set; }
+        public string? Name { get; set; }
     }
 }

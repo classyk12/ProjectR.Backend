@@ -2,9 +2,9 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using ProjectR.Backend.Middleware;
-using ProjectR.Backend.Application.AppSettings;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using Serilog;
+using ProjectR.Backend.Infrastructure.ServiceConfigurations;
 
 namespace ProjectR.Backend
 {
@@ -26,20 +26,19 @@ namespace ProjectR.Backend
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.RegisterServices(builder.Configuration);
+
             builder.Configuration
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
             .AddEnvironmentVariables();
 
-            builder.Services.Configure<TestSettings>(builder.Configuration.GetSection("ProcessingSettings"));
-            builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")!, options =>
-            {
-                options.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorCodesToAdd: []);
-            }));
+            builder.Services.RegisterDatabaseServices(builder.Configuration);
 
             builder.Services.AddHealthChecks();
+
+            builder.Services.RegisterAuthenticationService(builder.Configuration);
 
             WebApplication app = builder.Build();
 
@@ -52,20 +51,15 @@ namespace ProjectR.Backend
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Vigipay CrossBorda Admin");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProjectR Backend");
                 c.RoutePrefix = string.Empty;
             });
 
             app.UseSerilogRequestLogging();
-
             app.UseMiddleware<ExceptionMiddleware>();
-
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
             app.MapControllers();
-
             app.MapHealthChecks("/health", new HealthCheckOptions
             {
                 Predicate = _ => true,

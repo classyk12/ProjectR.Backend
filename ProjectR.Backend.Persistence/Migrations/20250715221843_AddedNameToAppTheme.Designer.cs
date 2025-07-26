@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ProjectR.Backend.Persistence.DatabaseContext;
@@ -12,9 +13,11 @@ using ProjectR.Backend.Persistence.DatabaseContext;
 namespace ProjectR.Backend.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250715221843_AddedNameToAppTheme")]
+    partial class AddedNameToAppTheme
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,9 +65,6 @@ namespace ProjectR.Backend.Persistence.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.Property<string>("Logo")
-                        .HasColumnType("text");
-
                     b.Property<string>("Longitude")
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
@@ -86,9 +86,6 @@ namespace ProjectR.Backend.Persistence.Migrations
 
                     b.Property<int?>("ServiceType")
                         .HasColumnType("integer");
-
-                    b.Property<string>("ShortLink")
-                        .HasColumnType("text");
 
                     b.Property<string>("Type")
                         .HasMaxLength(100)

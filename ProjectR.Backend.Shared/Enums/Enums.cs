@@ -12,7 +12,9 @@ namespace ProjectR.Backend.Shared.Enums
 
     public enum AccountType
     {
+        [Description("Business")]
         Business = 1,
+        [Description("Customer")]
         Customer
     }
 
@@ -24,9 +26,19 @@ namespace ProjectR.Backend.Shared.Enums
         Socials
     }
 
+    public enum SocialMediaProvider
+    {
+        [Description("Google")]
+        Google = 1,
+        [Description("Facebook")]
+        Facebook,
+        [Description("Apple")]
+        Apple
+    }
+
     public enum OtpType
     {
-        Onboarding = 1,
+        Authentication = 1,
     }
 
     public enum DeliveryMode
