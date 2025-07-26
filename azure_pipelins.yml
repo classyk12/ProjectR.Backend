@@ -1,0 +1,64 @@
+trigger:
+  branches:
+    include:
+      - develop
+      # - pipeline
+      - main
+
+
+pool:
+  name: "Default"
+  demands:
+    - Agent.Name -equals vm-pkw-db-monitor
+
+variables:
+  DOCKERHUB_USERNAME: "temilayon"
+  DOCKERHUB_ProR: "temilayon/projectr.backend"
+  DOCKER_TAG: "latest"
+
+steps:
+  - checkout: self
+
+  - task: Docker@2
+    displayName: "Login to Docker Hub"
+    inputs:
+      command: login
+      containerRegistry: "docker_svc_con_L"
+
+  - task: Docker@2
+    displayName: "Build and Tag Image"
+    inputs:
+      command: build
+      Dockerfile: "**/Dockerfile"
+      tags: |
+        $(DOCKER_TAG)
+      repository: $(DOCKERHUB_ProR)
+      buildContext: .
+
+  # Push the built image to Docker Hub
+  - script: |
+      echo "Pushing Docker image to Docker Hub..."
+      docker push "$(DOCKERHUB_ProR):$(DOCKER_TAG)"
+    displayName: "Push Docker Image to Docker Hub"
+
+  # Pull the image from Docker Hub (optional)
+  - script: |
+      echo "Pulling Docker image from Docker Hub..."
+      docker pull "$(DOCKERHUB_ProR):$(DOCKER_TAG)"
+    displayName: "Pull Docker Image from Docker Hub"
+
+  # Start containers using a custom shell script
+  - script: |
+      echo "Starting containers using Docker Compose..."
+      cd /home/tadeboye/classyk_msc
+      bash startsvcs.sh
+    displayName: "Start Docker Containers"
+
+# Uncomment if you want to push services using DockerCompose task
+# - task: DockerCompose@0
+#   displayName: "Push Docker Image"
+#   inputs:
+#     containerregistrytype: "Container Registry"
+#     dockerComposeFile: "src/docker-compose.yml"
+#     projectName: "classyk12_testapp"
+#     action: "Push services"

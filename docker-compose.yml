@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   api:
     build:
@@ -9,7 +8,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    
+
     networks:
       - mynetwork
 
@@ -18,8 +17,8 @@ services:
       - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=projectr;Username=postgres;Password=password
 
     ports:
-       - "8080:80"
-       - "8081:443"
+       - "5000:80"
+      #  - "8081:443"
 
   db:
     image: postgres:15
@@ -29,9 +28,9 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: projectr
-    
+
     ports:
-      - "5432:5432"
+      - "4400:80"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -40,7 +39,7 @@ services:
       retries: 5
       start_period: 30s
       timeout: 10s
-      
+
     networks:
       - mynetwork
 
@@ -49,4 +48,3 @@ volumes:
 
 networks:
   mynetwork:
-
