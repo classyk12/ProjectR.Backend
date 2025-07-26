@@ -87,7 +87,7 @@ We 💙 contributions! Please follow these steps:
 ---
 
 📢  Code of Conduct
-**
+
 Be kind, helpful, and respectful. We want ProjectR to be welcoming for everyone.
 
 ---
@@ -101,7 +101,7 @@ This project is licensed under the **MIT License**
 🙌 Acknowledgements
 
 Built with ❤️ by Faith Sodipe
-Inspired by businesses that want **better time management** for customers and staff alike.
+Inspired by businesses that want better time management for customers and staff alike.
 
 ---
 
