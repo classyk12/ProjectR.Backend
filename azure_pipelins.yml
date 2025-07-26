@@ -1,12 +1,10 @@
 trigger:
-  - pipeline
+  branches:
+    include:
+      - develop
+      # - pipeline
+      - main
 
-# Uncomment if you want to trigger on PRs to main
-pr:
-  - main
-push:
-  - develop
-  - pipeline
 
 pool:
   name: "Default"
