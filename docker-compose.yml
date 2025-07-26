@@ -17,9 +17,27 @@ services:
       # - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=projectr;Username=postgres;Password=password
 
+      - Google__Android=${Google__Android}
+      - Google__iOS=${Google__iOS}
+
+      - Jwt__Issuer=${Jwt__Issuer}
+      - Jwt__Audience=${Jwt__Audience}
+      - Jwt__Key=${Jwt__Key}
+
+      - Twilio__AccountSID=${Twilio__AccountSID}
+      - Twilio__AuthToken=${Twilio__AuthToken}
+      - Twilio__UseMock=${Twilio__UseMock}
+      - Twilio__OtpContentSid=${Twilio__OtpContentSid}
+
+      - Otp__UseMock=${Otp__UseMock}
+      - Otp__ExpiryInMin=${Otp__ExpiryInMin}
+
     ports:
        - "8080:80"
        - "8081:443"
+       
+    env_file:
+      - .env
 
   db:
     image: postgres:15

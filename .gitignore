@@ -4,6 +4,7 @@
 **/obj/
 **/bin/Debug/
 /Logs/
-appsettings.json
-appsettings.Development.json
 Properties/launchSettings.json
+Todo.txt
+.env
+appsettings.Development.json
