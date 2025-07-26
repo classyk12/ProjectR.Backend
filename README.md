@@ -36,9 +36,11 @@
 # Clone the repo
 git clone https://github.com/YOUR_USERNAME/ProjectR.git
 cd ProjectR
+checkout to develop (thats the stable branch)
 
 # Spin up the Postgres DB & API container
-docker compose up --build
+docker compose up db  [this spins up the postgres container]
+you can then run using "dotnet run" or using a debug profile (vs and vscode)
 
 # Migrate database (from inside your API project)
 databse auto migrates. all pending migration changes gets applied once you run the project
