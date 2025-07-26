@@ -34,6 +34,7 @@ namespace ProjectR.Backend.Shared.Helpers
                     _ => true
                 };
             }
+
             catch (Exception)
             {
                 return false;
