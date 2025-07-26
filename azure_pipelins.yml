@@ -2,8 +2,10 @@ trigger:
   - pipeline
 
 # Uncomment if you want to trigger on PRs to main
-# pr:
-#   - main
+pr:
+  - main
+push:
+  - develop
 
 pool:
   name: "Default"
