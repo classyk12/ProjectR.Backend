@@ -2,6 +2,8 @@
 
 **ProjectR** is an open-source mobile & web solution that helps **small and medium businesses** handle, track, and optimize appointments — with modern scheduling, real-time notifications, and a vision for AI-powered smart booking.
 
+**Link to Design:**  https://www.figma.com/design/MVeaUyF5dKVPqE2ngOj4yu/Project-R?node-id=427-9226&t=VvlOFmwMdmMVJyaG-0
+
 ---
 
 ## 📌 Features
@@ -61,6 +63,7 @@ ASPNETCORE_ENVIRONMENT
 
 AppSettings changes have been deliberately ignored here. If you need the files, I am more than happy to share with you.
 
+
 📡 API
 Swagger: https://localhost:{port}/swagger when running in dev.
 REST endpoints for authentication, scheduling, notifications, availability.
@@ -83,13 +86,13 @@ We 💙 contributions! Please follow these steps:
 
 ---
 
-📢 Code of Conduct
-
+📢  Code of Conduct
+**
 Be kind, helpful, and respectful. We want ProjectR to be welcoming for everyone.
 
 ---
 
-📄 License
+📄  License
 
 This project is licensed under the **MIT License**
 
