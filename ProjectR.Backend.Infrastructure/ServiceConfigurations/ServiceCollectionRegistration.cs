@@ -55,15 +55,19 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             })
             .AddJwtBearer(options =>
             {
+                string key = configuration["Jwt:Key"] ?? throw new Exception($"Configuration 'Jwt:Key' not found.");
+                string issuer = configuration["Jwt:Issuer"] ?? throw new Exception($"Configuration 'Jwt:Issuer' not found.");
+                string audience = configuration["Jwt:Audience"] ?? throw new Exception($"Configuration 'Jwt:AUdience' not found.");
+
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = configuration["Jwt:Issuer"],
-                    ValidAudience = configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!)),
+                    ValidIssuer = issuer,
+                    ValidAudience = audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
                     ClockSkew = TimeSpan.Zero
                 };
             });
