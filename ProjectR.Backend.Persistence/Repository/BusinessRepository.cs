@@ -15,10 +15,37 @@ namespace ProjectR.Backend.Persistence.Repository
             _context = context;
         }
 
+         public async Task<bool> SlugExistsAsync(string shortLink, Guid? excludedId = null)
+        {
+            var query = _context.Businesses.Where(p => p.ShortLink == shortLink);
+            
+            if (excludedId.HasValue)
+            {
+                query = query.Where(p => p.Id == excludedId.Value);
+            }
+
+            return await query.AnyAsync();
+        }
         public async Task<BusinessModel[]> AddAsync(BusinessModel[] businessModels)
         {
-            List<Business> entities = businessModels.Select(c => new Business {Name = c.Name }).ToList();
-            
+            List<Business> entities = businessModels.Select(e => new Business
+            {
+                UserId = e.UserId,
+                Id = e.Id,
+                Name = e.Name,
+                Type = e.Type,
+                PhoneCode = e.PhoneCode,
+                PhoneNumber = e.PhoneNumber,
+                Industry = e.Industry,
+                About = e.About,
+                Location = e.Location,
+                Longitude = e.Longitude,
+                Latitude = e.Latitude,
+                ShortLink = e.ShortLink,
+                Logo = e.Logo
+
+            }).ToList();
+
             await _context.Businesses.AddRangeAsync(entities);
             await _context.SaveChangesAsync();
             return businessModels;
@@ -39,6 +66,8 @@ namespace ProjectR.Backend.Persistence.Repository
                 Location = businessModel.Location,
                 Longitude = businessModel.Longitude,
                 Latitude = businessModel.Latitude,
+                ShortLink = businessModel.ShortLink,
+                Logo = businessModel.Logo
             };
 
             await _context.Businesses.AddAsync(entity);
@@ -76,6 +105,8 @@ namespace ProjectR.Backend.Persistence.Repository
                 Location = e.Location,
                 Longitude = e.Longitude,
                 Latitude = e.Latitude,
+                ShortLink = e.ShortLink,
+                Logo = e.Logo
             }).ToArray();
         }
 
@@ -88,13 +119,35 @@ namespace ProjectR.Backend.Persistence.Repository
                 Id = id,
                 Name = result?.Name,
                 Type = result?.Type,
-                 PhoneCode = result?.PhoneCode,
+                PhoneCode = result?.PhoneCode,
                 PhoneNumber = result?.PhoneNumber,
                 Industry = result?.Industry,
                 About = result?.About,
                 Location = result?.Location,
                 Longitude = result?.Longitude,
                 Latitude = result?.Latitude,
+                Logo = result?.Logo
+            };
+        }
+
+        public async Task<BusinessModel> GetBySlugAsync(string slug)
+        {
+            Business? result = await _context.Businesses.SingleOrDefaultAsync(c => c.ShortLink == slug);
+            return new BusinessModel
+            {
+                UserId = result.UserId,
+                Id = result.Id,
+                Name = result?.Name,
+                Type = result?.Type,
+                PhoneCode = result?.PhoneCode,
+                PhoneNumber = result?.PhoneNumber,
+                Industry = result?.Industry,
+                About = result?.About,
+                Location = result?.Location,
+                Longitude = result?.Longitude,
+                Latitude = result?.Latitude,
+                ShortLink = slug,
+                Logo = result?.Logo
             };
         }
 
@@ -111,7 +164,8 @@ namespace ProjectR.Backend.Persistence.Repository
                 About = c.About,
                 Location = c.Location,
                 Longitude = c.Longitude,
-                Latitude = c.Latitude
+                Latitude = c.Latitude,
+                Logo = c.Logo
             }).ToList();
             _context.Businesses.UpdateRange(entities);
             await _context.SaveChangesAsync();
@@ -130,6 +184,8 @@ namespace ProjectR.Backend.Persistence.Repository
             entity!.Location = businessModel.Location;
             entity!.Longitude = businessModel.Longitude;
             entity!.Latitude = businessModel.Latitude;
+            entity!.ShortLink = businessModel.ShortLink;
+            entity!.Logo = businessModel.Logo;
             _context.Businesses.Update(entity);
             await _context.SaveChangesAsync();
             return businessModel;

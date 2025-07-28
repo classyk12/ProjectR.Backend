@@ -28,10 +28,20 @@ namespace ProjectR.Backend.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<BusinessModel>))]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseModel<BusinessModel>))]
-        [HttpGet("{id}")]
+        [HttpGet("{id:guid}")]
         public async Task<IActionResult> Get(Guid id)
         {
             ResponseModel<BusinessModel> result = await _businessManager.GetByIdAsync(id);
+            return result.Status ? Ok(result) : BadRequest();
+        }
+
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<BusinessModel>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseModel<BusinessModel>))]
+        [HttpGet("{slug}")]
+        public async Task<IActionResult> GetBySlug(string slug)
+        {
+            ResponseModel<BusinessModel> result = await _businessManager.GetBySlugAsync(slug);
             return result.Status ? Ok(result) : BadRequest();
         }
 
