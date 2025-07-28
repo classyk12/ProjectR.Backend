@@ -6,7 +6,7 @@ namespace ProjectR.Backend.Application.Models
 {
     public class BusinessModel
     {
-        public Guid UserId  { get; set; }
+        public Guid UserId { get; set; }
         public Guid Id { get; set; }
         public string? Name { get; set; }
         public string? Type { get; set; }
@@ -17,6 +17,8 @@ namespace ProjectR.Backend.Application.Models
         public string? Location { get; set; }
         public string? Longitude { get; set; }
         public string? Latitude { get; set; }
+        public string? ShortLink { get; set; }
+        public string? Logo { get; set; }
     }
 
     public class AddBusinessModel
@@ -34,5 +36,6 @@ namespace ProjectR.Backend.Application.Models
         public string? Location { get; set; }
         public string? Longitude { get; set; }
         public string? Latitude { get; set; }
+        public string? Logo { get; set; }
     }
 }

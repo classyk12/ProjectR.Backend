@@ -5,6 +5,10 @@ using ProjectR.Backend.Middleware;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using Serilog;
 using ProjectR.Backend.Infrastructure.ServiceConfigurations;
+using ProjectR.Backend.Application.Interfaces.Managers;
+using ProjectR.Backend.Infrastructure.Managers;
+using ProjectR.Backend.Application.Interfaces.Repository;
+using ProjectR.Backend.Persistence.Repository;
 
 namespace ProjectR.Backend
 {
@@ -39,6 +43,7 @@ namespace ProjectR.Backend
             builder.Services.AddHealthChecks();
 
             builder.Services.RegisterAuthenticationService(builder.Configuration);
+            
 
             WebApplication app = builder.Build();
 
