@@ -12,7 +12,7 @@ namespace ProjectR.Backend
     {
         private static void Main(string[] args)
         {
-            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);   
             builder.Host.UseSerilog((context, services, loggerConfig) =>
             {
                 loggerConfig
