@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend", "ProjectR.Backend.csproj", "{9CB0D30E-7031-4705-8860-EDC4F655744F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend", "src\ProjectR.Backend.csproj", "{9CB0D30E-7031-4705-8860-EDC4F655744F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend.Infrastructure", "ProjectR.Backend.Infrastructure\ProjectR.Backend.Infrastructure.csproj", "{53C9795F-BCE4-4108-BF78-90B573566E84}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend.Infrastructure", "src\ProjectR.Backend.Infrastructure\ProjectR.Backend.Infrastructure.csproj", "{53C9795F-BCE4-4108-BF78-90B573566E84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend.Application", "ProjectR.Backend.Application\ProjectR.Backend.Application.csproj", "{E3A9AAE2-F9A4-4706-B727-D03DF276990C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend.Application", "src\ProjectR.Backend.Application\ProjectR.Backend.Application.csproj", "{E3A9AAE2-F9A4-4706-B727-D03DF276990C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend.Persistence", "ProjectR.Backend.Persistence\ProjectR.Backend.Persistence.csproj", "{AA4EBBDE-7EB2-43BF-B0DF-7AE770AB3CD5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend.Persistence", "src\ProjectR.Backend.Persistence\ProjectR.Backend.Persistence.csproj", "{AA4EBBDE-7EB2-43BF-B0DF-7AE770AB3CD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend.Domain", "ProjectR.Backend.Domain\ProjectR.Backend.Domain.csproj", "{C09FB3C5-BEDB-47AA-9347-9BB3DE51DF11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend.Domain", "src\ProjectR.Backend.Domain\ProjectR.Backend.Domain.csproj", "{C09FB3C5-BEDB-47AA-9347-9BB3DE51DF11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend.Tests", "ProjectR.Backend.Tests\ProjectR.Backend.Tests.csproj", "{7A2A050C-BA95-4E76-819C-257902854F76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend.Tests", "src\ProjectR.Backend.Tests\ProjectR.Backend.Tests.csproj", "{7A2A050C-BA95-4E76-819C-257902854F76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend.Shared", "ProjectR.Backend.Shared\ProjectR.Backend.Shared.csproj", "{80F924F8-22E1-4FC2-BC73-043AD9B061A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectR.Backend.Shared", "src\ProjectR.Backend.Shared\ProjectR.Backend.Shared.csproj", "{80F924F8-22E1-4FC2-BC73-043AD9B061A5}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{80F924F8-22E1-4FC2-BC73-043AD9B061A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80F924F8-22E1-4FC2-BC73-043AD9B061A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80F924F8-22E1-4FC2-BC73-043AD9B061A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
