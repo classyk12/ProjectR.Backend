@@ -76,8 +76,9 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
 
         public static void RegisterDatabaseServices(this IServiceCollection services, IConfiguration configuration)
         {
+            string connectionString = configuration.GetConnectionString("DefaultConnection")!;
             services.AddDbContext<AppDbContext>(options =>
-              options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")!, options =>
+              options.UseNpgsql(connectionString, options =>
               {
                   options.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorCodesToAdd: []);
               }));
