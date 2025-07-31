@@ -47,13 +47,13 @@ namespace ProjectR.Backend
                 AppDbContext db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
                 db.Database.Migrate();
             }
-
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProjectR Backend");
-                c.RoutePrefix = string.Empty;
-            });
+            
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProjectR Backend");
+                    c.RoutePrefix = string.Empty;
+                });
 
             app.UseSerilogRequestLogging();
             app.UseMiddleware<ExceptionMiddleware>();
