@@ -33,7 +33,7 @@ steps:
       tags: |
         $(DOCKER_TAG)
       repository: $(DOCKERHUB_ProR)
-      buildContext: .
+      buildContext: '$(Build.SourcesDirectory)/src'
 
   # Push the built image to Docker Hub
   - script: |
