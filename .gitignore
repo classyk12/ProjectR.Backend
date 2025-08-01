@@ -1,9 +1,13 @@
+.vs/ProjectR.Backend/DesignTimeBuild/.dtbcache.v2
+.vs/ProjectEvaluation/projectr.backend.projects.v9.bin
 .vs
 .vscode
 **/bin/
 **/obj/
 **/bin/Debug/
 /Logs/
+Properties/launchSettings.json
 Todo.txt
 .env
 appsettings.Development.json
+src/Logs/
