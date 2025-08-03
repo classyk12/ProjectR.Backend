@@ -9,7 +9,8 @@ namespace ProjectR.Backend.Application.Interfaces.Repository
 {
     public interface IBusinessRepository
     {
-        Task<BusinessModel> GetByIdAsync(Guid id);
+        Task<BusinessModel?> GetByIdAsync(Guid id);
+        Task<BusinessModel?> GetBySlugAsync(string slug);
         Task<BusinessModel[]> GetAllAsync();
         Task<BusinessModel[]> AddAsync(BusinessModel[] businessModels);
         Task<BusinessModel> AddAsync(BusinessModel businessModel);
@@ -17,6 +18,6 @@ namespace ProjectR.Backend.Application.Interfaces.Repository
         Task<BusinessModel> UpdateAsync(BusinessModel businessModel);
         Task DeleteAsync(BusinessModel[] businessModels);
         Task DeleteAsync(BusinessModel businessModel);
-
+        Task<bool> SlugExistsAsync(string shortLink, Guid? excludedId = null);
     }
 }
