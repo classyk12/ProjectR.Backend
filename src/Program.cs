@@ -25,7 +25,6 @@ namespace ProjectR.Backend
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
             builder.Services.RegisterServices(builder.Configuration);
 
             builder.Configuration
@@ -35,7 +34,8 @@ namespace ProjectR.Backend
             .AddEnvironmentVariables();
 
             builder.Services.RegisterDatabaseServices(builder.Configuration);
-
+            builder.Services.AddHealthChecks();
+            builder.Services.RegisterAuthenticationService(builder.Configuration);
             builder.Services.AddHealthChecks();
 
             builder.Services.RegisterAuthenticationService(builder.Configuration);
