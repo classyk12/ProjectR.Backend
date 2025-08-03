@@ -19,7 +19,5 @@ namespace ProjectR.Backend.Application.Interfaces.Repository
         Task DeleteAsync(BusinessModel[] businessModels);
         Task DeleteAsync(BusinessModel businessModel);
         Task<bool> SlugExistsAsync(string shortLink, Guid? excludedId = null);
-
-
     }
 }

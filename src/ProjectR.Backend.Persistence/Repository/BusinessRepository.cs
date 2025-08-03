@@ -46,11 +46,6 @@ namespace ProjectR.Backend.Persistence.Repository
 
             }).ToList();
 
-            await _context.Businesses.AddRangeAsync(entities);
-            await _context.SaveChangesAsync();
-            return businessModels;
-        }
-
         public async Task<BusinessModel> AddAsync(BusinessModel businessModel)
         {
             Business entity = new()
@@ -140,6 +135,19 @@ namespace ProjectR.Backend.Persistence.Repository
                 Name = result?.Name,
                 Type = result?.Type,
                 PhoneCode = result?.PhoneCode,
+            }).ToArray();
+        }
+
+        public async Task<BusinessModel> GetByIdAsync(Guid id)
+        {
+            Business? result = await _context.Businesses.SingleOrDefaultAsync(c => c.Id == id);
+            return new BusinessModel
+            {
+                UserId = result.UserId,
+                Id = id,
+                Name = result?.Name,
+                Type = result?.Type,
+                 PhoneCode = result?.PhoneCode,
                 PhoneNumber = result?.PhoneNumber,
                 Industry = result?.Industry,
                 About = result?.About,
@@ -166,6 +174,7 @@ namespace ProjectR.Backend.Persistence.Repository
                 Longitude = c.Longitude,
                 Latitude = c.Latitude,
                 Logo = c.Logo
+                Latitude = c.Latitude
             }).ToList();
             _context.Businesses.UpdateRange(entities);
             await _context.SaveChangesAsync();

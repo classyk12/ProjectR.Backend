@@ -1,4 +1,4 @@
-﻿using ProjectR.Backend.Application.Interfaces.Managers;
+using ProjectR.Backend.Application.Interfaces.Managers;
 using ProjectR.Backend.Application.Interfaces.Repository;
 using ProjectR.Backend.Application.Interfaces.Utility;
 using ProjectR.Backend.Application.Models;
@@ -16,10 +16,15 @@ namespace ProjectR.Backend.Infrastructure.Managers
             _businessRepository = businessRepository;
             _slugService = slugService;
         }
-      
-        public async Task<ResponseModel<BusinessModel>> AddAsync(AddBusinessModel? business)
+     
+        public BusinessManager(IBusinessRepository businessRepository)
         {
-             if (!double.TryParse(business?.Latitude?.ToString(), out double latitude) || latitude < -90 || latitude > 90)
+            _businessRepository = businessRepository;
+        }
+      
+        public async Task<ResponseModel<BusinessModel>> AddAsync(AddBusinessModel business)
+        {
+             if (!double.TryParse(business.Latitude?.ToString(), out double latitude) || latitude < -90 || latitude > 90)
             {
                 return new ResponseModel<BusinessModel>(message: "Latitude must be a number between -90 and 90.", status: true, data: default);
             }
@@ -29,8 +34,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 return new ResponseModel<BusinessModel>(message: "Longitude must be a number between -180 and 180.", status: true, data: default);
             }
 
-            BusinessModel? model = new()
-            {
+            BusinessModel model = new()
                 UserId = business.UserId,
                 Name = business.Name,
                 Type = business.Type,
@@ -81,6 +85,8 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 Location = at.Location,
                 Latitude = at.Latitude,
                 Longitude = at.Longitude
+                Industry = at.Industry, 
+                About = at.About,
             }).ToArray();
 
             BusinessModel[] result = await _businessRepository.AddAsync(models);
@@ -125,7 +131,8 @@ namespace ProjectR.Backend.Infrastructure.Managers
 
         public async Task<ResponseModel<BusinessModel>> UpdateAsync(BusinessModel business)
         {
-            if (!double.TryParse(business.Latitude?.ToString(), out double latitude) || latitude < -90 || latitude > 90)
+
+             if (!double.TryParse(business.Latitude?.ToString(), out double latitude) || latitude < -90 || latitude > 90)
             {
                 return new ResponseModel<BusinessModel>(message: "Latitude must be a number between -90 and 90.", status: true, data: default);
             }
@@ -136,6 +143,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
             }
 
             BusinessModel? existingBusiness = await _businessRepository.GetByIdAsync(business.Id);
+
             if (existingBusiness == null)
             {
                 return new ResponseModel<BusinessModel>(message: "Business not found", data: default, status: false);

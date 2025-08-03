@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -45,9 +45,13 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IBusinessManager, BusinessManager>();
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<INotificationManager, NotificationManager>();
+            services.AddScoped<IUserManager, UserManager>();
             #endregion
-
+  
+            #region Services
             services.AddScoped<ISlugService, SlugService>();
+            #endregion
         }
 
         public static void RegisterAuthenticationService(this IServiceCollection services, IConfiguration configuration)

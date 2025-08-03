@@ -51,6 +51,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
         public async Task<ResponseModel<AppThemeModel>> UpdateAsync(AppThemeModel appTheme)
         {
             AppThemeModel? existingTheme = await _appThemeRepository.GetByIdAsync(appTheme.Id);
+
             if (existingTheme == null)
             {
                 return new ResponseModel<AppThemeModel>(message: "App theme not found.", data: default, status: false);
@@ -82,7 +83,8 @@ namespace ProjectR.Backend.Infrastructure.Managers
 
         public async Task<BaseResponseModel> DeleteAsync(Guid Id)
         {
-            AppThemeModel? existingTheme = await _appThemeRepository.GetByIdAsync(Id);
+           AppThemeModel? existingTheme = await _appThemeRepository.GetByIdAsync(Id);
+
             if (existingTheme == null)
             {
                 return new BaseResponseModel(message: "App theme not found.", status: false);

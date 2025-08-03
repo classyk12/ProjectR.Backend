@@ -1,4 +1,4 @@
-﻿using ProjectR.Backend.Application.Models;
+using ProjectR.Backend.Application.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

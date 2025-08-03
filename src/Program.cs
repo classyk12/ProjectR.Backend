@@ -36,7 +36,9 @@ namespace ProjectR.Backend
             builder.Services.RegisterDatabaseServices(builder.Configuration);
             builder.Services.AddHealthChecks();
             builder.Services.RegisterAuthenticationService(builder.Configuration);
-            
+            builder.Services.AddHealthChecks();
+
+            builder.Services.RegisterAuthenticationService(builder.Configuration);
 
             WebApplication app = builder.Build();
 
