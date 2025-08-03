@@ -9,8 +9,8 @@ namespace ProjectR.Backend.Application.Interfaces.Repository
 {
     public interface IBusinessRepository
     {
-        Task<BusinessModel> GetByIdAsync(Guid id);
-        Task<BusinessModel> GetBySlugAsync(string slug);
+        Task<BusinessModel?> GetByIdAsync(Guid id);
+        Task<BusinessModel?> GetBySlugAsync(string slug);
         Task<BusinessModel[]> GetAllAsync();
         Task<BusinessModel[]> AddAsync(BusinessModel[] businessModels);
         Task<BusinessModel> AddAsync(BusinessModel businessModel);

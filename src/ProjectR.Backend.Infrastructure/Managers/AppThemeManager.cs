@@ -15,8 +15,11 @@ namespace ProjectR.Backend.Infrastructure.Managers
 
         public async Task<ResponseModel<AppThemeModel>> GetByIdAsync(Guid id)
         {
-            AppThemeModel result = await _appThemeRepository.GetByIdAsync(id);
-            return new ResponseModel<AppThemeModel>(message: result != null ? "App theme retrieved successfully." : "App theme not found.", result, result != null);
+            AppThemeModel? result = await _appThemeRepository.GetByIdAsync(id);
+            return new ResponseModel<AppThemeModel>(
+                message: result != null ? "App theme retrieved successfully." : "App theme not found.",
+                data: result,
+                status: result != null);
         }
 
         public async Task<AppThemeModel[]> GetAllAsync()
@@ -47,7 +50,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
 
         public async Task<ResponseModel<AppThemeModel>> UpdateAsync(AppThemeModel appTheme)
         {
-            AppThemeModel existingTheme = await _appThemeRepository.GetByIdAsync(appTheme.Id);
+            AppThemeModel? existingTheme = await _appThemeRepository.GetByIdAsync(appTheme.Id);
             if (existingTheme == null)
             {
                 return new ResponseModel<AppThemeModel>(message: "App theme not found.", data: default, status: false);
@@ -79,7 +82,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
 
         public async Task<BaseResponseModel> DeleteAsync(Guid Id)
         {
-            AppThemeModel existingTheme = await _appThemeRepository.GetByIdAsync(Id);
+            AppThemeModel? existingTheme = await _appThemeRepository.GetByIdAsync(Id);
             if (existingTheme == null)
             {
                 return new BaseResponseModel(message: "App theme not found.", status: false);

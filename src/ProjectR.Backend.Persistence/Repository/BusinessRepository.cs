@@ -110,12 +110,12 @@ namespace ProjectR.Backend.Persistence.Repository
             }).ToArray();
         }
 
-        public async Task<BusinessModel> GetByIdAsync(Guid id)
+        public async Task<BusinessModel?> GetByIdAsync(Guid id)
         {
             Business? result = await _context.Businesses.SingleOrDefaultAsync(c => c.Id == id);
-            return new BusinessModel
+            return result == null ? null : new BusinessModel
             {
-                UserId = result.UserId,
+                UserId = result!.UserId,
                 Id = id,
                 Name = result?.Name,
                 Type = result?.Type,
@@ -130,10 +130,10 @@ namespace ProjectR.Backend.Persistence.Repository
             };
         }
 
-        public async Task<BusinessModel> GetBySlugAsync(string slug)
+        public async Task<BusinessModel?> GetBySlugAsync(string slug)
         {
             Business? result = await _context.Businesses.SingleOrDefaultAsync(c => c.ShortLink == slug);
-            return new BusinessModel
+            return result == null ? null : new BusinessModel
             {
                 UserId = result.UserId,
                 Id = result.Id,

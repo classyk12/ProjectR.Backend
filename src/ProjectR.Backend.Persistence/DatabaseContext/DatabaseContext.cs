@@ -10,6 +10,7 @@ namespace ProjectR.Backend.Persistence.DatabaseContext
         public DbSet<Business> Businesses => Set<Business>();
         public DbSet<BusinessAvailability> BusinessAvailabilities => Set<BusinessAvailability>();
         public DbSet<BusinessAvailabilitySlot> BusinessAvailabilitySlots => Set<BusinessAvailabilitySlot>();
+        public DbSet<Otp> Otps => Set<Otp>();
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 

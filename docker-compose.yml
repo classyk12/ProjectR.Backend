@@ -1,7 +1,8 @@
+
 services:
-  api:
+  projectr.backend:
     build:
-      context: .
+      context: ./src
       dockerfile: Dockerfile
 
     container_name: projectr-api
@@ -13,31 +14,28 @@ services:
       - mynetwork
 
     environment:
-      # - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=projectr;Username=postgres;Password=password
 
-      - Google__Android=${Google__Android}
-      - Google__iOS=${Google__iOS}
+      # - Google__Android=${Google__Android}
+      # - Google__iOS=${Google__iOS}
 
-      - Jwt__Issuer=${Jwt__Issuer}
-      - Jwt__Audience=${Jwt__Audience}
-      - Jwt__Key=${Jwt__Key}
+      # - Jwt__Issuer=${Jwt__Issuer}
+      # - Jwt__Audience=${Jwt__Audience}
+      # - Jwt__Key=${Jwt__Key}
 
-      - Twilio__AccountSID=${Twilio__AccountSID}
-      - Twilio__AuthToken=${Twilio__AuthToken}
-      - Twilio__UseMock=${Twilio__UseMock}
-      - Twilio__OtpContentSid=${Twilio__OtpContentSid}
+      # - Twilio__AccountSID=${Twilio__AccountSID}
+      # - Twilio__AuthToken=${Twilio__AuthToken}
+      # - Twilio__UseMock=${Twilio__UseMock}
+      # - Twilio__OtpContentSid=${Twilio__OtpContentSid}
 
-      - Otp__UseMock=${Otp__UseMock}
-      - Otp__ExpiryInMin=${Otp__ExpiryInMin}
+      # - Otp__UseMock=${Otp__UseMock}
+      # - Otp__ExpiryInMin=${Otp__ExpiryInMin}
 
     ports:
-       - "8080:80"
-       - "8081:443"
-       
-    env_file:
-      - .env
-
+      - "5000:5000"
+      - "5001:5001"
+     
   db:
     image: postgres:15
     container_name: postgres
@@ -49,6 +47,7 @@ services:
 
     ports:
       - "4400:80"
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:

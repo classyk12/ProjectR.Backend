@@ -50,10 +50,10 @@ namespace ProjectR.Backend.Persistence.Repository
             return entities.Select(e => new AppThemeModel { Id = e.Id, Name = e.Name }).ToArray();
         }
 
-        public async Task<AppThemeModel> GetByIdAsync(Guid id)
+        public async Task<AppThemeModel?> GetByIdAsync(Guid id)
         {
             AppTheme? result = await _context.AppThemes.SingleOrDefaultAsync(c => c.Id == id);
-            return new AppThemeModel { Id = id, Name  = result?.Name };
+            return result == null ? null : new AppThemeModel { Id = result.Id, Name = result.Name };
         }
 
         public async Task<AppThemeModel> UpdateAsync(AppThemeModel appTheme)
