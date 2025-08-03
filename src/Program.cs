@@ -12,7 +12,7 @@ namespace ProjectR.Backend
     {
         private static void Main(string[] args)
         {
-            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);   
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
             builder.Host.UseSerilog((context, services, loggerConfig) =>
             {
                 loggerConfig
@@ -38,8 +38,6 @@ namespace ProjectR.Backend
             builder.Services.RegisterAuthenticationService(builder.Configuration);
             builder.Services.AddHealthChecks();
 
-            builder.Services.RegisterAuthenticationService(builder.Configuration);
-
             WebApplication app = builder.Build();
 
             using (IServiceScope scope = app.Services.CreateScope())
@@ -47,13 +45,13 @@ namespace ProjectR.Backend
                 AppDbContext db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
                 db.Database.Migrate();
             }
-            
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProjectR Backend");
-                    c.RoutePrefix = string.Empty;
-                });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProjectR Backend");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseSerilogRequestLogging();
             app.UseMiddleware<ExceptionMiddleware>();

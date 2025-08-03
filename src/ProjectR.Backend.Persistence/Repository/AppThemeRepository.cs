@@ -54,6 +54,7 @@ namespace ProjectR.Backend.Persistence.Repository
         {
             AppTheme? result = await _context.AppThemes.SingleOrDefaultAsync(c => c.Id == id);
             return result == null ? null : new AppThemeModel { Id = result.Id, Name = result.Name };
+        }
 
 
         public async Task<AppThemeModel> UpdateAsync(AppThemeModel appTheme)

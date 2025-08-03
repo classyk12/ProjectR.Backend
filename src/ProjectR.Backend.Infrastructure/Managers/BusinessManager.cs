@@ -35,6 +35,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
             }
 
             BusinessModel model = new()
+            {
                 UserId = business.UserId,
                 Name = business.Name,
                 Type = business.Type,
@@ -85,8 +86,6 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 Location = at.Location,
                 Latitude = at.Latitude,
                 Longitude = at.Longitude
-                Industry = at.Industry, 
-                About = at.About,
             }).ToArray();
 
             BusinessModel[] result = await _businessRepository.AddAsync(models);
