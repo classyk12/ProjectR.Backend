@@ -11,11 +11,7 @@ namespace ProjectR.Backend.Application.Models
         public string? PhoneNumber { get; set; }
         public string? PhoneCode { get; set; }
         public string? Email { get; set; }
-
-        [JsonConverter(typeof(EnumDescriptionConverter))]
         public AccountType? AccountType { get; set; }
-
-        [JsonConverter(typeof(EnumDescriptionConverter))]
         public RegistrationType? RegistrationType { get; set; }
         /// <summary>
         /// This identifies a user that has onborded but has not yet set up their profile (used by frontend to determine if the user needs to complete their profile)

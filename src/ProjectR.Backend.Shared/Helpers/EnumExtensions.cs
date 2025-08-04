@@ -44,30 +44,49 @@ namespace ProjectR.Backend.Shared.Helpers
         }
     }
 
-    /// <summary>
-    /// Convert Enums into their string Description equivalent. Can be used in form of annotation
-    /// </summary>
-    public class EnumDescriptionConverter : JsonConverter
+    public class GlobalEnumDescriptionConverter : JsonConverter
     {
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType.IsEnum || (Nullable.GetUnderlyingType(objectType)?.IsEnum ?? false);
+        }
+
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
-            if (value is Enum enumValue)
+            if (value == null)
             {
-                string description = enumValue
-                    .GetType()
-                    .GetField(enumValue.ToString())?
-                    .GetCustomAttribute<DescriptionAttribute>()?
-                    .Description ?? enumValue.ToString();
-
-                writer.WriteValue(description);
+                writer.WriteNull();
+                return;
             }
+
+            Type enumType = value.GetType();
+            FieldInfo? field = enumType.GetField(value.ToString()!);
+            string? description = field?.GetCustomAttribute<DescriptionAttribute>()?.Description;
+
+            writer.WriteValue(description ?? value.ToString());
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
-            throw new NotImplementedException("Deserialization not implemented");
-        }
+            bool isNullable = Nullable.GetUnderlyingType(objectType) != null;
+            Type enumType = Nullable.GetUnderlyingType(objectType) ?? objectType;
+            string? stringValue = reader.Value?.ToString();
 
-        public override bool CanConvert(Type objectType) => objectType.IsEnum;
+            if (stringValue == null)
+            {
+                return isNullable ? null : Activator.CreateInstance(enumType);
+            }
+
+            foreach (FieldInfo field in enumType.GetFields())
+            {
+                string? description = field.GetCustomAttribute<DescriptionAttribute>()?.Description;
+                if (description == stringValue || field.Name == stringValue)
+                {
+                    return Enum.Parse(enumType, field.Name);
+                }
+            }
+
+            throw new JsonSerializationException($"Cannot convert '{stringValue}' to {enumType.Name}");
+        }
     }
 }
