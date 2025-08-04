@@ -87,7 +87,9 @@ namespace ProjectR.Backend.Infrastructure.Managers
 
         private static bool CanSendOtpToPhoneNumber(OtpModel model)
         {
-            return (model.DeliveryMode.Equals(DeliveryMode.Whatsapp) || model.DeliveryMode.Equals(DeliveryMode.Sms)) && (model.PhoneNumber == null || !model.PhoneNumber.IsDigitOnly()) && (model.CountryCode == null || !model.CountryCode.IsValidPhoneCode());
+            bool isDigit = model.PhoneNumber != null && model.PhoneNumber.IsDigitOnly() && model.PhoneNumber.IsValidPhone();
+            bool isValidCountryCode = model.CountryCode != null && model.CountryCode.IsValidPhoneCode();
+            return (model.DeliveryMode.Equals(DeliveryMode.Whatsapp) || model.DeliveryMode.Equals(DeliveryMode.Sms)) && isDigit && isValidCountryCode;
         }
 
         private (string code, DateTimeOffset expiry) GenerateCode()
@@ -95,8 +97,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
             Random rnd = new();
             string random = rnd.Next(1, 99999).ToString().PadLeft(5, '0');
             DateTimeOffset expiry = DateTimeOffset.Now.AddMinutes(_settings.ExpiryInMin);
-            string code = random.Base64Encode();
-            return (code, expiry);
+            return (random, expiry);
         }
     }
 }

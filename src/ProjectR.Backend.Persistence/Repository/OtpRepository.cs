@@ -42,7 +42,7 @@ namespace ProjectR.Backend.Persistence.Repository
         public async Task<OtpModel?> GetAsync(OtpModel model)
         {
             Otp? result = await _context.Otps.FirstOrDefaultAsync(x => x.Code == model.Code && x.Id == model.Id &&
-                 (x.PhoneNumber == model.PhoneNumber || x.Email == model.Email || x.CountryCode == model.CountryCode) && x.OtpType == model.OtpType);
+                 x.PhoneNumber == model.PhoneNumber && x.CountryCode == model.CountryCode && x.Email == model.Email && x.OtpType == model.OtpType);
 
             if (result == null)
             {

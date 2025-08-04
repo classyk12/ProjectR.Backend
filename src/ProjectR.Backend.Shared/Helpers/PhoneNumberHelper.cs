@@ -13,7 +13,7 @@ namespace ProjectR.Backend.Shared.Helpers
         /// <returns>True if valid, otherwise false.</returns>
         /// 
         /// 
-        public static bool IsValidPhone(string phone)
+        public static bool IsValidPhone(this string phone)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace ProjectR.Backend.Shared.Helpers
 
                 return phone.Length switch
                 {
-                    < 11 or > 13 => false,
+                    < 10 or > 13 => false,
                     _ => true
                 };
             }
@@ -85,7 +85,7 @@ namespace ProjectR.Backend.Shared.Helpers
             try
             {
                 return Regex.IsMatch(strIn,
-                      @"^\d{10,15}$",
+                      @"^\+\d{1,3}$",
                       RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
             }
             catch (RegexMatchTimeoutException)

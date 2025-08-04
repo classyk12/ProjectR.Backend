@@ -37,8 +37,8 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IAppThemeRepository, AppThemeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBusinessRepository, BusinessRepository>();
+            services.AddScoped<IOtpRepository, OtpRepository>();
             #endregion
-            
 
             #region Managers
             services.AddScoped<IAppThemeManager, AppThemeManager>();
@@ -46,8 +46,9 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IBusinessManager, BusinessManager>();
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<IOtpManager, OtpManager>();
             #endregion
-  
+
             #region Services
             services.AddScoped<ISlugService, SlugService>();
             #endregion

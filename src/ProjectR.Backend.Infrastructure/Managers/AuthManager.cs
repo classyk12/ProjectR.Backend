@@ -58,7 +58,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
             return new ResponseModel<PhoneNumberLoginResponseModel>("OTP sent successfully.", new PhoneNumberLoginResponseModel
             {
                 ExpiresAt = otpModel.ExpiryDate,
-                OtpToken = otp.Data?.Id.ToString(),
+                OtpToken = otp.Data?.Id,
                 Type = otpModel.OtpType,
                 PhoneNumber = model.PhoneNumber,
                 PhoneCode = model.PhoneCode
@@ -73,6 +73,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 PhoneNumber = model.PhoneNumber,
                 CountryCode = model.PhoneCode,
                 Code = model.OTP,
+                Id = model.Token!.Value,
                 OtpType = OtpType.Authentication
             };
 
@@ -108,7 +109,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
             user!.IsFirstLogin = await _businessManager.IsBusinessExist(user!.Id);
 
             //IsFirstLogin = true; // This should be set based on whether the user has created a business profile or not
-            return new ResponseModel<LoginResponseModel>("User authenticated successfully.", new LoginResponseModel
+            return new ResponseModel<LoginResponseModel>("Authentication Successful.", new LoginResponseModel
             {
                 AuthToken = generatedToken,
                 User = user,
@@ -148,12 +149,11 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 user = result.Data;
             }
 
-            //generate an auth token and return it
             string generatedToken = GenerateAuthTokenAsync(user!);
 
-            user!.IsFirstLogin = await _businessManager.IsBusinessExist(user!.Id);
+            user!.IsFirstLogin = !await _businessManager.IsBusinessExist(user!.Id);
 
-            return new ResponseModel<LoginResponseModel>("User authenticated successfully.", new LoginResponseModel
+            return new ResponseModel<LoginResponseModel>("Authentication Successful.", new LoginResponseModel
             {
                 AuthToken = generatedToken,
                 User = user,
@@ -175,7 +175,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
                     new("RegistrationType", user.RegistrationType.ToString()!),
                 }),
 
-                Expires = DateTime.UtcNow.AddHours(1),
+                Expires = DateTime.UtcNow.AddMinutes(_options.ValidityInMinutes),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
                 Issuer = _options.Issuer,
                 Audience = _options.Audience
