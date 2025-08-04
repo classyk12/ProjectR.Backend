@@ -1,4 +1,4 @@
-﻿using ProjectR.Backend.Application.Models;
+using ProjectR.Backend.Application.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +10,7 @@ namespace ProjectR.Backend.Application.Interfaces.Managers
     public interface IBusinessManager
     {
         Task<ResponseModel<BusinessModel>> GetByIdAsync(Guid id);
+        Task<ResponseModel<BusinessModel>> GetBySlugAsync(string slug);
         Task<BusinessModel[]> GetAllAsync();
         Task<ResponseModel<BusinessModel[]>> AddAsync(AddBusinessModel[] businesses);
         Task<ResponseModel<BusinessModel>> AddAsync(AddBusinessModel business);
