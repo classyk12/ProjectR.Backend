@@ -16,51 +16,110 @@ namespace ProjectR.Backend.Infrastructure.Managers
         private readonly JwtSettings _options;
         private readonly ISocialAuthProvider _socialAuthProvider;
         private readonly INotificationManager _notificationManager;
+        private readonly IOtpManager _otpManager;
+        private readonly IUserManager _userManager;
+        private readonly IBusinessManager _businessManager;
 
-        public AuthManager(IOptions<JwtSettings> options, ISocialAuthProvider socialAuthProvider, INotificationManager notificationManager)
+        public AuthManager(IOptions<JwtSettings> options, ISocialAuthProvider socialAuthProvider, INotificationManager notificationManager, IOtpManager otpManager, IUserManager userManager,
+        IBusinessManager businessManager
+        )
         {
             _notificationManager = notificationManager ?? throw new ArgumentNullException(nameof(notificationManager));
             _socialAuthProvider = socialAuthProvider ?? throw new ArgumentNullException(nameof(socialAuthProvider));
+            _otpManager = otpManager ?? throw new ArgumentNullException(nameof(otpManager));
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _businessManager = businessManager ?? throw new ArgumentNullException(nameof(businessManager));
             _options = options.Value ?? throw new ArgumentNullException(nameof(options));
         }
 
         public async Task<ResponseModel<PhoneNumberLoginResponseModel>> AuthenticateWithPhoneNumberAsync(LoginWithPhoneNumberModel model)
         {
-            //validate phone number and phone code
-            //if valid, insert and create a new OTP instance in the database
-            // generate an OTP token and send it to the user's phone number via whatsapp
+            OtpModel otpModel = new()
+            {
+                PhoneNumber = model.PhoneNumber,
+                CountryCode = model.PhoneCode,
+                DeliveryMode = DeliveryMode.Whatsapp,
+                OtpType = OtpType.Authentication
+            };
 
-            //TODO: OTP manager is to be injected to handle OTP (creation etc) notification manager
+            ResponseModel<OtpModel> otp = await _otpManager.AddAsync(otpModel);
+            if (!otp.Status)
+            {
+                return new ResponseModel<PhoneNumberLoginResponseModel>("Failed to send OTP. Try again", default, false);
+            }
+
             NotificationModel notificationModel = new([DeliveryMode.Whatsapp], model.PhoneCode + model.PhoneNumber, "Test Notification");
             BaseResponseModel sendNotificationResult = await _notificationManager.SendNotificationAsync(notificationModel);
             if (!sendNotificationResult.Status)
             {
-                return new ResponseModel<PhoneNumberLoginResponseModel>("Failed to send OTP.", default, false);
+                return new ResponseModel<PhoneNumberLoginResponseModel>("Failed to send OTP. Try again", default, false);
             }
 
             return new ResponseModel<PhoneNumberLoginResponseModel>("OTP sent successfully.", new PhoneNumberLoginResponseModel
             {
-                ExpiresAt = DateTime.UtcNow.AddMinutes(10),
-                OtpToken = Guid.NewGuid().ToString(),
-                Type = OtpType.Authentication,
-                PhoneNumber = model.PhoneNumber
+                ExpiresAt = otpModel.ExpiryDate,
+                OtpToken = otp.Data?.Id.ToString(),
+                Type = otpModel.OtpType,
+                PhoneNumber = model.PhoneNumber,
+                PhoneCode = model.PhoneCode
             }, true);
         }
 
-        public Task<ResponseModel<LoginResponseModel>> CompletePhoneNumberAuthenticationAsync(CompleteLoginWithPhoneNumberModel model)
+        public async Task<ResponseModel<LoginResponseModel>> CompletePhoneNumberAuthenticationAsync(CompleteLoginWithPhoneNumberModel model)
         {
             //validate the OTP token
-            //if valid, check if the user exists in the database
-            //if not, create a new user in the database
-            //generate an auth token and return it
+            OtpModel otpModel = new()
+            {
+                PhoneNumber = model.PhoneNumber,
+                CountryCode = model.PhoneCode,
+                Code = model.OTP,
+                OtpType = OtpType.Authentication
+            };
 
-            throw new NotImplementedException("CompletePhoneNumberAuthenticationAsync is not implemented yet.");
+            ResponseModel<OtpModel> otp = await _otpManager.VerifyAsync(otpModel);
+            if (!otp.Status)
+            {
+                return new ResponseModel<LoginResponseModel>(otp.Message, default, false);
+            }
+
+            UserModel? user;
+
+            //if valid, check if the user exists in the database
+            user = await _userManager.GetByPhoneNumber(model.PhoneCode!, model.PhoneNumber!);
+            //if not, create a new user in the database
+            if (user == null)
+            {
+                AddUserModel addUser = new()
+                {
+                    PhoneCode = model.PhoneCode!,
+                    PhoneNumber = model.PhoneNumber!,
+                    Email = string.Empty,
+                    AccountType = AccountType.Business,
+                    RegistrationType = RegistrationType.PhoneNumber
+                };
+
+                ResponseModel<UserModel> result = await _userManager.AddAsync(addUser);
+                user = result.Data;
+            }
+
+            //generate an auth token and return it
+            string generatedToken = GenerateAuthTokenAsync(user!);
+
+            user!.IsFirstLogin = await _businessManager.IsBusinessExist(user!.Id);
+
+            //IsFirstLogin = true; // This should be set based on whether the user has created a business profile or not
+            return new ResponseModel<LoginResponseModel>("User authenticated successfully.", new LoginResponseModel
+            {
+                AuthToken = generatedToken,
+                User = user,
+            }, true);
         }
 
         public async Task<ResponseModel<LoginResponseModel>> AuthenticateWithSocialAsync(LoginWithSocialModel model)
         {
             //check if the email of the uuser in the database
-            UserModel? user = null;
+            UserModel? user;
+            user = await _userManager.GetByEmail(model.Email!);
 
             if (user == null)
             {
@@ -76,23 +135,28 @@ namespace ProjectR.Backend.Infrastructure.Managers
                     return new ResponseModel<LoginResponseModel>("Email Mismatch. Authentication failed", default, false);
                 }
 
-                //if valid, create a new user in the database
-                user = new()
+                AddUserModel addUser = new()
                 {
-                    Id = Guid.NewGuid(), // This should be replaced with the actual user ID from the database
-                    Email = verificationResult.Email,
+                    PhoneCode = string.Empty,
+                    PhoneNumber = string.Empty,
+                    Email = model.Email,
                     AccountType = AccountType.Business,
                     RegistrationType = RegistrationType.Socials
                 };
+
+                ResponseModel<UserModel> result = await _userManager.AddAsync(addUser);
+                user = result.Data;
             }
 
-            string generatedToken = GenerateAuthTokenAsync(user);
+            //generate an auth token and return it
+            string generatedToken = GenerateAuthTokenAsync(user!);
 
-            //IsFirstLogin = true; // This should be set based on whether the user has created a business profile or not
+            user!.IsFirstLogin = await _businessManager.IsBusinessExist(user!.Id);
+
             return new ResponseModel<LoginResponseModel>("User authenticated successfully.", new LoginResponseModel
             {
                 AuthToken = generatedToken,
-                User = user
+                User = user,
             }, true);
         }
 

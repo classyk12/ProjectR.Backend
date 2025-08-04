@@ -75,6 +75,25 @@ namespace ProjectR.Backend.Shared.Helpers
             return phone;
         }
 
+        public static bool IsValidPhoneCode(this string strIn)
+        {
+            if (string.IsNullOrEmpty(strIn))
+            {
+                return false;
+            }
+
+            try
+            {
+                return Regex.IsMatch(strIn,
+                      @"^\d{10,15}$",
+                      RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
+        }
+
         [GeneratedRegex(@"^-?[0-9][0-9,\.]+$")]
         private static partial Regex MyRegex();
     }

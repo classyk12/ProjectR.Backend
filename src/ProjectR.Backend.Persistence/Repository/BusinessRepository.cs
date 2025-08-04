@@ -15,10 +15,10 @@ namespace ProjectR.Backend.Persistence.Repository
             _context = context;
         }
 
-         public async Task<bool> SlugExistsAsync(string shortLink, Guid? excludedId = null)
+        public async Task<bool> SlugExistsAsync(string shortLink, Guid? excludedId = null)
         {
-            var query = _context.Businesses.Where(p => p.ShortLink == shortLink);
-            
+            IQueryable<Business> query = _context.Businesses.Where(p => p.ShortLink == shortLink);
+
             if (excludedId.HasValue)
             {
                 query = query.Where(p => p.Id == excludedId.Value);
@@ -76,7 +76,7 @@ namespace ProjectR.Backend.Persistence.Repository
 
         public async Task DeleteAsync(BusinessModel[] businessModels)
         {
-            List<Business> entities = businessModels.Select(c => new Business { Id = c.Id}).ToList();
+            List<Business> entities = businessModels.Select(c => new Business { Id = c.Id }).ToList();
             _context.Businesses.RemoveRange(entities);
             await _context.SaveChangesAsync();
         }
@@ -165,7 +165,7 @@ namespace ProjectR.Backend.Persistence.Repository
 
         public async Task<BusinessModel> UpdateAsync(BusinessModel businessModel)
         {
-            Business? entity = await _context.Businesses.SingleOrDefaultAsync(c => c.Id ==  businessModel.Id);
+            Business? entity = await _context.Businesses.SingleOrDefaultAsync(c => c.Id == businessModel.Id);
             entity!.Name = businessModel.Name;
             entity!.Type = businessModel.Type;
             entity!.PhoneCode = businessModel.PhoneCode;
@@ -180,6 +180,31 @@ namespace ProjectR.Backend.Persistence.Repository
             _context.Businesses.Update(entity);
             await _context.SaveChangesAsync();
             return businessModel;
+        }
+
+        public async Task<BusinessModel?> GetByUserId(Guid userId)
+        {
+            Business? result = await _context.Businesses.SingleOrDefaultAsync(c => c.UserId == userId);
+            return result == null ? null : new BusinessModel
+            {
+                UserId = result!.UserId,
+                Id = result.Id,
+                Name = result?.Name,
+                Type = result?.Type,
+                PhoneCode = result?.PhoneCode,
+                PhoneNumber = result?.PhoneNumber,
+                Industry = result?.Industry,
+                About = result?.About,
+                Location = result?.Location,
+                Longitude = result?.Longitude,
+                Latitude = result?.Latitude,
+                Logo = result?.Logo
+            };
+        }
+
+        public async Task<bool> IsBusinessExist(Guid userId)
+        {
+            return await _context.Businesses.AnyAsync(c => c.UserId == userId);
         }
     }
 }

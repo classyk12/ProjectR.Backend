@@ -90,5 +90,45 @@ namespace ProjectR.Backend.Persistence.Repository
         {
             return _context.Users.AnyAsync(user => user.Email!.ToLower() == email.ToLower());
         }
+
+        public async Task<UserModel?> GetByEmail(string email)
+        {
+            User? user = await _context.Users.FirstOrDefaultAsync(user => user.Email!.ToLower() == email.ToLower());
+
+            if (user == null)
+            {
+                return default;
+            }
+
+            return new UserModel
+            {
+                Id = user!.Id,
+                Email = user?.Email,
+                PhoneNumber = user?.PhoneNumber,
+                PhoneCode = user?.PhoneCode,
+                AccountType = user?.AccountType,
+                RegistrationType = user?.RegistrationType
+            };
+        }
+
+        public async Task<UserModel?> GetByPhoneNumber(string phoneNumber, string phoneCode)
+        {
+            User? user = await _context.Users.FirstOrDefaultAsync(user => user.PhoneNumber!.ToLower() == phoneNumber.ToLower() && user.PhoneCode!.ToLower() == phoneCode.ToLower());
+
+            if (user == null)
+            {
+                return default;
+            }
+
+            return new UserModel
+            {
+                Id = user!.Id,
+                Email = user?.Email,
+                PhoneNumber = user?.PhoneNumber,
+                PhoneCode = user?.PhoneCode,
+                AccountType = user?.AccountType,
+                RegistrationType = user?.RegistrationType
+            };
+        }
     }
 }
