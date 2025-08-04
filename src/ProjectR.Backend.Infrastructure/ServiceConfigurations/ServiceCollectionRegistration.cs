@@ -38,13 +38,12 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBusinessRepository, BusinessRepository>();
             #endregion
+            
 
             #region Managers
             services.AddScoped<IAppThemeManager, AppThemeManager>();
             services.AddScoped<IAuthManager, AuthManager>();
             services.AddScoped<IBusinessManager, BusinessManager>();
-            services.AddScoped<INotificationManager, NotificationManager>();
-            services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IUserManager, UserManager>();
             #endregion
