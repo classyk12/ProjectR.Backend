@@ -38,7 +38,6 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBusinessRepository, BusinessRepository>();
             #endregion
-            
 
             #region Managers
             services.AddScoped<IAppThemeManager, AppThemeManager>();
@@ -47,7 +46,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IUserManager, UserManager>();
             #endregion
-  
+
             #region Services
             services.AddScoped<ISlugService, SlugService>();
             #endregion
@@ -55,6 +54,9 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
 
         public static void RegisterAuthenticationService(this IServiceCollection services, IConfiguration configuration)
         {
+            string key = configuration["Jwt:Key"] ?? throw new Exception($"Configuration 'Jwt:Key' not found.");
+            string issuer = configuration["Jwt:Issuer"] ?? throw new Exception($"Configuration 'Jwt:Issuer' not found.");
+            string audience = configuration["Jwt:Audience"] ?? throw new Exception($"Configuration 'Jwt:AUdience' not found.");
             #region Authentication
             services.AddAuthentication(c =>
             {
@@ -63,10 +65,6 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             })
             .AddJwtBearer(options =>
             {
-                string key = configuration["Jwt:Key"] ?? throw new Exception($"Configuration 'Jwt:Key' not found.");
-                string issuer = configuration["Jwt:Issuer"] ?? throw new Exception($"Configuration 'Jwt:Issuer' not found.");
-                string audience = configuration["Jwt:Audience"] ?? throw new Exception($"Configuration 'Jwt:AUdience' not found.");
-
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
