@@ -86,7 +86,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProjectR.Backend", Version = "v1" });
 
                 // Add JWT bearer authorization to Swagger
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
