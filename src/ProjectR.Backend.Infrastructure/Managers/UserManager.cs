@@ -34,13 +34,13 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 return new ResponseModel<UserModel>(message: "User already exists.", status: false, data: null);
             }
 
-            UserModel model = new UserModel
+            UserModel model = new()
             {
                 Email = userModel.Email,
                 PhoneNumber = userModel.PhoneNumber,
                 RegistrationType = userModel.RegistrationType,
                 AccountType = userModel.AccountType,
-                PhoneCode = userModel.PhoneCode
+                PhoneCode = userModel.PhoneCode,
             };
             UserModel result = await _userRepository.AddAsync(model);
             return new ResponseModel<UserModel>(message: "User added successfully.", data: result, status: true);
@@ -68,6 +68,18 @@ namespace ProjectR.Backend.Infrastructure.Managers
 
             await _userRepository.DeleteAsync(existingUser.Id);
             return new BaseResponseModel(message: "User deleted successfully.", status: true);
+        }
+
+        public async Task<UserModel?> GetByEmail(string email)
+        {
+            UserModel? user = await _userRepository.GetByEmail(email);
+            return user;
+        }
+
+        public async Task<UserModel?> GetByPhoneNumber(string phoneCode, string phoneNumber)
+        {
+            UserModel? user = await _userRepository.GetByPhoneNumber(phoneNumber, phoneCode);
+            return user;
         }
     }
 }

@@ -1,4 +1,6 @@
+using Newtonsoft.Json;
 using ProjectR.Backend.Shared.Enums;
+using ProjectR.Backend.Shared.Helpers;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProjectR.Backend.Application.Models
@@ -19,14 +21,14 @@ namespace ProjectR.Backend.Application.Models
 
     public class AddUserModel
     {
-        [Required(ErrorMessage = "Email is required")]
-        [EmailAddress(ErrorMessage = "Invalid email format.")]
+        // [Required(ErrorMessage = "Email is required")]
+        // [EmailAddress(ErrorMessage = "Invalid email format.")]
         public string Email { get; set; } = string.Empty;
-        [Required(ErrorMessage = "Phone number is required")]
-        [RegularExpression(@"^\d{10,15}$", ErrorMessage = "Invalid phone number format. It should be between 10 to 15 digits.")]
+        // [Required(ErrorMessage = "Phone number is required")]
+        // [RegularExpression(@"^\d{10,15}$", ErrorMessage = "Invalid phone number format. It should be between 10 to 15 digits.")]
         public string PhoneNumber { get; set; } = string.Empty;
-        [Required(ErrorMessage = "Phone Code is required.")]
-        [RegularExpression(@"^\+\d{1,3}$", ErrorMessage = "Invalid phone code format. Use the format +[country code].")]
+        // [Required(ErrorMessage = "Phone Code is required.")]
+        // [RegularExpression(@"^\+\d{1,3}$", ErrorMessage = "Invalid phone code format. Use the format +[country code].")]
         public string PhoneCode { get; set; } = string.Empty;
         [Required(ErrorMessage = "Account type is required")]
         public AccountType AccountType { get; set; }

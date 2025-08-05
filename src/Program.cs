@@ -5,6 +5,7 @@ using ProjectR.Backend.Middleware;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using Serilog;
 using ProjectR.Backend.Infrastructure.ServiceConfigurations;
+using ProjectR.Backend.Shared.Helpers;
 
 namespace ProjectR.Backend
 {
@@ -21,7 +22,11 @@ namespace ProjectR.Backend
                     .WriteTo.File("Logs/applog.txt", rollingInterval: RollingInterval.Day);
             });
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.Converters.Add(new GlobalEnumDescriptionConverter());
+            });
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

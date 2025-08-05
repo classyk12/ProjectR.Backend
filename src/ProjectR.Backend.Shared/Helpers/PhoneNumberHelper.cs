@@ -13,7 +13,7 @@ namespace ProjectR.Backend.Shared.Helpers
         /// <returns>True if valid, otherwise false.</returns>
         /// 
         /// 
-        public static bool IsValidPhone(string phone)
+        public static bool IsValidPhone(this string phone)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace ProjectR.Backend.Shared.Helpers
 
                 return phone.Length switch
                 {
-                    < 11 or > 13 => false,
+                    < 10 or > 13 => false,
                     _ => true
                 };
             }
@@ -73,6 +73,25 @@ namespace ProjectR.Backend.Shared.Helpers
             }
 
             return phone;
+        }
+
+        public static bool IsValidPhoneCode(this string strIn)
+        {
+            if (string.IsNullOrEmpty(strIn))
+            {
+                return false;
+            }
+
+            try
+            {
+                return Regex.IsMatch(strIn,
+                      @"^\+\d{1,3}$",
+                      RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
         }
 
         [GeneratedRegex(@"^-?[0-9][0-9,\.]+$")]

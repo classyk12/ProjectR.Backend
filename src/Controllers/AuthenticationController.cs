@@ -30,7 +30,7 @@ namespace ProjectR.Backend.Controllers
         }
 
         /// <summary>
-        /// This endppint is used to authenticate a user that has requested to login with phone number.
+        /// This endpoint is used to authenticate a user that has requested to login with phone number.
         /// It validates the OTP and returns a response model containing the login details.
         /// </summary>
         /// <param name="model"></param>
