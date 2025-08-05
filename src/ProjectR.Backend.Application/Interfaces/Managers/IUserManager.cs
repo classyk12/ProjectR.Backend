@@ -10,5 +10,7 @@ namespace ProjectR.Backend.Application.Interfaces.Managers
         Task<ResponseModel<UserModel>> AddAsync(AddUserModel addUserModel);
         Task<ResponseModel<UserModel>> UpdateAsync(UserModel user);
         Task<BaseResponseModel?> DeleteAsync(Guid Id);
+        Task<UserModel?> GetByEmail(string email);
+        Task<UserModel?> GetByPhoneNumber(string phoneCode, string phoneNumber);
     }
 }

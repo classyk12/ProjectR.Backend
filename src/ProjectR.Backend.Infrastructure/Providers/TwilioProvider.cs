@@ -22,6 +22,11 @@ namespace ProjectR.Backend.Infrastructure.Providers
 
         public async Task<bool> SendMessageViaWhatsAppAsync(string phoneNumber, string messageContent)
         {
+            if (_settings.UseMock)
+            {
+                return _settings.UseMock;
+            }
+
             try
             {
                 TwilioClient.Init(_settings.AccountSID, _settings.AuthToken);
@@ -39,7 +44,7 @@ namespace ProjectR.Backend.Infrastructure.Providers
 
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error sending Twilio Message to {PhoneNumber}", phoneNumber);
+                _logger.LogError(ex, "Error sending Twilio Message to {PhoneNumber} at {DateTime}", phoneNumber, DateTime.UtcNow);
                 return default;
             }
         }

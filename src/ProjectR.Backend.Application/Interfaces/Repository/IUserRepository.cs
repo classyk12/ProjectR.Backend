@@ -11,5 +11,7 @@ namespace ProjectR.Backend.Application.Interfaces.Repository
         Task<UserModel> UpdateAsync(UserModel user);
         Task<User?> DeleteAsync(Guid id);
         Task<bool> UserExists(string email);
+        Task<UserModel?> GetByEmail(string email);
+        Task<UserModel?> GetByPhoneNumber(string phoneNumber, string phoneCode);
     }
 }
