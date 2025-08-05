@@ -111,7 +111,7 @@ Inspired by businesses that want better time management for customers and staff 
 
 * Project maintainer: Faith Sodipe (faithsodipe@gmail.com)
 * LinkedIn: https://www.linkedin.com/in/sodipefaith/
-* Website: classykdigital.com
+* Website: https://www.classykdigital.com
 
 ---
 
