@@ -15,6 +15,7 @@ using ProjectR.Backend.Infrastructure.Providers;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using ProjectR.Backend.Persistence.Repository;
 using System.Text;
+using Twilio.TwiML.Voice;
 
 namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
 {
@@ -23,6 +24,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
             #region  Settings
+            services.Configure<WhatsappCloudApiSettings>(configuration.GetSection("WhatsApp"));
             services.Configure<GoogleSettings>(configuration.GetSection("Google"));
             services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
             services.Configure<TwilioSettings>(configuration.GetSection("Twilio"));
