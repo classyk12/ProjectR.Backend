@@ -92,7 +92,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
-                    Type = SecuritySchemeType.Http,
+                    Type = SecuritySchemeType.ApiKey,
                     Scheme = "Bearer",
                     BearerFormat = "JWT",
                     In = ParameterLocation.Header,
@@ -104,7 +104,15 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
                     {
                         new OpenApiSecurityScheme
                         {
-                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+
                         },
                         Array.Empty<string>()
                     }
