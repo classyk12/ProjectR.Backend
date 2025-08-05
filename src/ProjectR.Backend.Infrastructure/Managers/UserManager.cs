@@ -42,6 +42,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 AccountType = userModel.AccountType,
                 PhoneCode = userModel.PhoneCode,
             };
+
             UserModel result = await _userRepository.AddAsync(model);
             return new ResponseModel<UserModel>(message: "User added successfully.", data: result, status: true);
         }

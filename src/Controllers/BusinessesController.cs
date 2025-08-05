@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProjectR.Backend.Application.Interfaces.Managers;
 using ProjectR.Backend.Application.Models;
-using ProjectR.Backend.Domain.Entities;
 
 namespace ProjectR.Backend.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class BusinessesController : Controller
     {

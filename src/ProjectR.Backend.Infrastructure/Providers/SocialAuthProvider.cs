@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -21,6 +22,15 @@ namespace ProjectR.Backend.Infrastructure.Providers
 
         public async Task<GoogleAuthenticationVerificationModel?> VerifyGoogleTokenAsync(string token)
         {
+            if (_googleSettings.UseMock)
+            {
+                return new GoogleAuthenticationVerificationModel
+                {
+                    Name = "test_family_name",
+                    Email = "test_email",
+                };
+            }
+
             try
             {
                 Payload payload = await ValidateAsync(token, new ValidationSettings

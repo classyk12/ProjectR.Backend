@@ -17,8 +17,10 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=projectr;Username=postgres;Password=password
 
-      # - Google__Android=${Google__Android}
-      # - Google__iOS=${Google__iOS}
+      - Google__Android=${Google__Android}
+      - Google__Ios=${Google__Ios}
+      - Google__Web=${Google__Web}
+      - Google__UseMock=${Google__UseMock}
 
       # - Jwt__Issuer=${Jwt__Issuer}
       # - Jwt__Audience=${Jwt__Audience}

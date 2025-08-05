@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ProjectR.Backend.Application.Interfaces.Repository;
 using ProjectR.Backend.Application.Models;
 using ProjectR.Backend.Domain.Entities;
@@ -29,15 +30,16 @@ namespace ProjectR.Backend.Persistence.Repository
         {
             User entity = new()
             {
-                Id = user.Id,
                 PhoneNumber = user.PhoneNumber,
                 PhoneCode = user.PhoneCode,
                 Email = user.Email,
                 AccountType = user.AccountType,
                 RegistrationType = user.RegistrationType
             };
-            await _context.Users.AddAsync(entity);
+
+            EntityEntry<User> result = await _context.Users.AddAsync(entity);
             await _context.SaveChangesAsync();
+            user.Id = result.Entity.Id;
             return user;
         }
 
