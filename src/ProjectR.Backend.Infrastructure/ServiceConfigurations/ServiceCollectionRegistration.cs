@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using ProjectR.Backend.Application.Interfaces.Managers;
 using ProjectR.Backend.Application.Interfaces.Providers;
 using ProjectR.Backend.Application.Interfaces.Repository;
@@ -38,8 +39,8 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IAppThemeRepository, AppThemeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBusinessRepository, BusinessRepository>();
+            services.AddScoped<IOtpRepository, OtpRepository>();
             #endregion
-            
 
             #region Managers
             services.AddScoped<IAppThemeManager, AppThemeManager>();
@@ -47,11 +48,15 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IBusinessManager, BusinessManager>();
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IUserManager, UserManager>();
+<<<<<<< HEAD
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IBusinessManager, BusinessManager>();
+=======
+            services.AddScoped<IOtpManager, OtpManager>();
+>>>>>>> 3c59552164877d07e1a7fbf50da879afceef0a2b
             #endregion
-  
+
             #region Services
             services.AddScoped<ISlugService, SlugService>();
             services.AddScoped<ICloudinaryService, CloudinaryService>();
@@ -60,6 +65,9 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
 
         public static void RegisterAuthenticationService(this IServiceCollection services, IConfiguration configuration)
         {
+            string key = configuration["Jwt:Key"] ?? throw new Exception($"Configuration 'Jwt:Key' not found.");
+            string issuer = configuration["Jwt:Issuer"] ?? throw new Exception($"Configuration 'Jwt:Issuer' not found.");
+            string audience = configuration["Jwt:Audience"] ?? throw new Exception($"Configuration 'Jwt:AUdience' not found.");
             #region Authentication
             services.AddAuthentication(c =>
             {
@@ -68,10 +76,6 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             })
             .AddJwtBearer(options =>
             {
-                string key = configuration["Jwt:Key"] ?? throw new Exception($"Configuration 'Jwt:Key' not found.");
-                string issuer = configuration["Jwt:Issuer"] ?? throw new Exception($"Configuration 'Jwt:Issuer' not found.");
-                string audience = configuration["Jwt:Audience"] ?? throw new Exception($"Configuration 'Jwt:AUdience' not found.");
-
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -85,6 +89,43 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
                 };
             });
             #endregion
+        }
+        public static void RegisterSwaggerService(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProjectR.Backend", Version = "v1" });
+
+                // Add JWT bearer authorization to Swagger
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Enter 'Bearer' [space] and then your valid JWT token in the text input below.\r\n\r\nExample: \"Bearer eyJhbGci...\""
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+
+                        },
+                        Array.Empty<string>()
+                    }
+                });
+            });
         }
 
         public static void RegisterDatabaseServices(this IServiceCollection services, IConfiguration configuration)

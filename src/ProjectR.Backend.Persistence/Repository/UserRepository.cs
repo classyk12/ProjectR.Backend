@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ProjectR.Backend.Application.Interfaces.Repository;
 using ProjectR.Backend.Application.Models;
 using ProjectR.Backend.Domain.Entities;
@@ -29,15 +30,16 @@ namespace ProjectR.Backend.Persistence.Repository
         {
             User entity = new()
             {
-                Id = user.Id,
                 PhoneNumber = user.PhoneNumber,
                 PhoneCode = user.PhoneCode,
                 Email = user.Email,
                 AccountType = user.AccountType,
                 RegistrationType = user.RegistrationType
             };
-            await _context.Users.AddAsync(entity);
+
+            EntityEntry<User> result = await _context.Users.AddAsync(entity);
             await _context.SaveChangesAsync();
+            user.Id = result.Entity.Id;
             return user;
         }
 
@@ -89,6 +91,46 @@ namespace ProjectR.Backend.Persistence.Repository
         public Task<bool> UserExists(string email)
         {
             return _context.Users.AnyAsync(user => user.Email!.ToLower() == email.ToLower());
+        }
+
+        public async Task<UserModel?> GetByEmail(string email)
+        {
+            User? user = await _context.Users.FirstOrDefaultAsync(user => user.Email!.ToLower() == email.ToLower());
+
+            if (user == null)
+            {
+                return default;
+            }
+
+            return new UserModel
+            {
+                Id = user!.Id,
+                Email = user?.Email,
+                PhoneNumber = user?.PhoneNumber,
+                PhoneCode = user?.PhoneCode,
+                AccountType = user?.AccountType,
+                RegistrationType = user?.RegistrationType
+            };
+        }
+
+        public async Task<UserModel?> GetByPhoneNumber(string phoneNumber, string phoneCode)
+        {
+            User? user = await _context.Users.FirstOrDefaultAsync(user => user.PhoneNumber!.ToLower() == phoneNumber.ToLower() && user.PhoneCode!.ToLower() == phoneCode.ToLower());
+
+            if (user == null)
+            {
+                return default;
+            }
+
+            return new UserModel
+            {
+                Id = user!.Id,
+                Email = user?.Email,
+                PhoneNumber = user?.PhoneNumber,
+                PhoneCode = user?.PhoneCode,
+                AccountType = user?.AccountType,
+                RegistrationType = user?.RegistrationType
+            };
         }
     }
 }

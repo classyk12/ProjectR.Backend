@@ -1,16 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProjectR.Backend.Application.Interfaces.Managers;
 using ProjectR.Backend.Application.Models;
 
 namespace ProjectR.Backend.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
-    public class BusinessesController : Controller
+    public class BusinessesController : BaseController
     {
         private readonly IBusinessManager _businessManager;
 
         public BusinessesController(IBusinessManager businessManager)
-        { 
+        {
             _businessManager = businessManager;
         }
 
@@ -84,7 +86,16 @@ namespace ProjectR.Backend.Controllers
         {
             BaseResponseModel result = await _businessManager.DeleteAsync(id);
             return result.Status ? Ok(result) : BadRequest(result);
+        }
 
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseModel<BusinessModel>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<BusinessModel>))]
+        [HttpGet("GetByUser")]
+        public async Task<IActionResult> GetByUserId()
+        {
+            BaseResponseModel result = await _businessManager.GetByUserId(UserId);
+            return result.Status ? Ok(result) : BadRequest(result);
         }
     }
 }

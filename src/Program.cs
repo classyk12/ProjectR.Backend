@@ -5,9 +5,13 @@ using ProjectR.Backend.Middleware;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using Serilog;
 using ProjectR.Backend.Infrastructure.ServiceConfigurations;
+<<<<<<< HEAD
 using CloudinaryDotNet;
 using Microsoft.Extensions.Options;
 using ProjectR.Backend.Application.Settings;
+=======
+using Microsoft.OpenApi.Models;
+>>>>>>> 3c59552164877d07e1a7fbf50da879afceef0a2b
 
 namespace ProjectR.Backend
 {
@@ -25,16 +29,16 @@ namespace ProjectR.Backend
             });
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            builder.Services.RegisterServices(builder.Configuration);
 
             builder.Configuration
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
             .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
             .AddEnvironmentVariables();
+
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.RegisterSwaggerService();
+            builder.Services.RegisterServices(builder.Configuration);
 
             builder.Services.RegisterDatabaseServices(builder.Configuration);
             builder.Services.AddHealthChecks();

@@ -4,9 +4,13 @@ namespace ProjectR.Backend.Shared.Enums
 {
     public enum RecordStatus
     {
+        [Description("Active")]
         Active = 1,
+        [Description("InActive")]
         InActive,
+        [Description("Deleted")]
         Deleted,
+        [Description("Archieved")]
         Archieved
     }
 
@@ -38,28 +42,39 @@ namespace ProjectR.Backend.Shared.Enums
 
     public enum OtpType
     {
+        [Description("Authentication")]
         Authentication = 1,
     }
 
     public enum DeliveryMode
     {
+        [Description("Whatsapp")]
         Whatsapp = 1,
+        [Description("Email")]
         Email = 2,
+        [Description("Sms")]
         Sms
     }
 
     public enum BusinessServiceType
     {
+        [Description("Onsite")]
         Onsite = 1,
+        [Description("Offsite")]
         Offsite = 2,
+        [Description("Online")]
         Online
     }
 
     public enum AppointmentStatus
     {
+        [Description("Requested")]
         Requested = 1,
+        [Description("Confirmed")]
         Confirmed = 2,
+        [Description("Deffered")]
         Deffered,
+        [Description("Cancelled")]
         Cancelled
     }
 }
