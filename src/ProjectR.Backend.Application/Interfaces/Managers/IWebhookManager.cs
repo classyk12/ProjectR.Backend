@@ -11,3 +11,10 @@ namespace ProjectR.Backend.Application.Interfaces.Managers
         Task HandleMessageAsync();
     }
 }
+
+//Webhook table
+//payload => serialized string
+// Source => whatsapp, twilio etc
+//IsProcessed => true, false
+//LastProcessedResult => result of the processing <log error if it fails>
+//LastProcessedDate
