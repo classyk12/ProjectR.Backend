@@ -9,11 +9,13 @@ namespace ProjectR.Backend.Infrastructure.Managers
     {
         public readonly IBusinessRepository _businessRepository;
         private readonly ISlugService _slugService;
+        private readonly ICloudinaryService _cloudinaryService;
 
-        public BusinessManager(IBusinessRepository businessRepository, ISlugService slugService)
+        public BusinessManager(IBusinessRepository businessRepository, ISlugService slugService, ICloudinaryService cloudinaryService)
         {
             _businessRepository = businessRepository;
             _slugService = slugService;
+            _cloudinaryService = cloudinaryService;
         }
 
         public async Task<ResponseModel<BusinessModel>> AddAsync(AddBusinessModel business)
@@ -28,6 +30,23 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 return new ResponseModel<BusinessModel>(message: "Longitude must be a number between -180 and 180.", status: true, data: default);
             }
 
+<<<<<<< HEAD
+                BusinessModel model = new()
+                {
+                    UserId = business.UserId,
+                    Name = business.Name,
+                    Type = business.Type,
+                    PhoneCode = business.PhoneCode,
+                    PhoneNumber = business.PhoneNumber,
+                    Industry = business.Industry,
+                    About = business.About,
+                    Location = business.Location,
+                    Longitude = business.Longitude,
+                    Latitude = business.Latitude,
+                    Logo = business.Logo,
+                    ShortLink = await _slugService.GenerateUniqueSlug(business?.Name, async s => await _businessRepository.SlugExistsAsync(s))
+                };
+=======
             BusinessModel model = new()
             {
                 UserId = business.UserId,
@@ -43,6 +62,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 Logo = business.Logo,
                 ShortLink = await _slugService.GenerateUniqueSlug(business.Name!, async s => await _businessRepository.SlugExistsAsync(s))
             };
+>>>>>>> 3c59552164877d07e1a7fbf50da879afceef0a2b
 
             BusinessModel result = await _businessRepository.AddAsync(model);
             return new ResponseModel<BusinessModel>(message: "Business Added Successfully", data: result, status: true);
