@@ -7,11 +7,11 @@ namespace ProjectR.Backend.Infrastructure.Managers
 {
     public class NotificationManager : INotificationManager
     {
-        private readonly ITwilioProvider _twilioProvider;
+        private readonly IWhatsAppProvider _whatsAppProvider;
 
-        public NotificationManager(ITwilioProvider twilioProvider)
+        public NotificationManager(IWhatsAppProvider whatsAppProvider)
         {
-            _twilioProvider = twilioProvider ?? throw new ArgumentNullException(nameof(twilioProvider));
+            _whatsAppProvider = whatsAppProvider ?? throw new ArgumentNullException(nameof(whatsAppProvider));
         }
 
         public async Task<BaseResponseModel> SendNotificationAsync(NotificationModel notificationModel)
@@ -25,7 +25,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
                     switch (deliveryMode)
                     {
                         case DeliveryMode.Whatsapp:
-                            status = await _twilioProvider.SendMessageViaWhatsAppAsync(notificationModel.Recipient!, notificationModel.Content!);
+                            status = await _whatsAppProvider.SendMessageAsync(notificationModel);
                             break;
 
                         case DeliveryMode.Email:

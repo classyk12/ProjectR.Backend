@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,8 +13,8 @@ using ProjectR.Backend.Infrastructure.Managers;
 using ProjectR.Backend.Infrastructure.Providers;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using ProjectR.Backend.Persistence.Repository;
+using ProjectR.Backend.Shared;
 using System.Text;
-using Twilio.TwiML.Voice;
 
 namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
 {
@@ -57,12 +56,21 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             #endregion
         }
 
+        public static void RegisterHttpClients(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddHttpClient(AppConstants.WhatsappTag!, client =>
+            {
+                client.BaseAddress = new Uri(configuration["WhatsApp:BaseUrl"]!);
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {configuration["WhatsApp:AccessToken"]!}");
+            });
+        }
+
         public static void RegisterAuthenticationService(this IServiceCollection services, IConfiguration configuration)
         {
             string key = configuration["Jwt:Key"] ?? throw new Exception($"Configuration 'Jwt:Key' not found.");
             string issuer = configuration["Jwt:Issuer"] ?? throw new Exception($"Configuration 'Jwt:Issuer' not found.");
             string audience = configuration["Jwt:Audience"] ?? throw new Exception($"Configuration 'Jwt:AUdience' not found.");
-            #region Authentication
+
             services.AddAuthentication(c =>
             {
                 c.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -82,7 +90,6 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
                     ClockSkew = TimeSpan.Zero
                 };
             });
-            #endregion
         }
         public static void RegisterSwaggerService(this IServiceCollection services)
         {

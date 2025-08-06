@@ -4,11 +4,12 @@ namespace ProjectR.Backend.Application.Models
 {
     public class NotificationModel
     {
-        public NotificationModel(DeliveryMode[] deliveryModes, string? recipient, string? content)
+        public NotificationModel(DeliveryMode[] deliveryModes, string? recipient, string? content, Dictionary<string, object>? extras)
         {
             DeliveryModes = deliveryModes;
             Recipient = recipient;
             Content = content;
+            Extras = extras;
         }
 
         /// <summary>
@@ -20,5 +21,11 @@ namespace ProjectR.Backend.Application.Models
         /// </summary>
         public string? Recipient { get; private set; }
         public string? Content { get; private set; }
+        /// <summary>
+        /// This holds extra information needed to process a notification
+        /// Use Case: When sending via WhatsApp, There exist options to send a plain text or send an interactive message that may contain buttons
+        /// Use this to set those values which can then be read by the implementing class
+        /// </summary>
+        public Dictionary<string, object>? Extras { get; private set; }
     }
 }
