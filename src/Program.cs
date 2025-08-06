@@ -5,6 +5,9 @@ using ProjectR.Backend.Middleware;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using Serilog;
 using ProjectR.Backend.Infrastructure.ServiceConfigurations;
+using CloudinaryDotNet;
+using Microsoft.Extensions.Options;
+using ProjectR.Backend.Application.Settings;
 
 namespace ProjectR.Backend
 {
@@ -37,6 +40,15 @@ namespace ProjectR.Backend
             builder.Services.AddHealthChecks();
             builder.Services.RegisterAuthenticationService(builder.Configuration);
             builder.Services.AddHealthChecks();
+            builder.Services.Configure<CloudinarySettings>(
+                    builder.Configuration.GetSection("Cloudinary"));
+
+            builder.Services.AddSingleton<Cloudinary>(provider =>
+            {
+                var config = provider.GetRequiredService<IOptions<CloudinarySettings>>().Value;
+                var account = new Account(config.CloudName, config.ApiKey, config.ApiSecret);
+                return new Cloudinary(account);
+            });
 
             WebApplication app = builder.Build();
 

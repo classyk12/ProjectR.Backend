@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectR.Backend.Application.Interfaces.Managers;
 using ProjectR.Backend.Application.Models;
-using ProjectR.Backend.Domain.Entities;
 
 namespace ProjectR.Backend.Controllers
 {
@@ -57,6 +56,7 @@ namespace ProjectR.Backend.Controllers
             }
 
             ResponseModel<BusinessModel> result = await _businessManager.AddAsync(business);
+            
             return result.Status ? Ok(result) : BadRequest(result);
         }
 

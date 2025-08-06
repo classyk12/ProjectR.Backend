@@ -125,7 +125,8 @@ namespace ProjectR.Backend.Persistence.Repository
                 Location = result?.Location,
                 Longitude = result?.Longitude,
                 Latitude = result?.Latitude,
-                Logo = result?.Logo
+                Logo = result?.Logo,
+                ShortLink = result?.ShortLink
             };
         }
 
@@ -139,6 +140,14 @@ namespace ProjectR.Backend.Persistence.Repository
                 Name = result?.Name,
                 Type = result?.Type,
                 PhoneCode = result?.PhoneCode,
+                PhoneNumber = result?.PhoneNumber,
+                Industry = result?.Industry,
+                About = result?.About,
+                Location = result?.Location,
+                Longitude = result?.Longitude,
+                Latitude = result?.Latitude,
+                Logo = result?.Logo,
+                ShortLink = result?.ShortLink
             };
         }
 

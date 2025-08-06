@@ -11,6 +11,7 @@ using ProjectR.Backend.Application.Interfaces.Utility;
 using ProjectR.Backend.Application.Settings;
 using ProjectR.Backend.Infrastructure.Managers;
 using ProjectR.Backend.Infrastructure.Providers;
+using ProjectR.Backend.Infrastructure.Utility;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using ProjectR.Backend.Persistence.Repository;
 using System.Text;
@@ -46,10 +47,14 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IBusinessManager, BusinessManager>();
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<INotificationManager, NotificationManager>();
+            services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<IBusinessManager, BusinessManager>();
             #endregion
   
             #region Services
             services.AddScoped<ISlugService, SlugService>();
+            services.AddScoped<ICloudinaryService, CloudinaryService>();
             #endregion
         }
 

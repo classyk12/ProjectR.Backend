@@ -10,21 +10,18 @@ namespace ProjectR.Backend.Infrastructure.Managers
     {
         public readonly IBusinessRepository _businessRepository;
         private readonly ISlugService _slugService;
+        private readonly ICloudinaryService _cloudinaryService;
 
-        public BusinessManager(IBusinessRepository businessRepository, ISlugService slugService)
+        public BusinessManager(IBusinessRepository businessRepository, ISlugService slugService, ICloudinaryService cloudinaryService)
         {
             _businessRepository = businessRepository;
             _slugService = slugService;
+            _cloudinaryService = cloudinaryService;
         }
-     
-        public BusinessManager(IBusinessRepository businessRepository)
-        {
-            _businessRepository = businessRepository;
-        }
-      
+
         public async Task<ResponseModel<BusinessModel>> AddAsync(AddBusinessModel business)
         {
-             if (!double.TryParse(business.Latitude?.ToString(), out double latitude) || latitude < -90 || latitude > 90)
+            if (!double.TryParse(business.Latitude?.ToString(), out double latitude) || latitude < -90 || latitude > 90)
             {
                 return new ResponseModel<BusinessModel>(message: "Latitude must be a number between -90 and 90.", status: true, data: default);
             }
@@ -34,21 +31,21 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 return new ResponseModel<BusinessModel>(message: "Longitude must be a number between -180 and 180.", status: true, data: default);
             }
 
-            BusinessModel model = new()
-            {
-                UserId = business.UserId,
-                Name = business.Name,
-                Type = business.Type,
-                PhoneCode = business.PhoneCode,
-                PhoneNumber = business.PhoneNumber,
-                Industry = business.Industry,
-                About = business.About,
-                Location = business.Location,
-                Longitude = business.Longitude,
-                Latitude = business.Latitude,
-                Logo = business.Logo,
-                ShortLink = await _slugService.GenerateUniqueSlug(business?.Name, async s => await _businessRepository.SlugExistsAsync(s))
-            };
+                BusinessModel model = new()
+                {
+                    UserId = business.UserId,
+                    Name = business.Name,
+                    Type = business.Type,
+                    PhoneCode = business.PhoneCode,
+                    PhoneNumber = business.PhoneNumber,
+                    Industry = business.Industry,
+                    About = business.About,
+                    Location = business.Location,
+                    Longitude = business.Longitude,
+                    Latitude = business.Latitude,
+                    Logo = business.Logo,
+                    ShortLink = await _slugService.GenerateUniqueSlug(business?.Name, async s => await _businessRepository.SlugExistsAsync(s))
+                };
 
             BusinessModel result = await _businessRepository.AddAsync(model);
             return new ResponseModel<BusinessModel>(message: "Business Added Successfully", data: result, status: true);
