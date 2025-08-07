@@ -1,8 +1,8 @@
 trigger:
   branches:
     include:
-      # - develop
-      # - pipeline
+      - develop
+      - pipeline
       - main
 
 
