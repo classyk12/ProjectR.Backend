@@ -15,7 +15,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
 
         public async Task HandleMessageAsync(WebhookMessageModel model)
         {
-            throw new NotImplementedException();
+            await _repository.AddAsync(model);
         }
     }
 }
