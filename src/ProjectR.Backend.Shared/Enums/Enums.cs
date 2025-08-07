@@ -77,4 +77,10 @@ namespace ProjectR.Backend.Shared.Enums
         [Description("Cancelled")]
         Cancelled
     }
+
+    public enum WebhookSource
+    {
+        [Description("Whatsapp")]
+        Whatsapp = 1
+    }
 }

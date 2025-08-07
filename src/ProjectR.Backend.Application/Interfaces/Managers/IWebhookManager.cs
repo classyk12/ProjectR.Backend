@@ -8,13 +8,6 @@ namespace ProjectR.Backend.Application.Interfaces.Managers
         /// This handles all webhooks requests.
         /// </summary>
         /// <returns></returns>
-        Task HandleMessageAsync();
+        Task HandleMessageAsync(WebhookMessageModel model);
     }
 }
-
-//Webhook table
-//payload => serialized string
-// Source => whatsapp, twilio etc
-//IsProcessed => true, false
-//LastProcessedResult => result of the processing <log error if it fails>
-//LastProcessedDate
