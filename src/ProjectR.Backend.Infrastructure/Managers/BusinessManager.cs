@@ -1,22 +1,24 @@
-﻿using ProjectR.Backend.Application.Interfaces.Managers;
+using ProjectR.Backend.Application.Interfaces.Managers;
 using ProjectR.Backend.Application.Interfaces.Repository;
+using ProjectR.Backend.Application.Interfaces.Utility;
 using ProjectR.Backend.Application.Models;
-using ProjectR.Backend.Domain.Entities;
 
 namespace ProjectR.Backend.Infrastructure.Managers
 {
     public class BusinessManager : IBusinessManager
     {
         public readonly IBusinessRepository _businessRepository;
+        private readonly ISlugService _slugService;
 
-        public BusinessManager(IBusinessRepository businessRepository)
+        public BusinessManager(IBusinessRepository businessRepository, ISlugService slugService)
         {
             _businessRepository = businessRepository;
+            _slugService = slugService;
         }
-      
+
         public async Task<ResponseModel<BusinessModel>> AddAsync(AddBusinessModel business)
         {
-             if (!double.TryParse(business.Latitude?.ToString(), out double latitude) || latitude < -90 || latitude > 90)
+            if (!double.TryParse(business.Latitude?.ToString(), out double latitude) || latitude < -90 || latitude > 90)
             {
                 return new ResponseModel<BusinessModel>(message: "Latitude must be a number between -90 and 90.", status: true, data: default);
             }
@@ -38,6 +40,8 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 Location = business.Location,
                 Longitude = business.Longitude,
                 Latitude = business.Latitude,
+                Logo = business.Logo,
+                ShortLink = await _slugService.GenerateUniqueSlug(business.Name!, async s => await _businessRepository.SlugExistsAsync(s))
             };
 
             BusinessModel result = await _businessRepository.AddAsync(model);
@@ -51,7 +55,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 return new ResponseModel<BusinessModel[]>(message: "Business list cannot be empty", status: false, data: Array.Empty<BusinessModel>());
             }
 
-             foreach (AddBusinessModel b in businesses)
+            foreach (AddBusinessModel b in businesses)
             {
                 if (!double.TryParse(b.Latitude?.ToString(), out double latitude) || latitude < -90 || latitude > 90)
                 {
@@ -70,8 +74,12 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 Type = at.Type,
                 PhoneCode = at.PhoneCode,
                 PhoneNumber = at.PhoneNumber,
-                Industry = at.Industry, 
+                Industry = at.Industry,
                 About = at.About,
+                Logo = at.Logo,
+                Location = at.Location,
+                Latitude = at.Latitude,
+                Longitude = at.Longitude
             }).ToArray();
 
             BusinessModel[] result = await _businessRepository.AddAsync(models);
@@ -87,14 +95,14 @@ namespace ProjectR.Backend.Infrastructure.Managers
 
         public async Task<BaseResponseModel> DeleteAsync(Guid id)
         {
-            BusinessModel exisitingBusiness = await _businessRepository.GetByIdAsync(id);
+            BusinessModel? exisitingBusiness = await _businessRepository.GetByIdAsync(id);
             if (exisitingBusiness == null)
             {
                 return new BaseResponseModel(message: "Business not found", status: false);
             }
 
             await _businessRepository.DeleteAsync(exisitingBusiness);
-            return new BaseResponseModel(message:"Business succesfully deleted", status: true);
+            return new BaseResponseModel(message: "Business succesfully deleted", status: true);
         }
 
         public async Task<BusinessModel[]> GetAllAsync()
@@ -104,13 +112,31 @@ namespace ProjectR.Backend.Infrastructure.Managers
 
         public async Task<ResponseModel<BusinessModel>> GetByIdAsync(Guid id)
         {
-            BusinessModel result = await _businessRepository.GetByIdAsync(id);
-            return new ResponseModel<BusinessModel>(message: result != null ? "Business retrieved successfully" : "Business not found",result, result != null);
+            BusinessModel? result = await _businessRepository.GetByIdAsync(id);
+            return new ResponseModel<BusinessModel>(message: result != null ? "Business retrieved successfully" : "Business not found", data: result, status: result != null);
+        }
+
+        public async Task<ResponseModel<BusinessModel>> GetBySlugAsync(string slug)
+        {
+            BusinessModel? result = await _businessRepository.GetBySlugAsync(slug);
+            return new ResponseModel<BusinessModel>(message: result != null ? "Business retrieved successfully" : "Business not found", data: result, status: result != null);
+        }
+
+        public async Task<ResponseModel<BusinessModel>> GetByUserId(Guid userId)
+        {
+            BusinessModel? result = await _businessRepository.GetByUserId(userId);
+            return new ResponseModel<BusinessModel>(message: result != null ? "Business retrieved successfully" : "Business not found", data: result, status: result != null);
+        }
+
+        public async Task<bool> IsBusinessExist(Guid userId)
+        {
+            return await _businessRepository.IsBusinessExist(userId);
         }
 
         public async Task<ResponseModel<BusinessModel>> UpdateAsync(BusinessModel business)
         {
-             if (!double.TryParse(business.Latitude?.ToString(), out double latitude) || latitude < -90 || latitude > 90)
+
+            if (!double.TryParse(business.Latitude?.ToString(), out double latitude) || latitude < -90 || latitude > 90)
             {
                 return new ResponseModel<BusinessModel>(message: "Latitude must be a number between -90 and 90.", status: true, data: default);
             }
@@ -119,11 +145,17 @@ namespace ProjectR.Backend.Infrastructure.Managers
             {
                 return new ResponseModel<BusinessModel>(message: "Longitude must be a number between -180 and 180.", status: true, data: default);
             }
-            
-            BusinessModel existingBusiness = await _businessRepository.GetByIdAsync(business.Id);
+
+            BusinessModel? existingBusiness = await _businessRepository.GetByIdAsync(business.Id);
+
             if (existingBusiness == null)
             {
                 return new ResponseModel<BusinessModel>(message: "Business not found", data: default, status: false);
+            }
+
+            if (!await _businessRepository.SlugExistsAsync(business.ShortLink ?? string.Empty))
+            {
+                business.ShortLink = await _slugService.GenerateUniqueSlug(business.Name!, async s => await _businessRepository.SlugExistsAsync(s));
             }
 
             BusinessModel result = await _businessRepository.UpdateAsync(business);
@@ -136,9 +168,9 @@ namespace ProjectR.Backend.Infrastructure.Managers
             {
                 return new ResponseModel<BusinessModel[]>(message: "Empty Business", status: false, data: Array.Empty<BusinessModel>());
             }
-           
+
             BusinessModel[] result = await _businessRepository.UpdateAsync(businesses);
-            return new ResponseModel<BusinessModel[]>(message: "Business updated successfully", data: result , status: true);
+            return new ResponseModel<BusinessModel[]>(message: "Business updated successfully", data: result, status: true);
 
         }
     }

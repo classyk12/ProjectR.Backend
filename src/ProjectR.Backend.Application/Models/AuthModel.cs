@@ -22,11 +22,11 @@ namespace ProjectR.Backend.Application.Models
     public class CompleteLoginWithPhoneNumberModel : BasePhoneAuthModel
     {
         [Required(ErrorMessage = "OTP is required.")]
-        [RegularExpression(@"^\d{6}$", ErrorMessage = "Invalid OTP format. It should be exactly 6 digits.")]
+        [RegularExpression(@"^\d{5}$", ErrorMessage = "Invalid OTP format. It should be exactly 5 digits.")]
         public string? OTP { get; set; }
 
         [Required(ErrorMessage = "Token is required.")]
-        public string? Token { get; set; }
+        public Guid? Token { get; set; }
 
         [Required(ErrorMessage = "Type is required.")]
         public OtpType Type { get; set; }
@@ -43,6 +43,7 @@ namespace ProjectR.Backend.Application.Models
         [Required(ErrorMessage = "Email is required.")]
         [EmailAddress(ErrorMessage = "Invalid email format.")]
         public string? Email { get; set; }
+        [Required]
 
         public SocialMediaProvider Type { get; set; }
     }
@@ -61,17 +62,14 @@ namespace ProjectR.Backend.Application.Models
         /// It is used to verify the user's ownership of the phone number.
         /// The validation of this token will contain a combination of the phone number and the OTP token.
         /// </summary>
-        public string? OtpToken { get; set; }
+        public Guid? OtpToken { get; set; }
         public DateTimeOffset? ExpiresAt { get; set; }
         /// <summary>
         /// This is the phone number with the country code that the user has provided during login.
         /// </summary>
         public string? PhoneNumber { get; set; }
+        public string? PhoneCode { get; set; }
         public OtpType? Type { get; set; }
-        /// <summary>
-        /// For the sake of development, the OTP will be returned till proper whatsapp delivery is sorted
-        /// </summary>
-        public string? Otp { get; set; }
     }
 
     public class GoogleAuthenticationVerificationModel
