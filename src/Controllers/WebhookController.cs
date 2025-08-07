@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using ProjectR.Backend.Application.Interfaces.Managers;
 using ProjectR.Backend.Application.Models;
 using ProjectR.Backend.Application.Models.WhatsApp;
+using ProjectR.Backend.Shared.Enums;
 
 namespace ProjectR.Backend.Controllers
 {
@@ -23,7 +25,8 @@ namespace ProjectR.Backend.Controllers
         {
             WebhookMessageModel webhookModel = new()
             {
-                
+                Payload = JsonConvert.SerializeObject(model),
+                Source = WebhookSource.Whatsapp
             };
 
             await _webhookManager.HandleMessageAsync(webhookModel);
