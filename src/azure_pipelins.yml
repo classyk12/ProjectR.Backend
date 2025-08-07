@@ -2,7 +2,7 @@ trigger:
   branches:
     include:
       - develop
-      # - pipeline
+      - pipeline
       - main
 
 
@@ -50,7 +50,7 @@ steps:
   # Start containers using a custom shell script
   - script: |
       echo "Starting containers using Docker Compose..."
-      cd /home/tadeboye/ProjectR/build
+      cd /opt/ProjectR/build
       bash startsvcs.sh
     displayName: "Start Docker Containers"
 
