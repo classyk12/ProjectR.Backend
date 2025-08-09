@@ -1,7 +1,7 @@
 ﻿using ProjectR.Backend.Application.Interfaces.Managers;
 using ProjectR.Backend.Application.Models;
 using ProjectR.Backend.Application.Interfaces.Providers;
-using ProjectR.Backend.Shared.Enums;
+using ProjectR.Backend.Shared;
 
 namespace ProjectR.Backend.Infrastructure.Managers
 {

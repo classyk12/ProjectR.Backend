@@ -1,4 +1,4 @@
-using ProjectR.Backend.Shared.Enums;
+using ProjectR.Backend.Shared;
 
 namespace ProjectR.Backend.Domain.Entities
 {

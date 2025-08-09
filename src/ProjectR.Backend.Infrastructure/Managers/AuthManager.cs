@@ -7,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using ProjectR.Backend.Application.Settings;
 using Microsoft.Extensions.Options;
 using ProjectR.Backend.Application.Interfaces.Providers;
-using ProjectR.Backend.Shared.Enums;
+using ProjectR.Backend.Shared;
 
 namespace ProjectR.Backend.Infrastructure.Managers
 {
@@ -48,7 +48,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 return new ResponseModel<PhoneNumberLoginResponseModel>("Failed to send OTP. Try again", default, false);
             }
 
-            NotificationModel notificationModel = new([DeliveryMode.Whatsapp], model.PhoneCode + model.PhoneNumber, "Test Notification");
+            NotificationModel notificationModel = new([DeliveryMode.Whatsapp], model.PhoneCode + model.PhoneNumber, "Test Notification", default);
             BaseResponseModel sendNotificationResult = await _notificationManager.SendNotificationAsync(notificationModel);
             if (!sendNotificationResult.Status)
             {

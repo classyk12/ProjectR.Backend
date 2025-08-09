@@ -1,5 +1,4 @@
-using ProjectR.Backend.Shared.Enums;
-using System.ComponentModel.DataAnnotations;
+using ProjectR.Backend.Shared;
 
 namespace ProjectR.Backend.Application.Models
 {
@@ -8,7 +7,7 @@ namespace ProjectR.Backend.Application.Models
         public Guid? Id { get; set; }
         public WebhookSource Source { get; set; }
         public string? Payload { get; set; }
-        public bool IsProcessed { get; set; }
+        public bool IsProcessed { get; set; } = false;
         public DateTimeOffset? LastProcessedDate { get; set; }
         public string? LastProcessedResult { get; set; }
     }

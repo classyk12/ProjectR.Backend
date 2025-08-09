@@ -33,6 +33,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             #region  Providers
             services.AddScoped<ISocialAuthProvider, SocialAuthProvider>();
             services.AddScoped<ITwilioProvider, TwilioProvider>();
+            services.AddScoped<IWhatsAppProvider, WhatsAppProvider>();
             #endregion
 
             #region  Repositories
@@ -40,6 +41,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBusinessRepository, BusinessRepository>();
             services.AddScoped<IOtpRepository, OtpRepository>();
+            services.AddScoped<IWebhookMessageRepository, WebhookMessageRepository>();
             #endregion
 
             #region Managers
@@ -49,6 +51,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IOtpManager, OtpManager>();
+            services.AddScoped<IWebhookManager, WebhookManager>();
             #endregion
 
             #region Services

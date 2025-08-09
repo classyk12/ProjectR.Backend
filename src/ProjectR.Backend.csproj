@@ -28,12 +28,14 @@
     <Content Remove="ProjectR.Backend.Domain\**" />
     <Content Remove="ProjectR.Backend.Infrastructure\**" />
     <Content Remove="ProjectR.Backend.Persistence\**" />
+     <Content Remove="ProjectR.Backend.Shared\**" />
     <Content Remove="ProjectR.Backend.Tests\**" />
      <EmbeddedResource Remove="ProjectR.Backend.Application\**" />
     <EmbeddedResource Remove="ProjectR.Backend.Domain\**" />
     <EmbeddedResource Remove="ProjectR.Backend.Infrastructure\**" />
     <EmbeddedResource Remove="ProjectR.Backend.Persistence\**" />
     <EmbeddedResource Remove="ProjectR.Backend.Tests\**" /> 
+    <EmbeddedResource Remove="ProjectR.Backend.Shared\**" /> 
     <None Remove="ProjectR.Backend.Application\**" />
     <None Remove="ProjectR.Backend.Domain\**" />
     <None Remove="ProjectR.Backend.Infrastructure\**" />
@@ -62,6 +64,7 @@
     <ProjectReference Include="ProjectR.Backend.Application\ProjectR.Backend.Application.csproj" />
     <ProjectReference Include="ProjectR.Backend.Infrastructure\ProjectR.Backend.Infrastructure.csproj" />
     <ProjectReference Include="ProjectR.Backend.Persistence\ProjectR.Backend.Persistence.csproj" />
+    <ProjectReference Include="ProjectR.Backend.Shared\ProjectR.Backend.Shared.csproj" />
   </ItemGroup>
 
 </Project>

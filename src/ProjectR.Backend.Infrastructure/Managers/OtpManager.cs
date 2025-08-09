@@ -1,7 +1,7 @@
 ﻿using ProjectR.Backend.Application.Interfaces.Managers;
 using ProjectR.Backend.Application.Models;
 using ProjectR.Backend.Application.Interfaces.Repository;
-using ProjectR.Backend.Shared.Enums;
+using ProjectR.Backend.Shared;
 using ProjectR.Backend.Shared.Helpers;
 using ProjectR.Backend.Application.Settings;
 using Microsoft.Extensions.Options;

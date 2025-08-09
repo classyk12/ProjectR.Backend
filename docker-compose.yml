@@ -22,17 +22,12 @@ services:
       - Google__Web=${Google__Web}
       - Google__UseMock=${Google__UseMock}
 
-      # - Jwt__Issuer=${Jwt__Issuer}
-      # - Jwt__Audience=${Jwt__Audience}
-      # - Jwt__Key=${Jwt__Key}
+      - WhatsApp__PhoneNumberId=${WhatsApp__PhoneNumberId}
+      - WhatsApp__BaseUrl=${WhatsApp__BaseUrl}
+      - WhatsApp__AccessToken=${WhatsApp__AccessToken}
+      - WhatsApp__BusinessAccountId =${WhatsApp__BusinessAccountId}
+      - WhatsApp__UseMock =${WhatsApp__UseMock}
 
-      # - Twilio__AccountSID=${Twilio__AccountSID}
-      # - Twilio__AuthToken=${Twilio__AuthToken}
-      # - Twilio__UseMock=${Twilio__UseMock}
-      # - Twilio__OtpContentSid=${Twilio__OtpContentSid}
-
-      # - Otp__UseMock=${Otp__UseMock}
-      # - Otp__ExpiryInMin=${Otp__ExpiryInMin}
 
     ports:
       - "5000:5000"

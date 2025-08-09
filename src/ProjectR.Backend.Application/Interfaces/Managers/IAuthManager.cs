@@ -1,5 +1,5 @@
 using ProjectR.Backend.Application.Models;
-using ProjectR.Backend.Shared.Enums;
+using ProjectR.Backend.Shared;
 
 namespace ProjectR.Backend.Application.Interfaces.Managers
 {
