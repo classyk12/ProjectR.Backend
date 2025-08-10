@@ -13,13 +13,6 @@ namespace ProjectR.Backend.Infrastructure.Providers
         private readonly ILogger<WhatsAppProvider> _logger;
         private readonly WhatsappCloudApiSettings _settings;
         private readonly IHttpClientFactory _factory;
-        private readonly string MessageTypeKey = "Type";
-        private readonly string SimpleMessageKey = "SimpleMessage";
-        private readonly string InteractiveMessageKey = "InteractiveMessage";
-        private readonly string MessagingProduct = "whatsapp";
-        private readonly string RecipientType = "individual";
-        private readonly string SimpleMessageType = "text";
-        private readonly string InteractiveMessageType = "interactive";
 
         public WhatsAppProvider(ILogger<WhatsAppProvider> logger, IOptions<WhatsappCloudApiSettings> settings, IHttpClientFactory factory)
         {
@@ -34,16 +27,16 @@ namespace ProjectR.Backend.Infrastructure.Providers
             //use IF/ELSE to redirect call based on message type
             try
             {
-                if (model.Extras!.ContainsKey(MessageTypeKey))
+                if (model.Extras!.ContainsKey(AppConstants.MessageTypeKey))
                 {
-                    if (model.Extras[MessageTypeKey].Equals(SimpleMessageKey))
+                    if (model.Extras[AppConstants.MessageTypeKey].Equals(AppConstants.SimpleMessageKey))
                     {
                         SimpleMessageModel simpleMessage = new()
                         {
-                            MessagingProduct = MessagingProduct,
-                            RecipientType = RecipientType,
+                            MessagingProduct = AppConstants.MessagingProduct,
+                            RecipientType = AppConstants.RecipientType,
                             To = model.Recipient,
-                            Type = SimpleMessageType,
+                            Type = AppConstants.SimpleMessageType,
                             Text = new Text
                             {
                                 Body = model.Content

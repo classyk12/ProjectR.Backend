@@ -26,7 +26,7 @@ namespace ProjectR.Backend.Controllers
             WebhookMessageModel webhookModel = new()
             {
                 Payload = JsonConvert.SerializeObject(model),
-              //  Source = WebhookSource.Whatsapp
+                Source = WebhookSource.Whatsapp
             };
 
             await _webhookManager.HandleMessageAsync(webhookModel);

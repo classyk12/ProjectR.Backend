@@ -14,18 +14,19 @@ namespace ProjectR.Backend.Infrastructure.Managers
             _whatsAppProvider = whatsAppProvider ?? throw new ArgumentNullException(nameof(whatsAppProvider));
         }
 
-        public async Task<BaseResponseModel> SendNotificationAsync(NotificationModel notificationModel)
+        public async Task SendNotificationAsync(NotificationModel notificationModel)
         {
+
             if (notificationModel != null)
             {
-                bool status = false;
+                List<Task> tasks = new();
 
                 foreach (DeliveryMode deliveryMode in notificationModel.DeliveryModes)
                 {
                     switch (deliveryMode)
                     {
                         case DeliveryMode.Whatsapp:
-                            status = await _whatsAppProvider.SendMessageAsync(notificationModel);
+                            tasks.Add(_whatsAppProvider.SendMessageAsync(notificationModel));
                             break;
 
                         case DeliveryMode.Email:
@@ -39,7 +40,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
                     }
                 }
 
-                return new BaseResponseModel(status ? "Notification sent successfully." : "Failed to send notification.", status);
+                await Task.WhenAll(tasks);
             }
 
             throw new ArgumentNullException(nameof(notificationModel));

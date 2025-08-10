@@ -48,12 +48,13 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 return new ResponseModel<PhoneNumberLoginResponseModel>("Failed to send OTP. Try again", default, false);
             }
 
-            NotificationModel notificationModel = new([DeliveryMode.Whatsapp], model.PhoneCode + model.PhoneNumber, "Test Notification", default);
-            BaseResponseModel sendNotificationResult = await _notificationManager.SendNotificationAsync(notificationModel);
-            if (!sendNotificationResult.Status)
+            Dictionary<string, object> extras = new()
             {
-                return new ResponseModel<PhoneNumberLoginResponseModel>("Failed to send OTP. Try again", default, false);
-            }
+                { AppConstants.MessageTypeKey, AppConstants.SimpleMessageKey },
+            };
+
+            NotificationModel notificationModel = new([DeliveryMode.Whatsapp], model.PhoneCode + model.PhoneNumber, $"Your OTP Code is {otp.Data?.Code}", extras);
+            await _notificationManager.SendNotificationAsync(notificationModel);
 
             return new ResponseModel<PhoneNumberLoginResponseModel>("OTP sent successfully.", new PhoneNumberLoginResponseModel
             {

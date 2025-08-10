@@ -28,7 +28,6 @@ services:
       - WhatsApp__BusinessAccountId =${WhatsApp__BusinessAccountId}
       - WhatsApp__UseMock =${WhatsApp__UseMock}
 
-
     ports:
       - "5000:5000"
       - "5001:5001"

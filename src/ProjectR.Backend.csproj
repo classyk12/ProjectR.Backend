@@ -23,6 +23,7 @@
     <Compile Remove="ProjectR.Backend.Domain\**" />
     <Compile Remove="ProjectR.Backend.Infrastructure\**" />
     <Compile Remove="ProjectR.Backend.Persistence\**" />
+    <Compile Remove="ProjectR.Backend.Shared\**" />
     <Compile Remove="ProjectR.Backend.Tests\**" />
     <Content Remove="ProjectR.Backend.Application\**" />
     <Content Remove="ProjectR.Backend.Domain\**" />
@@ -37,6 +38,7 @@
     <EmbeddedResource Remove="ProjectR.Backend.Tests\**" /> 
     <EmbeddedResource Remove="ProjectR.Backend.Shared\**" /> 
     <None Remove="ProjectR.Backend.Application\**" />
+    <None Remove="ProjectR.Backend.Shared\**" />
     <None Remove="ProjectR.Backend.Domain\**" />
     <None Remove="ProjectR.Backend.Infrastructure\**" />
     <None Remove="ProjectR.Backend.Persistence\**" />
