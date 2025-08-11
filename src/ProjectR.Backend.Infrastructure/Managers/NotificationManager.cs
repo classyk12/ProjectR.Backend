@@ -43,7 +43,10 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 await Task.WhenAll(tasks);
             }
 
-            throw new ArgumentNullException(nameof(notificationModel));
+            else
+            {
+                throw new ArgumentNullException(nameof(notificationModel));
+            }
         }
     }
 }

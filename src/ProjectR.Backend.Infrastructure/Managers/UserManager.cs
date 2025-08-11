@@ -28,12 +28,6 @@ namespace ProjectR.Backend.Infrastructure.Managers
 
         public async Task<ResponseModel<UserModel>> AddAsync(AddUserModel userModel)
         {
-            bool userExists = await _userRepository.UserExists(userModel.Email);
-            if (userExists)
-            {
-                return new ResponseModel<UserModel>(message: "User already exists.", status: false, data: null);
-            }
-
             UserModel model = new()
             {
                 Email = userModel.Email,

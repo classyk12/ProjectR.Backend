@@ -1,10 +1,12 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using ProjectR.Backend.Application.Interfaces.Providers;
 using ProjectR.Backend.Application.Models;
 using ProjectR.Backend.Application.Models.WhatsApp;
 using ProjectR.Backend.Application.Settings;
 using ProjectR.Backend.Shared;
+using System.Text;
 
 namespace ProjectR.Backend.Infrastructure.Providers
 {
@@ -57,8 +59,11 @@ namespace ProjectR.Backend.Infrastructure.Providers
                     }
                 }
 
-                _logger.LogInformation("Unable to Determine WhatsApp Message Processing Route: No Message Type Found");
-                return false;
+                else
+                {
+                   _logger.LogInformation("Unable to Determine WhatsApp Message Processing Route: No Message Type Found");
+                    return false;
+                }
             }
 
             catch (Exception ex)
@@ -67,7 +72,7 @@ namespace ProjectR.Backend.Infrastructure.Providers
                 return default;
             }
 
-            throw new NotImplementedException();
+            return true;
         }
 
         public async Task<bool> SendInteractiveReplyButtonMessageAsync(InteractiveMessageModel model)
@@ -101,8 +106,11 @@ namespace ProjectR.Backend.Infrastructure.Providers
 
             try
             {
+                string json = JsonConvert.SerializeObject(model);
                 HttpClient client = _factory.CreateClient(AppConstants.WhatsappTag!);
-                HttpResponseMessage result = await client.GetAsync($"{_settings.PhoneNumberId}/messages");
+                Console.WriteLine("URL: "+ client.BaseAddress+ $"{_settings.PhoneNumberId}/messages");
+                Console.WriteLine(json);
+                HttpResponseMessage result = await client.PostAsync($"{_settings.PhoneNumberId}/messages", new StringContent(json, Encoding.UTF8, "application/json"));
                 string response = await result.Content.ReadAsStringAsync();
                 _logger.LogInformation("result to {Url} is {Result}", client.BaseAddress, response);
                 return result.IsSuccessStatusCode;

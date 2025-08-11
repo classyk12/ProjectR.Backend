@@ -107,7 +107,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
             //generate an auth token and return it
             string generatedToken = GenerateAuthTokenAsync(user!);
 
-            user!.IsFirstLogin = await _businessManager.IsBusinessExist(user!.Id);
+            user!.IsFirstLogin = !await _businessManager.IsBusinessExist(user!.Id);
 
             //IsFirstLogin = true; // This should be set based on whether the user has created a business profile or not
             return new ResponseModel<LoginResponseModel>("Authentication Successful.", new LoginResponseModel
