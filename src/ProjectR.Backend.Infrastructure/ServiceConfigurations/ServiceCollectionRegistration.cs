@@ -28,6 +28,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
             services.Configure<TwilioSettings>(configuration.GetSection("Twilio"));
             services.Configure<OtpSettings>(configuration.GetSection("Otp"));
+            services.Configure<CloudinarySettings>(configuration.GetSection("Cloudinary"));
             #endregion
 
             #region  Providers
@@ -48,13 +49,10 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IBusinessManager, BusinessManager>();
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IUserManager, UserManager>();
-<<<<<<< HEAD
             services.AddScoped<INotificationManager, NotificationManager>();
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IBusinessManager, BusinessManager>();
-=======
             services.AddScoped<IOtpManager, OtpManager>();
->>>>>>> 3c59552164877d07e1a7fbf50da879afceef0a2b
             #endregion
 
             #region Services
