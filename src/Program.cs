@@ -1,11 +1,15 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using ProjectR.Backend.Application.Interfaces.Managers;
+using ProjectR.Backend.Application.Interfaces.Repository;
+using ProjectR.Backend.Infrastructure.Managers;
+using ProjectR.Backend.Infrastructure.ServiceConfigurations;
 using ProjectR.Backend.Middleware;
 using ProjectR.Backend.Persistence.DatabaseContext;
+using ProjectR.Backend.Persistence.Repository;
 using Serilog;
-using ProjectR.Backend.Infrastructure.ServiceConfigurations;
-using Microsoft.OpenApi.Models;
 
 namespace ProjectR.Backend
 {
