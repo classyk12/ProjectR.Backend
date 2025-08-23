@@ -10,7 +10,6 @@ using ProjectR.Backend.Middleware;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using ProjectR.Backend.Persistence.Repository;
 using Serilog;
-using ProjectR.Backend.Infrastructure.ServiceConfigurations;
 using CloudinaryDotNet;
 using Microsoft.Extensions.Options;
 using ProjectR.Backend.Application.Settings;
