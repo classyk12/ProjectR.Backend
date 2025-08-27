@@ -1,0 +1,56 @@
+name: Docker Build and Deploy (Dev)
+
+on:
+  push:
+    branches:
+      - develop
+
+env:
+  DOCKERHUB_USERNAME: temilayon
+  DOCKERHUB_PROJECT: temilayon/projectr.backend
+  DOCKER_TAG: latest
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: Development
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ env.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and Tag Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./src
+          file: ./src/Dockerfile
+          push: false
+          tags: ${{ env.DOCKERHUB_PROJECT }}:${{ env.DOCKER_TAG }}
+
+      - name: Push Docker Image to Docker Hub
+        run: |
+          echo "Pushing Docker image to Docker Hub..."
+          docker push $DOCKERHUB_PROJECT:$DOCKER_TAG
+
+      - name: Pull Docker Image from Docker Hub
+        run: |
+          echo "Pulling Docker image from Docker Hub..."
+          docker pull $DOCKERHUB_PROJECT:$DOCKER_TAG
+
+      - name: SSH into Host and Start Containers
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            echo "Deploying on remote host..."
+            cd /opt/ProjectR/build
+            bash startsvcs.sh
