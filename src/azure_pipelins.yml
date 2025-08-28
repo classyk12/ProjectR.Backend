@@ -2,8 +2,7 @@ trigger:
   branches:
     include:
       - develop
-      # - pipeline
-      - main
+      - pipe_fix
 
 
 pool:
