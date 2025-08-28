@@ -1,7 +1,9 @@
+using CloudinaryDotNet;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ProjectR.Backend.Application.Interfaces.Managers;
@@ -146,6 +148,16 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
               {
                   options.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorCodesToAdd: []);
               }));
+        }
+
+        public static void RegisterCloudinaryService(this IServiceCollection services)
+        {
+            services.AddSingleton(provider =>
+            {
+                CloudinarySettings config = provider.GetRequiredService<IOptions<CloudinarySettings>>().Value;
+                Account account = new(config.CloudName, config.ApiKey, config.ApiSecret);
+                return new Cloudinary(account);
+            });
         }
     }
 }
