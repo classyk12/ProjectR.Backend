@@ -19,9 +19,9 @@ COPY ["ProjectR.Backend.Domain/ProjectR.Backend.Domain.csproj", "ProjectR.Backen
 COPY ["ProjectR.Backend.Shared/ProjectR.Backend.Shared.csproj", "ProjectR.Backend.Shared/"]
 COPY ["ProjectR.Backend.Infrastructure/ProjectR.Backend.Infrastructure.csproj", "ProjectR.Backend.Infrastructure/"]
 COPY ["ProjectR.Backend.Persistence/ProjectR.Backend.Persistence.csproj", "ProjectR.Backend.Persistence/"]
-RUN dotnet restore "./ProjectR.Backend.csproj"
+RUN dotnet restore "ProjectR.Backend/ProjectR.Backend.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/ProjectR.Backend"
 RUN dotnet build "./ProjectR.Backend.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
