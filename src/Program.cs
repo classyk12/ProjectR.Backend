@@ -39,6 +39,7 @@ namespace ProjectR.Backend
             builder.Services.RegisterDatabaseServices(builder.Configuration);
             builder.Services.AddHealthChecks();
             builder.Services.RegisterAuthenticationService(builder.Configuration);
+            builder.Services.RegisterHttpClients(builder.Configuration);
             builder.Services.AddHealthChecks();
 
             builder.Services.AddSingleton<Cloudinary>(provider =>

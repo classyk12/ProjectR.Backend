@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +14,7 @@ using ProjectR.Backend.Infrastructure.Providers;
 using ProjectR.Backend.Infrastructure.Utility;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using ProjectR.Backend.Persistence.Repository;
+using ProjectR.Backend.Shared;
 using System.Text;
 
 namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
@@ -24,6 +24,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
             #region  Settings
+            services.Configure<WhatsappCloudApiSettings>(configuration.GetSection("WhatsApp"));
             services.Configure<GoogleSettings>(configuration.GetSection("Google"));
             services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
             services.Configure<TwilioSettings>(configuration.GetSection("Twilio"));
@@ -34,6 +35,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             #region  Providers
             services.AddScoped<ISocialAuthProvider, SocialAuthProvider>();
             services.AddScoped<ITwilioProvider, TwilioProvider>();
+            services.AddScoped<IWhatsAppProvider, WhatsAppProvider>();
             #endregion
 
             #region  Repositories
@@ -41,6 +43,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBusinessRepository, BusinessRepository>();
             services.AddScoped<IOtpRepository, OtpRepository>();
+            services.AddScoped<IWebhookMessageRepository, WebhookMessageRepository>();
             #endregion
 
             #region Managers
@@ -53,6 +56,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IBusinessManager, BusinessManager>();
             services.AddScoped<IOtpManager, OtpManager>();
+            services.AddScoped<IWebhookManager, WebhookManager>();
             #endregion
 
             #region Services
@@ -61,12 +65,21 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             #endregion
         }
 
+        public static void RegisterHttpClients(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddHttpClient(AppConstants.WhatsappTag!, client =>
+            {
+                client.BaseAddress = new Uri(configuration["WhatsApp:BaseUrl"]!);
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {configuration["WhatsApp:AccessToken"]!}");
+            });
+        }
+
         public static void RegisterAuthenticationService(this IServiceCollection services, IConfiguration configuration)
         {
             string key = configuration["Jwt:Key"] ?? throw new Exception($"Configuration 'Jwt:Key' not found.");
             string issuer = configuration["Jwt:Issuer"] ?? throw new Exception($"Configuration 'Jwt:Issuer' not found.");
             string audience = configuration["Jwt:Audience"] ?? throw new Exception($"Configuration 'Jwt:AUdience' not found.");
-            #region Authentication
+
             services.AddAuthentication(c =>
             {
                 c.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -86,7 +99,6 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
                     ClockSkew = TimeSpan.Zero
                 };
             });
-            #endregion
         }
         public static void RegisterSwaggerService(this IServiceCollection services)
         {

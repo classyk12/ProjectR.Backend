@@ -4,7 +4,7 @@ using ProjectR.Backend.Application.Interfaces.Repository;
 using ProjectR.Backend.Application.Models;
 using ProjectR.Backend.Domain.Entities;
 using ProjectR.Backend.Persistence.DatabaseContext;
-using ProjectR.Backend.Shared.Enums;
+using ProjectR.Backend.Shared;
 using ProjectR.Backend.Shared.Helpers;
 
 namespace ProjectR.Backend.Persistence.Repository

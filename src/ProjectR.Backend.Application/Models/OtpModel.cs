@@ -1,4 +1,4 @@
-using ProjectR.Backend.Shared.Enums;
+using ProjectR.Backend.Shared;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
