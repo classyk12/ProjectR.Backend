@@ -29,8 +29,9 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y sshpass
 
-      - name: Run deployment script with password
+      - name: Run deployment script
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" \
-            ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-            -tt sudo /opt/ProjectR/build/startsvcs.sh
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+          "echo '${{ secrets.SSH_PASSWORD }}' | sudo -S /opt/ProjectR/build/startsvcs.sh"
+
