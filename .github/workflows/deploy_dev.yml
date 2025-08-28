@@ -1,8 +1,10 @@
 name: Docker Build and Deploy (Dev)
+
 on:
   push:
     branches:
       - develop
+
 env:
   DOCKERHUB_USERNAME: temilayon
   DOCKERHUB_PROJECT: temilayon/projectr.backend
@@ -23,14 +25,12 @@ jobs:
           username: ${{ env.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set up SSH with PEM file
+      - name: Install sshpass
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          echo "Host *" > ~/.ssh/config
-          echo "  StrictHostKeyChecking no" >> ~/.ssh/config
+          sudo apt-get update && sudo apt-get install -y sshpass
 
-      - name: Run deployment script
+      - name: Run deployment script with password
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} -tt sudo /opt/ProjectR/build/startsvcs.sh
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" \
+            ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            -tt sudo /opt/ProjectR/build/startsvcs.sh
