@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 
@@ -18,6 +19,7 @@ namespace ProjectR.Backend.Application.Models
         public string? Latitude { get; set; }
         public string? ShortLink { get; set; }
         public string? Logo { get; set; }
+        
     }
 
     public class AddBusinessModel
