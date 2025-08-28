@@ -1,31 +1,32 @@
 ﻿using ProjectR.Backend.Application.Interfaces.Managers;
 using ProjectR.Backend.Application.Models;
 using ProjectR.Backend.Application.Interfaces.Providers;
-using ProjectR.Backend.Shared.Enums;
+using ProjectR.Backend.Shared;
 
 namespace ProjectR.Backend.Infrastructure.Managers
 {
     public class NotificationManager : INotificationManager
     {
-        private readonly ITwilioProvider _twilioProvider;
+        private readonly IWhatsAppProvider _whatsAppProvider;
 
-        public NotificationManager(ITwilioProvider twilioProvider)
+        public NotificationManager(IWhatsAppProvider whatsAppProvider)
         {
-            _twilioProvider = twilioProvider ?? throw new ArgumentNullException(nameof(twilioProvider));
+            _whatsAppProvider = whatsAppProvider ?? throw new ArgumentNullException(nameof(whatsAppProvider));
         }
 
-        public async Task<BaseResponseModel> SendNotificationAsync(NotificationModel notificationModel)
+        public async Task SendNotificationAsync(NotificationModel notificationModel)
         {
+
             if (notificationModel != null)
             {
-                bool status = false;
+                List<Task> tasks = new();
 
                 foreach (DeliveryMode deliveryMode in notificationModel.DeliveryModes)
                 {
                     switch (deliveryMode)
                     {
                         case DeliveryMode.Whatsapp:
-                            status = await _twilioProvider.SendMessageViaWhatsAppAsync(notificationModel.Recipient!, notificationModel.Content!);
+                            tasks.Add(_whatsAppProvider.SendMessageAsync(notificationModel));
                             break;
 
                         case DeliveryMode.Email:
@@ -39,10 +40,13 @@ namespace ProjectR.Backend.Infrastructure.Managers
                     }
                 }
 
-                return new BaseResponseModel(status ? "Notification sent successfully." : "Failed to send notification.", status);
+                await Task.WhenAll(tasks);
             }
 
-            throw new ArgumentNullException(nameof(notificationModel));
+            else
+            {
+                throw new ArgumentNullException(nameof(notificationModel));
+            }
         }
     }
 }

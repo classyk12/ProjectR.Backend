@@ -7,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using ProjectR.Backend.Application.Settings;
 using Microsoft.Extensions.Options;
 using ProjectR.Backend.Application.Interfaces.Providers;
-using ProjectR.Backend.Shared.Enums;
+using ProjectR.Backend.Shared;
 
 namespace ProjectR.Backend.Infrastructure.Managers
 {
@@ -48,12 +48,13 @@ namespace ProjectR.Backend.Infrastructure.Managers
                 return new ResponseModel<PhoneNumberLoginResponseModel>("Failed to send OTP. Try again", default, false);
             }
 
-            NotificationModel notificationModel = new([DeliveryMode.Whatsapp], model.PhoneCode + model.PhoneNumber, "Test Notification");
-            BaseResponseModel sendNotificationResult = await _notificationManager.SendNotificationAsync(notificationModel);
-            if (!sendNotificationResult.Status)
+            Dictionary<string, object> extras = new()
             {
-                return new ResponseModel<PhoneNumberLoginResponseModel>("Failed to send OTP. Try again", default, false);
-            }
+                { AppConstants.MessageTypeKey, AppConstants.SimpleMessageKey },
+            };
+
+            NotificationModel notificationModel = new([DeliveryMode.Whatsapp], model.PhoneCode + model.PhoneNumber, $"Your OTP Code is {otp.Data?.Code}", extras);
+            await _notificationManager.SendNotificationAsync(notificationModel);
 
             return new ResponseModel<PhoneNumberLoginResponseModel>("OTP sent successfully.", new PhoneNumberLoginResponseModel
             {
@@ -106,7 +107,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
             //generate an auth token and return it
             string generatedToken = GenerateAuthTokenAsync(user!);
 
-            user!.IsFirstLogin = await _businessManager.IsBusinessExist(user!.Id);
+            user!.IsFirstLogin = !await _businessManager.IsBusinessExist(user!.Id);
 
             //IsFirstLogin = true; // This should be set based on whether the user has created a business profile or not
             return new ResponseModel<LoginResponseModel>("Authentication Successful.", new LoginResponseModel

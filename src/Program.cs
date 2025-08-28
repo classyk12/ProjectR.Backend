@@ -35,18 +35,13 @@ namespace ProjectR.Backend
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.RegisterSwaggerService();
             builder.Services.RegisterServices(builder.Configuration);
+            builder.Services.RegisterCloudinaryService();
 
             builder.Services.RegisterDatabaseServices(builder.Configuration);
             builder.Services.AddHealthChecks();
             builder.Services.RegisterAuthenticationService(builder.Configuration);
+            builder.Services.RegisterHttpClients(builder.Configuration);
             builder.Services.AddHealthChecks();
-
-            builder.Services.AddSingleton<Cloudinary>(provider =>
-            {
-                CloudinarySettings config = provider.GetRequiredService<IOptions<CloudinarySettings>>().Value;
-                Account account = new Account(config.CloudName, config.ApiKey, config.ApiSecret);
-                return new Cloudinary(account);
-            });
 
             WebApplication app = builder.Build();
 

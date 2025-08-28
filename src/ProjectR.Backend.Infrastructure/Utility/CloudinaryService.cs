@@ -3,7 +3,6 @@ using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using ProjectR.Backend.Application.Interfaces.Utility;
 
-
 namespace ProjectR.Backend.Infrastructure.Utility
 {
     public class CloudinaryService : ICloudinaryService
@@ -18,11 +17,13 @@ namespace ProjectR.Backend.Infrastructure.Utility
         public async Task<ImageUploadResult> UploadImageAsync(IFormFile file, string? folder = null)
         {
             if (file == null || file.Length == 0)
+            {
                 throw new ArgumentException("File is required");
+            }
 
-            using var stream = file.OpenReadStream();
+            using Stream stream = file.OpenReadStream();
 
-            var uploadParams = new ImageUploadParams()
+            ImageUploadParams uploadParams = new()
             {
                 File = new FileDescription(file.FileName, stream),
                 Folder = folder,
@@ -38,7 +39,7 @@ namespace ProjectR.Backend.Infrastructure.Utility
         }
         public async Task<DeletionResult> DeleteResourceAsync(string publicId, ResourceType resourceType = ResourceType.Image)
         {
-            var deleteParams = new DeletionParams(publicId)
+            DeletionParams deleteParams = new(publicId)
             {
                 ResourceType = resourceType
             };
@@ -48,22 +49,26 @@ namespace ProjectR.Backend.Infrastructure.Utility
 
         public string GetOptimizedUrl(string publicId, int? width = null, int? height = null, string format = "auto")
         {
-            var transformation = new Transformation()
+            Transformation transformation = new Transformation()
                 .Quality("auto")
                 .FetchFormat("format");
 
-            if(width.HasValue) 
+            if (width.HasValue)
+            {
                 transformation = transformation.Width(width.Value);
+            }
 
-            if(height.HasValue)
+            if (height.HasValue)
+            {
                 transformation = transformation.Height(height.Value);
+            }
 
             return _cloudinary.Api.UrlImgUp.Transform(transformation).BuildUrl(publicId);
         }
 
         public string GetTransformedImageUrl(string publicId, int? width, int? height, string? effect = null)
         {
-            var transformation = new Transformation()
+            Transformation transformation = new Transformation()
                                         .Width(width)
                                         .Height(height)
                                         .Crop("fill")
