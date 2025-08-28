@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - pipeline
 
 env:
   DOCKERHUB_USERNAME: temilayon
@@ -32,6 +33,8 @@ jobs:
           file: ./src/Dockerfile
           push: false
           tags: ${{ env.DOCKERHUB_PROJECT }}:${{ env.DOCKER_TAG }}
+          build-args: |
+              BUILD_CONFIGURATION=Release
 
       - name: Push Docker Image to Docker Hub
         run: |
