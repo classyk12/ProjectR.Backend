@@ -13,15 +13,15 @@ EXPOSE 5001
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["ProjectR.Backend/ProjectR.Backend.csproj", "."]
+COPY ["ProjectR.Backend/ProjectR.Backend.csproj", "ProjectR.Backend/"]
 COPY ["ProjectR.Backend.Application/ProjectR.Backend.Application.csproj", "ProjectR.Backend.Application/"]
 COPY ["ProjectR.Backend.Domain/ProjectR.Backend.Domain.csproj", "ProjectR.Backend.Domain/"]
 COPY ["ProjectR.Backend.Shared/ProjectR.Backend.Shared.csproj", "ProjectR.Backend.Shared/"]
 COPY ["ProjectR.Backend.Infrastructure/ProjectR.Backend.Infrastructure.csproj", "ProjectR.Backend.Infrastructure/"]
 COPY ["ProjectR.Backend.Persistence/ProjectR.Backend.Persistence.csproj", "ProjectR.Backend.Persistence/"]
-RUN dotnet restore "./ProjectR.Backend.csproj"
+RUN dotnet restore "ProjectR.Backend/ProjectR.Backend.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/ProjectR.Backend"
 RUN dotnet build "./ProjectR.Backend.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
