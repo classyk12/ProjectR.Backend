@@ -50,7 +50,7 @@ steps:
   - script: |
       echo "Starting containers using Docker Compose..."
       cd /opt/ProjectR/build
-      sudo bash startsvcs.sh
+      sudo bash startsvcs.dynamic.sh
     displayName: "Start Docker Containers"
 
 # Uncomment if you want to push services using DockerCompose task
