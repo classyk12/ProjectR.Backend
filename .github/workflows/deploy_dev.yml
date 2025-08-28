@@ -33,5 +33,5 @@ jobs:
         run: |
           sshpass -p "${{ secrets.SSH_PASSWORD }}" \
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-          "echo '${{ secrets.SSH_PASSWORD }}' | sudo -S /opt/ProjectR/build/startsvcs.sh"
+          "echo '${{ secrets.SSH_PASSWORD }}' | bash /opt/ProjectR/build/startsvcs.sh"
 
