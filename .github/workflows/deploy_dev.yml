@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - develop
-
-
 env:
   DOCKERHUB_USERNAME: temilayon
   DOCKERHUB_PROJECT: temilayon/projectr.backend
