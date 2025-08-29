@@ -24,19 +24,13 @@ steps:
       containerRegistry: "docker_svc_con_L"
 
   - script: |
-      mkdir -p ~/.docker/cli-plugins
-      curl -L https://github.com/docker/buildx/releases/latest/download/buildx-linux.amd64 \
-        -o ~/.docker/cli-plugins/docker-buildx
-      chmod +x ~/.docker/cli-plugins/docker-buildx
-    displayName: "Install Docker Buildx"
-
-  - script: |
-      docker run --privileged --rm tonistiigi/binfmt --install all
-      docker buildx create --use --name mybuilder
-      docker buildx build \
-        --platform linux/amd64,linux/arm64 \
-        -t $(DOCKERHUB_ProR):$(DOCKER_TAG) \
-        --push .
+    docker run --privileged --rm tonistiigi/binfmt --install all
+    docker buildx create --name mybuilder
+    docker buildx use mybuilder
+    docker buildx build \
+      --platform linux/amd64,linux/arm64 \
+      -t $(DOCKERHUB_ProR):$(DOCKER_TAG) \
+      --push .
     displayName: "Build and Push with Docker Buildx"
 
   # (Optional) Verify push by pulling image back
