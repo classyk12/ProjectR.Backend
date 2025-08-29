@@ -28,7 +28,6 @@ steps:
       curl -L https://github.com/docker/buildx/releases/latest/download/buildx-linux.amd64 \
         -o ~/.docker/cli-plugins/docker-buildx
       chmod +x ~/.docker/cli-plugins/docker-buildx
-      docker buildx version
     displayName: "Install Docker Buildx"
 
   - script: |
