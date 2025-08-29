@@ -24,10 +24,10 @@ steps:
       containerRegistry: "docker_svc_con_L"
 
   - script: |
-    docker run --privileged --rm tonistiigi/binfmt --install all
-    docker buildx create --name mybuilder
-    docker buildx use mybuilder
-    docker buildx build \
+      docker run --privileged --rm tonistiigi/binfmt --install all
+      docker buildx create --name mybuilder
+      docker buildx use mybuilder
+      docker buildx build \
       --platform linux/amd64,linux/arm64 \
       -t $(DOCKERHUB_ProR):$(DOCKER_TAG) \
       --push .
