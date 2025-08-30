@@ -12,16 +12,7 @@ using ProjectR.Backend.Persistence.Repository;
 using Serilog;
 using Microsoft.Extensions.Options;
 using ProjectR.Backend.Application.Settings;
-=========
->>>>>>>>> Temporary merge branch 2
-using Microsoft.Extensions.Options;
-using ProjectR.Backend.Application.Settings;
-=========
->>>>>>>>> Temporary merge branch 2
-using Microsoft.Extensions.Options;
-using ProjectR.Backend.Application.Settings;
-=========
->>>>>>>>> Temporary merge branch 2
+using CloudinaryDotNet;
 
 namespace ProjectR.Backend
 {
@@ -54,6 +45,13 @@ namespace ProjectR.Backend
             builder.Services.AddHealthChecks();
             builder.Services.RegisterAuthenticationService(builder.Configuration);
             builder.Services.AddHealthChecks();
+
+            builder.Services.AddSingleton<Cloudinary>(provider =>
+            {
+                CloudinarySettings config = provider.GetRequiredService<IOptions<CloudinarySettings>>().Value;
+                Account account = new Account(config.CloudName, config.ApiKey, config.ApiSecret);
+                return new Cloudinary(account);
+            });
 
             WebApplication app = builder.Build();
 
