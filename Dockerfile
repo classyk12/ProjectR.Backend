@@ -13,12 +13,12 @@ EXPOSE 5001
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY [".", "."]
-COPY ["ProjectR.Backend.Application/*", "ProjectR.Backend.Application/"]
-COPY ["ProjectR.Backend.Domain/*", "ProjectR.Backend.Domain/"]
-COPY ["ProjectR.Backend.Shared/*", "ProjectR.Backend.Shared/"]
-COPY ["ProjectR.Backend.Infrastructure/*", "ProjectR.Backend.Infrastructure/"]
-COPY ["ProjectR.Backend.Persistence/*", "ProjectR.Backend.Persistence/"]
+COPY ["ProjectR.Backend.csproj", "ProjectR.Backend.csproj"]
+COPY ["ProjectR.Backend.Application/ProjectR.Backend.Application.csproj", "ProjectR.Backend.Application/"]
+COPY ["ProjectR.Backend.Domain/ProjectR.Backend.Domain.csproj", "ProjectR.Backend.Domain/"]
+COPY ["ProjectR.Backend.Shared/ProjectR.Backend.Shared.csproj", "ProjectR.Backend.Shared/"]
+COPY ["ProjectR.Backend.Infrastructure/ProjectR.Backend.Infrastructure.csproj", "ProjectR.Backend.Infrastructure/"]
+COPY ["ProjectR.Backend.Persistence/ProjectR.Backend.Persistence.csproj", "ProjectR.Backend.Persistence/"]
 RUN dotnet restore "./ProjectR.Backend.csproj"
 COPY . .
 WORKDIR "/src/."
