@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ProjectR.Backend.Persistence.DatabaseContext;
@@ -12,9 +13,11 @@ using ProjectR.Backend.Persistence.DatabaseContext;
 namespace ProjectR.Backend.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250819082107_AddIndustryDescription")]
+    partial class AddIndustryDescription
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -302,44 +305,6 @@ namespace ProjectR.Backend.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("users", (string)null);
-                });
-
-            modelBuilder.Entity("ProjectR.Backend.Domain.Entities.WebhookMessage", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsProcessed")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTimeOffset?>("LastProcessedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("LastProcessedResult")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Payload")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("RecordStatus")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Source")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTimeOffset>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WebhookMessages");
                 });
 
             modelBuilder.Entity("ProjectR.Backend.Domain.Entities.Business", b =>
