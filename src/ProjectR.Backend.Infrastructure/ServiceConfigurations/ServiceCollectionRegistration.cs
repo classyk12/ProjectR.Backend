@@ -65,7 +65,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
 
             #region Services
             services.AddScoped<ISlugService, SlugService>();
-            // services.AddScoped<ICloudinaryService, CloudinaryService>();
+            services.AddScoped<ICloudinaryService, CloudinaryService>();
             #endregion
         }
 
@@ -151,12 +151,13 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             });
         }
 
-        public static void RegisterCloudinaryService(this IServiceCollection services)
+        public static void RegisterCloudinaryService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton(provider =>
             {
                 CloudinarySettings config = provider.GetRequiredService<IOptions<CloudinarySettings>>().Value;
-                Account account = new(config.CloudName, config.ApiKey, config.ApiSecret);
+                Account account = new(configuration["Cloudinary:CloudName"]!, configuration["Cloudinary:ApiKey"]!, configuration["Cloudinary:ApiSecret"]!);
+                // Account account = new(config.CloudName, config.ApiKey, config.ApiSecret);
                 return new Cloudinary(account);
             });
         }
