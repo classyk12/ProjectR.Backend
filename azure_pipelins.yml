@@ -1,7 +1,8 @@
 trigger:
   branches:
     include:
-      - pipe_fix   # Add develop later if needed
+      - develop   
+      - pipe_fix
 
 pool:
   name: "Default"
