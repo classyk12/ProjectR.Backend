@@ -16,7 +16,6 @@ variables:
 steps:
   # Checkout source
   - checkout: self
-
   # Login to Docker Hub using service connection
   - task: Docker@2
     displayName: "Login to Docker Hub"
@@ -35,7 +34,6 @@ steps:
       tags: |
         $(DOCKER_TAG)
 
-  # Start containers using your script
   - script: |
       echo "Starting containers using Docker Compose..."
       cd /opt/ProjectR/build
