@@ -8,6 +8,7 @@ EXPOSE 8080
 EXPOSE 5000
 EXPOSE 5001
 
+USER root
 # Install the agent
 RUN apt-get update && apt-get install -y wget ca-certificates gnupg \
 && echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' | tee /etc/apt/sources.list.d/newrelic.list \
@@ -25,7 +26,7 @@ CORECLR_PROFILER_PATH=/usr/local/newrelic-dotnet-agent/libNewRelicProfiler.so \
 NEW_RELIC_LICENSE_KEY=77bf83537d0a90af6bac1f9b494fa075FFFFNRAL \
 NEW_RELIC_APP_NAME="projectr"
 
-
+USER $APP_UID
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
