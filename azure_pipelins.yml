@@ -2,8 +2,6 @@ trigger:
   branches:
     include:
       - develop   
-      - pipe_fix
-
 pool:
   name: "Default"
   demands:
