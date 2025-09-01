@@ -34,7 +34,6 @@ steps:
       tags: |
         $(DOCKER_TAG)
 
-  # Start containers using your script
   - script: |
       echo "Starting containers using Docker Compose..."
       cd /opt/ProjectR/build
