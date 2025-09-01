@@ -35,15 +35,6 @@ steps:
       tags: |
         $(DOCKER_TAG)
 
-  # (Optional) Pull the image back to verify push
-  - task: Docker@2
-    displayName: "Verify Pull from Docker Hub"
-    inputs:
-      command: pull
-      repository: $(DOCKERHUB_PROJECT)
-      tags: |
-        $(DOCKER_TAG)
-
   # Start containers using your script
   - script: |
       echo "Starting containers using Docker Compose..."
