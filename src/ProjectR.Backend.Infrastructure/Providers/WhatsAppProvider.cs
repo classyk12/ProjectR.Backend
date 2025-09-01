@@ -61,7 +61,7 @@ namespace ProjectR.Backend.Infrastructure.Providers
 
                 else
                 {
-                   _logger.LogInformation("Unable to Determine WhatsApp Message Processing Route: No Message Type Found");
+                    _logger.LogInformation("Unable to Determine WhatsApp Message Processing Route: No Message Type Found");
                     return false;
                 }
             }
@@ -108,8 +108,8 @@ namespace ProjectR.Backend.Infrastructure.Providers
             {
                 string json = JsonConvert.SerializeObject(model);
                 HttpClient client = _factory.CreateClient(AppConstants.WhatsappTag!);
-                Console.WriteLine("URL: "+ client.BaseAddress+ $"{_settings.PhoneNumberId}/messages");
-                Console.WriteLine(json);
+                _logger.LogInformation("Calling URL {url}{path}/messages ", client.BaseAddress, _settings.PhoneNumberId);
+                _logger.LogInformation("json payload is {json}", json);
                 HttpResponseMessage result = await client.PostAsync($"{_settings.PhoneNumberId}/messages", new StringContent(json, Encoding.UTF8, "application/json"));
                 string response = await result.Content.ReadAsStringAsync();
                 _logger.LogInformation("result to {Url} is {Result}", client.BaseAddress, response);

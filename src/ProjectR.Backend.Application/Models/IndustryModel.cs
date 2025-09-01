@@ -1,5 +1,4 @@
-﻿using ProjectR.Backend.Shared.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ProjectR.Backend.Application.Models
 {
