@@ -2,7 +2,7 @@
 services:
   projectr.backend:
     build:
-      context: .
+      context: ./src
       dockerfile: Dockerfile
 
     container_name: projectr-api

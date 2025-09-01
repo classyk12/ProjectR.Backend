@@ -30,7 +30,7 @@ steps:
     inputs:
       command: buildAndPush
       repository: $(DOCKERHUB_PROJECT)
-      dockerfile: $(Build.SourcesDirectory)/Dockerfile
+      dockerfile: $(Build.SourcesDirectory)/src/Dockerfile
       buildContext: $(Build.SourcesDirectory)
       tags: |
         $(DOCKER_TAG)
