@@ -32,7 +32,7 @@ namespace ProjectR.Backend
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.RegisterSwaggerService();
             builder.Services.RegisterServices(builder.Configuration);
-            builder.Services.RegisterCloudinaryService();
+            // builder.Services.RegisterCloudinaryService();
 
             builder.Services.RegisterDatabaseServices(builder.Configuration);
             builder.Services.AddHealthChecks();

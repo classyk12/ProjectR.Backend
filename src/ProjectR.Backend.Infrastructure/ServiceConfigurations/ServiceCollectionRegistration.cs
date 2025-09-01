@@ -65,7 +65,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
 
             #region Services
             services.AddScoped<ISlugService, SlugService>();
-            services.AddScoped<ICloudinaryService, CloudinaryService>();
+            // services.AddScoped<ICloudinaryService, CloudinaryService>();
             #endregion
         }
 
