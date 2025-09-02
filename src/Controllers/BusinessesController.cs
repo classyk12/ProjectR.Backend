@@ -6,7 +6,7 @@ using ProjectR.Backend.Application.Models;
 
 namespace ProjectR.Backend.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     public class BusinessesController : BaseController
     {
