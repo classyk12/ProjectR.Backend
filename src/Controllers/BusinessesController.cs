@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using ProjectR.Backend.Application.Interfaces.Managers;
 using ProjectR.Backend.Application.Models;
 
 namespace ProjectR.Backend.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     public class BusinessesController : BaseController
     {
@@ -95,6 +96,23 @@ namespace ProjectR.Backend.Controllers
         {
             BaseResponseModel result = await _businessManager.GetByUserId(UserId);
             return result.Status ? Ok(result) : BadRequest(result);
+        }
+
+        [Consumes("multipart/form-data")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseModel<BusinessModel>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<BusinessModel>))]
+        [HttpPost("{id:guid}/logo")]
+        public async Task<IActionResult> UploadLogo([FromRoute] Guid id, [FromForm] UploadLogoRequest request)
+        {
+            if (request?.File == null || request?.File.Length == 0)
+            {
+                return BadRequest(new ResponseModel<BusinessModel>(message: "File is required", status: false, data: default));
+            }
+
+            var result = await _businessManager.UploadLogoAsync(id, request.File);
+            return result.Status ? Ok(result) : BadRequest(result);
+
         }
     }
 }
