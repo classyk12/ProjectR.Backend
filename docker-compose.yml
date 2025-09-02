@@ -9,6 +9,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      seq:
+        condition: service_started
 
     networks:
       - mynetwork
@@ -25,12 +27,16 @@ services:
       - WhatsApp__PhoneNumberId=${WhatsApp__PhoneNumberId}
       - WhatsApp__BaseUrl=${WhatsApp__BaseUrl}
       - WhatsApp__AccessToken=${WhatsApp__AccessToken}
-      - WhatsApp__BusinessAccountId =${WhatsApp__BusinessAccountId}
-      - WhatsApp__UseMock =${WhatsApp__UseMock}
+      - WhatsApp__BusinessAccountId=${WhatsApp__BusinessAccountId}
+      - WhatsApp__UseMock=${WhatsApp__UseMock}
 
       - Cloudinary__CloudName=${Cloudinary__CloudName}
       - Cloudinary__ApiKey=${Cloudinary__ApiKey}
       - Cloudinary__ApiSecret=${Cloudinary__ApiSecret}
+
+      # Serilog Seq config
+      - Serilog__WriteTo__0__Name=Seq
+      - Serilog__WriteTo__0__Args__serverUrl=http://seq:5341
 
     ports:
       - "5000:5000"
@@ -60,8 +66,24 @@ services:
     networks:
       - mynetwork
 
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    restart: always
+    ports:
+      - "5341:80" # UI accessible on http://localhost:5341
+    volumes:
+      - seq_data:/data
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_ADMINPASSWORD=Test@1234   # optional: sets admin password on first run
+    networks:
+      - mynetwork
+
 volumes:
   postgres_data:
+  seq_data:
+
 
 networks:
   mynetwork:

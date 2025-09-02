@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -155,9 +156,29 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
         {
             services.AddSingleton(provider =>
             {
+                ILogger<Cloudinary> logger = provider.GetRequiredService<ILogger<Cloudinary>>();
                 CloudinarySettings config = provider.GetRequiredService<IOptions<CloudinarySettings>>().Value;
-                Account account = new(configuration["Cloudinary:CloudName"]!, configuration["Cloudinary:ApiKey"]!, configuration["Cloudinary:ApiSecret"]!);
-                // Account account = new(config.CloudName, config.ApiKey, config.ApiSecret);
+                // Log the configuration (mask sensitive values!)
+                logger.LogInformation("Retrieving Cloudinary with CloudName using IOptions: {CloudName}, ApiKey (last 4): {ApiKey}, ApiSecret: {ApiSecret}",
+                    config.CloudName,
+                    config.ApiKey?.Length > 4 ? config.ApiKey[^4..] : config.ApiKey, // only log last 4 chars
+                    "***masked***"
+                );
+
+                // Retrieve values from config
+                string cloudName = configuration["Cloudinary:CloudName"]!;
+                string apiKey = configuration["Cloudinary:ApiKey"]!;
+                string apiSecret = configuration["Cloudinary:ApiSecret"]!;
+
+                // Log the configuration (mask sensitive values!)
+                logger.LogInformation("Retrieving Cloudinary with CloudName using Config: {CloudName}, ApiKey (last 4): {ApiKey}, ApiSecret: {ApiSecret}",
+                    cloudName,
+                    apiKey.Length > 4 ? apiKey[^4..] : apiKey, // only log last 4 chars
+                    "***masked***"
+                );
+
+                // Create the Cloudinary account
+                Account account = new(cloudName, apiKey, apiSecret);
                 return new Cloudinary(account);
             });
         }

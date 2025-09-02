@@ -18,6 +18,7 @@ namespace ProjectR.Backend
                 loggerConfig
                     .MinimumLevel.Debug()
                     .WriteTo.Console()
+                    .WriteTo.Seq("http://seq:5341")
                     .WriteTo.File("Logs/applog.txt", rollingInterval: RollingInterval.Day);
             });
 
@@ -66,6 +67,7 @@ namespace ProjectR.Backend
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
 
+            app.MapGet("/", () => "ProjectR Backend is running with Serilog logging!");
             app.Run();
         }
     }
