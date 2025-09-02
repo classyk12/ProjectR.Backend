@@ -72,6 +72,8 @@ services:
     restart: always
     ports:
       - "5341:80" # UI accessible on http://localhost:5341
+    volumes:
+      - seq_data:/data
     environment:
       - ACCEPT_EULA=Y
       - SEQ_FIRSTRUN_ADMINPASSWORD=Test@1234   # optional: sets admin password on first run
@@ -80,6 +82,7 @@ services:
 
 volumes:
   postgres_data:
+  seq_data:
 
 
 networks:
