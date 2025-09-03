@@ -103,7 +103,7 @@ namespace ProjectR.Backend.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseModel<BusinessModel>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<BusinessModel>))]
         [HttpPost("{id:guid}/logo")]
-        public async Task<IActionResult> UploadLogo([FromRoute] Guid id, [FromForm] UploadLogoRequest request)
+        public async Task<IActionResult> UploadLogo([FromRoute] Guid id, [FromForm] UploadLogoModel request)
         {
             if (request?.File == null || request?.File.Length == 0)
             {

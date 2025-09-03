@@ -2,7 +2,8 @@
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using ProjectR.Backend.Application.Interfaces.Utility;
-
+using ProjectR.Backend.Application.Models;
+using System.Net;
 
 namespace ProjectR.Backend.Infrastructure.Utility
 {
@@ -15,26 +16,66 @@ namespace ProjectR.Backend.Infrastructure.Utility
             _cloudinary = cloudinary;
         }
 
-        public async Task<ImageUploadResult> UploadImageAsync(IFormFile file, string? folder = null)
+        public async Task<CloudinaryResponseModel> UploadImageAsync(IFormFile file, string? folder = null)
         {
-            if (file == null || file.Length == 0)
-                throw new ArgumentException("File is required");
-
-            using var stream = file.OpenReadStream();
-
-            var uploadParams = new ImageUploadParams()
+            try
             {
-                File = new FileDescription(file.FileName, stream),
-                Folder = folder,
-                UseFilename = true,
-                UniqueFilename = false,
-                Overwrite = true,
-                Transformation = new Transformation()
-                                .Quality("auto")
-                                .FetchFormat("auto")
-            };
 
-            return await _cloudinary.UploadAsync(uploadParams);
+                if (file == null || file.Length == 0)
+                {
+                    return CloudinaryResponseModel.Failure("File is required");
+                }
+
+                if (file.Length > 10 * 1024 * 1024)
+                {
+                    return CloudinaryResponseModel.Failure("File size cannot exceed 10MB");
+                }
+
+                List<string> allowedExtensions = [".jpg", ".jpeg", ".png"];
+                string fileExtension = Path.GetExtension(file.FileName)?.ToLowerInvariant();
+                if (string.IsNullOrEmpty(fileExtension) || !allowedExtensions.Contains(fileExtension))
+                {
+                    return CloudinaryResponseModel.Failure("Invalid file type, Only JPG, JPEG and PNG Files are allowed");
+                }
+
+                using var stream = file.OpenReadStream();
+
+                var uploadParams = new ImageUploadParams()
+                {
+                    File = new FileDescription(file.FileName, stream),
+                    Folder = folder,
+                    UseFilename = true,
+                    UniqueFilename = false,
+                    Overwrite = true,
+                    Transformation = new Transformation()
+                                    .Quality("auto")
+                                    .FetchFormat("auto")
+                };
+
+                var result = await _cloudinary.UploadAsync(uploadParams);
+
+                if (result.StatusCode == HttpStatusCode.OK)
+                {
+                    return CloudinaryResponseModel.Success
+                    (
+                        result.Url?.ToString() ?? string.Empty,
+                        result.SecureUrl.ToString() ?? string.Empty,
+                        result.PublicId,
+                        result.Bytes,
+                        result.Format,
+                        result.Width,
+                        result.Height
+                    );
+                }
+                else
+                {
+                    return CloudinaryResponseModel.Failure($"Upload failed with status: {result.StatusCode}");
+                }
+            }
+            catch (Exception ex) 
+            {
+                return CloudinaryResponseModel.Failure($"Upload failed: {ex.Message}");
+            }
         }
         public async Task<DeletionResult> DeleteResourceAsync(string publicId, ResourceType resourceType = ResourceType.Image)
         {

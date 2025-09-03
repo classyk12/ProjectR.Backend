@@ -40,7 +40,7 @@ namespace ProjectR.Backend.Application.Models
         public string? Logo { get; set; }
     }
 
-    public class UploadLogoRequest
+    public class UploadLogoModel
     {
         public IFormFile File { get; set; }
     }

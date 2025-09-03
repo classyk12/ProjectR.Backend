@@ -186,6 +186,15 @@ namespace ProjectR.Backend.Infrastructure.Managers
             }
 
             var upload = await _cloudinaryService.UploadImageAsync(file, $"business/{id}");
+
+            if (!upload.IsSuccess)
+            {
+                    return new ResponseModel<BusinessModel>(
+                        message: $"Logo upload failed: {upload.ErrorMessage}",
+                        data: default,
+                        status: false
+                    );
+            }
             business.Logo = upload?.SecureUrl?.ToString() ?? upload?.Url.ToString();
 
             BusinessModel updatedBusiness = await _businessRepository.UpdateAsync(business);
