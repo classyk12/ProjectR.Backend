@@ -72,7 +72,7 @@ namespace ProjectR.Backend.Infrastructure.Utility
                     return CloudinaryResponseModel.Failure($"Upload failed with status: {result.StatusCode}");
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return CloudinaryResponseModel.Failure($"Upload failed: {ex.Message}");
             }
@@ -93,10 +93,10 @@ namespace ProjectR.Backend.Infrastructure.Utility
                 .Quality("auto")
                 .FetchFormat("format");
 
-            if(width.HasValue) 
+            if (width.HasValue)
                 transformation = transformation.Width(width.Value);
 
-            if(height.HasValue)
+            if (height.HasValue)
                 transformation = transformation.Height(height.Value);
 
             return _cloudinary.Api.UrlImgUp.Transform(transformation).BuildUrl(publicId);

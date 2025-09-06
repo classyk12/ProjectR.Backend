@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ProjectR.Backend.Persistence.DatabaseContext;
@@ -12,9 +13,11 @@ using ProjectR.Backend.Persistence.DatabaseContext;
 namespace ProjectR.Backend.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250809114128_AddedWebhookMessageTable")]
+    partial class AddedWebhookMessageTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -193,26 +196,6 @@ namespace ProjectR.Backend.Persistence.Migrations
                     b.HasIndex("BusinessAvailabilityId1");
 
                     b.ToTable("BusinessAvailabilitySlots");
-                });
-
-            modelBuilder.Entity("ProjectR.Backend.Domain.Entities.Industry", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Industries");
                 });
 
             modelBuilder.Entity("ProjectR.Backend.Domain.Entities.Otp", b =>

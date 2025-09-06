@@ -1,5 +1,5 @@
 using Newtonsoft.Json;
-using ProjectR.Backend.Shared.Enums;
+using ProjectR.Backend.Shared;
 using ProjectR.Backend.Shared.Helpers;
 using System.ComponentModel.DataAnnotations;
 

@@ -1,8 +1,11 @@
+using CloudinaryDotNet;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ProjectR.Backend.Application.Interfaces.Managers;
@@ -15,6 +18,7 @@ using ProjectR.Backend.Infrastructure.Providers;
 using ProjectR.Backend.Infrastructure.Utility;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using ProjectR.Backend.Persistence.Repository;
+using ProjectR.Backend.Shared;
 using System.Text;
 
 namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
@@ -24,6 +28,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
             #region  Settings
+            services.Configure<WhatsappCloudApiSettings>(configuration.GetSection("WhatsApp"));
             services.Configure<GoogleSettings>(configuration.GetSection("Google"));
             services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
             services.Configure<TwilioSettings>(configuration.GetSection("Twilio"));
@@ -34,6 +39,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             #region  Providers
             services.AddScoped<ISocialAuthProvider, SocialAuthProvider>();
             services.AddScoped<ITwilioProvider, TwilioProvider>();
+            services.AddScoped<IWhatsAppProvider, WhatsAppProvider>();
             #endregion
 
             #region  Repositories
@@ -41,6 +47,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBusinessRepository, BusinessRepository>();
             services.AddScoped<IOtpRepository, OtpRepository>();
+            services.AddScoped<IIndustryRepository, IndustryRepository>();
             #endregion
 
             #region Managers
@@ -53,6 +60,8 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IBusinessManager, BusinessManager>();
             services.AddScoped<IOtpManager, OtpManager>();
+            services.AddScoped<IIndustryManager, IndustryManager>();
+            services.AddScoped<IAuthManager, AuthManager>();
             #endregion
 
             #region Services
@@ -125,7 +134,6 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
                 });
             });
         }
-
         public static void RegisterDatabaseServices(this IServiceCollection services, IConfiguration configuration)
         {
             string connectionString = configuration.GetConnectionString("DefaultConnection")!;
@@ -134,6 +142,45 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
               {
                   options.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorCodesToAdd: []);
               }));
+        }
+        public static void RegisterHttpClients(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddHttpClient(AppConstants.WhatsappTag!, client =>
+            {
+                client.BaseAddress = new Uri(configuration["WhatsApp:BaseUrl"]!);
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {configuration["WhatsApp:AccessToken"]!}");
+            });
+        }
+
+        public static void RegisterCloudinaryService(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddSingleton(provider =>
+            {
+                ILogger<Cloudinary> logger = provider.GetRequiredService<ILogger<Cloudinary>>();
+                CloudinarySettings config = provider.GetRequiredService<IOptions<CloudinarySettings>>().Value;
+                // Log the configuration (mask sensitive values!)
+                logger.LogInformation("Retrieving Cloudinary with CloudName using IOptions: {CloudName}, ApiKey (last 4): {ApiKey}, ApiSecret: {ApiSecret}",
+                    config.CloudName,
+                    config.ApiKey?.Length > 4 ? config.ApiKey[^4..] : config.ApiKey, // only log last 4 chars
+                    "***masked***"
+                );
+
+                // Retrieve values from config
+                string cloudName = configuration["Cloudinary:CloudName"]!;
+                string apiKey = configuration["Cloudinary:ApiKey"]!;
+                string apiSecret = configuration["Cloudinary:ApiSecret"]!;
+
+                // Log the configuration (mask sensitive values!)
+                logger.LogInformation("Retrieving Cloudinary with CloudName using Config: {CloudName}, ApiKey (last 4): {ApiKey}, ApiSecret: {ApiSecret}",
+                    cloudName,
+                    apiKey.Length > 4 ? apiKey[^4..] : apiKey, // only log last 4 chars
+                    "***masked***"
+                );
+
+                // Create the Cloudinary account
+                Account account = new(cloudName, apiKey, apiSecret);
+                return new Cloudinary(account);
+            });
         }
     }
 }

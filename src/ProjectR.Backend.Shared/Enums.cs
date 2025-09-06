@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace ProjectR.Backend.Shared.Enums
+namespace ProjectR.Backend.Shared
 {
     public enum RecordStatus
     {
@@ -76,5 +76,11 @@ namespace ProjectR.Backend.Shared.Enums
         Deffered,
         [Description("Cancelled")]
         Cancelled
+    }
+
+    public enum WebhookSource
+    {
+        [Description("Whatsapp")]
+        Whatsapp = 1
     }
 }
