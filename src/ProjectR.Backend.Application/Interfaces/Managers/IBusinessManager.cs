@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using ProjectR.Backend.Application.Models;
 
 namespace ProjectR.Backend.Application.Interfaces.Managers
@@ -15,5 +16,6 @@ namespace ProjectR.Backend.Application.Interfaces.Managers
         Task<BaseResponseModel> DeleteAsync(Guid id);
         Task<ResponseModel<BusinessModel>> GetByUserId(Guid userId);
         Task<bool> IsBusinessExist(Guid userId);
+        Task<ResponseModel<BusinessModel>> UploadLogoAsync(Guid id, IFormFile file);
     }
 }

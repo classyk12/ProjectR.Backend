@@ -2,6 +2,8 @@
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using ProjectR.Backend.Application.Interfaces.Utility;
+using ProjectR.Backend.Application.Models;
+using System.Net;
 
 namespace ProjectR.Backend.Infrastructure.Utility
 {
@@ -14,32 +16,70 @@ namespace ProjectR.Backend.Infrastructure.Utility
             _cloudinary = cloudinary;
         }
 
-        public async Task<ImageUploadResult> UploadImageAsync(IFormFile file, string? folder = null)
+        public async Task<CloudinaryResponseModel> UploadImageAsync(IFormFile file, string? folder = null)
         {
-            if (file == null || file.Length == 0)
+            try
             {
-                throw new ArgumentException("File is required");
+
+                if (file == null || file.Length == 0)
+                {
+                    return CloudinaryResponseModel.Failure("File is required");
+                }
+
+                if (file.Length > 10 * 1024 * 1024)
+                {
+                    return CloudinaryResponseModel.Failure("File size cannot exceed 10MB");
+                }
+
+                List<string> allowedExtensions = [".jpg", ".jpeg", ".png"];
+                string fileExtension = Path.GetExtension(file.FileName)?.ToLowerInvariant();
+                if (string.IsNullOrEmpty(fileExtension) || !allowedExtensions.Contains(fileExtension))
+                {
+                    return CloudinaryResponseModel.Failure("Invalid file type, Only JPG, JPEG and PNG Files are allowed");
+                }
+
+                using var stream = file.OpenReadStream();
+
+                var uploadParams = new ImageUploadParams()
+                {
+                    File = new FileDescription(file.FileName, stream),
+                    Folder = folder,
+                    UseFilename = true,
+                    UniqueFilename = false,
+                    Overwrite = true,
+                    Transformation = new Transformation()
+                                    .Quality("auto")
+                                    .FetchFormat("auto")
+                };
+
+                var result = await _cloudinary.UploadAsync(uploadParams);
+
+                if (result.StatusCode == HttpStatusCode.OK)
+                {
+                    return CloudinaryResponseModel.Success
+                    (
+                        result.Url?.ToString() ?? string.Empty,
+                        result.SecureUrl.ToString() ?? string.Empty,
+                        result.PublicId,
+                        result.Bytes,
+                        result.Format,
+                        result.Width,
+                        result.Height
+                    );
+                }
+                else
+                {
+                    return CloudinaryResponseModel.Failure($"Upload failed with status: {result.StatusCode}");
+                }
             }
-
-            using Stream stream = file.OpenReadStream();
-
-            ImageUploadParams uploadParams = new()
+            catch (Exception ex)
             {
-                File = new FileDescription(file.FileName, stream),
-                Folder = folder,
-                UseFilename = true,
-                UniqueFilename = false,
-                Overwrite = true,
-                Transformation = new Transformation()
-                                .Quality("auto")
-                                .FetchFormat("auto")
-            };
-
-            return await _cloudinary.UploadAsync(uploadParams);
+                return CloudinaryResponseModel.Failure($"Upload failed: {ex.Message}");
+            }
         }
         public async Task<DeletionResult> DeleteResourceAsync(string publicId, ResourceType resourceType = ResourceType.Image)
         {
-            DeletionParams deleteParams = new(publicId)
+            var deleteParams = new DeletionParams(publicId)
             {
                 ResourceType = resourceType
             };
@@ -49,26 +89,22 @@ namespace ProjectR.Backend.Infrastructure.Utility
 
         public string GetOptimizedUrl(string publicId, int? width = null, int? height = null, string format = "auto")
         {
-            Transformation transformation = new Transformation()
+            var transformation = new Transformation()
                 .Quality("auto")
                 .FetchFormat("format");
 
             if (width.HasValue)
-            {
                 transformation = transformation.Width(width.Value);
-            }
 
             if (height.HasValue)
-            {
                 transformation = transformation.Height(height.Value);
-            }
 
             return _cloudinary.Api.UrlImgUp.Transform(transformation).BuildUrl(publicId);
         }
 
         public string GetTransformedImageUrl(string publicId, int? width, int? height, string? effect = null)
         {
-            Transformation transformation = new Transformation()
+            var transformation = new Transformation()
                                         .Width(width)
                                         .Height(height)
                                         .Crop("fill")
