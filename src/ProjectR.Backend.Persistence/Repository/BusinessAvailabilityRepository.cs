@@ -4,6 +4,7 @@ using ProjectR.Backend.Application.Interfaces.Repository;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using ProjectR.Backend.Application.Models;
 using ProjectR.Backend.Shared.Mappers;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace ProjectR.Backend.Persistence.Repository
 {
@@ -50,11 +51,14 @@ namespace ProjectR.Backend.Persistence.Repository
             // };
         }
 
-        public async Task AddAsync(BusinessAvailabilityModel model)
+        public async Task<BusinessAvailabilityModel> AddAsync(BusinessAvailabilityModel model)
         {
             // Create new availability
             BusinessAvailability newAvailability = Mapper.Map<BusinessAvailabilityModel, BusinessAvailability>(model);
-            await _appDbContext.BusinessAvailabilities.AddAsync(newAvailability);
+            EntityEntry<BusinessAvailability> result = await _appDbContext.BusinessAvailabilities.AddAsync(newAvailability);
+            await _appDbContext.SaveChangesAsync();
+            model.Id = result.Entity.Id;
+            return model;
         }
 
         public async Task<BusinessAvailabilityModel> UpdateAsync(Guid id, UpdateBusinessAvailabilityModel model)
@@ -74,6 +78,17 @@ namespace ProjectR.Backend.Persistence.Repository
             _appDbContext.AddRange(model.Slots!);
             await _appDbContext.SaveChangesAsync();
             return Mapper.Map<BusinessAvailability, BusinessAvailabilityModel>(availability);
+        }
+
+        public async Task<BusinessAvailabilityModel[]> GetAllByBusinessIdAsync(Guid id)
+        {
+            List<BusinessAvailability> availabilities = await _appDbContext.BusinessAvailabilities
+                .Include(x => x.Slots)!
+                    .ThenInclude(s => s.Breaks)
+                .Where(x => x.BusinessId == id)
+                .ToListAsync();
+
+            return availabilities.Select(c => Mapper.Map<BusinessAvailability, BusinessAvailabilityModel>(c)).ToArray();
         }
     }
 }

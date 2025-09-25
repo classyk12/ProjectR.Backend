@@ -9,13 +9,11 @@ namespace ProjectR.Backend.Infrastructure.Managers
     {
         public readonly IBusinessRepository _businessRepository;
         private readonly ISlugService _slugService;
-        private readonly ICloudinaryService _cloudinaryService;
 
-        public BusinessManager(IBusinessRepository businessRepository, ISlugService slugService, ICloudinaryService cloudinaryService)
+        public BusinessManager(IBusinessRepository businessRepository, ISlugService slugService)
         {
             _businessRepository = businessRepository;
             _slugService = slugService;
-            _cloudinaryService = cloudinaryService;
         }
 
         public async Task<ResponseModel<BusinessModel>> AddAsync(AddBusinessModel business)
@@ -86,7 +84,6 @@ namespace ProjectR.Backend.Infrastructure.Managers
 
             BusinessModel[] result = await _businessRepository.AddAsync(models);
             return new ResponseModel<BusinessModel[]>(message: "Businesses Added Successfully", data: result, status: true);
-
         }
 
         public async Task<BaseResponseModel> DeleteAsync(BusinessModel[] businesses)

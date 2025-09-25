@@ -15,6 +15,10 @@ namespace ProjectR.Backend.Domain.Entities
         [Required]
         public TimeOnly? EndTime { get; set; }
         public DayOfWeek DayOfWeek { get; set; }
+        /// <summary>
+        /// The specific date for this slot. Slots are generally recurring weekly but this date represents the specific date for this slot
+        /// </summary>
+        public DateTimeOffset Date { get; set; }
         public ICollection<Break>? Breaks { get; set; }
     }
 }
