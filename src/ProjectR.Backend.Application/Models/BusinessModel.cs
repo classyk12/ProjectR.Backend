@@ -19,7 +19,6 @@ namespace ProjectR.Backend.Application.Models
         public string? Latitude { get; set; }
         public string? ShortLink { get; set; }
         public string? Logo { get; set; }
-        
     }
 
     public class AddBusinessModel

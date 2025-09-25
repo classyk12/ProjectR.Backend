@@ -97,6 +97,7 @@ namespace ProjectR.Backend.Infrastructure.Providers
                 return default;
             }
         }
+
         public async Task<bool> SendSimpleMessageAsync(SimpleMessageModel model)
         {
             if (_settings.UseMock)

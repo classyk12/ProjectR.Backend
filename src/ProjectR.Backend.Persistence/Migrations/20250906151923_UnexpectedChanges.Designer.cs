@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ProjectR.Backend.Persistence.DatabaseContext;
@@ -11,9 +12,11 @@ using ProjectR.Backend.Persistence.DatabaseContext;
 namespace ProjectR.Backend.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250906151923_UnexpectedChanges")]
+    partial class UnexpectedChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,6 +48,9 @@ namespace ProjectR.Backend.Persistence.Migrations
                     b.Property<Guid>("BusinessAvailabilitySlotId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("BusinessAvailabilitySlotId1")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -67,7 +73,9 @@ namespace ProjectR.Backend.Persistence.Migrations
 
                     b.HasIndex("BusinessAvailabilitySlotId");
 
-                    b.ToTable("Breaks");
+                    b.HasIndex("BusinessAvailabilitySlotId1");
+
+                    b.ToTable("Break");
                 });
 
             modelBuilder.Entity("ProjectR.Backend.Domain.Entities.Business", b =>
@@ -174,7 +182,7 @@ namespace ProjectR.Backend.Persistence.Migrations
 
                     b.HasIndex("BusinessId");
 
-                    b.ToTable("BusinessAvailabilities");
+                    b.ToTable("BusinessAvailability");
                 });
 
             modelBuilder.Entity("ProjectR.Backend.Domain.Entities.BusinessAvailabilitySlot", b =>
@@ -184,6 +192,9 @@ namespace ProjectR.Backend.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("BusinessAvailabilityId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("BusinessAvailabilityId1")
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -211,7 +222,9 @@ namespace ProjectR.Backend.Persistence.Migrations
 
                     b.HasIndex("BusinessAvailabilityId");
 
-                    b.ToTable("BusinessAvailabilitySlots");
+                    b.HasIndex("BusinessAvailabilityId1");
+
+                    b.ToTable("BusinessAvailabilitySlot");
                 });
 
             modelBuilder.Entity("ProjectR.Backend.Domain.Entities.Industry", b =>
@@ -363,11 +376,15 @@ namespace ProjectR.Backend.Persistence.Migrations
 
             modelBuilder.Entity("ProjectR.Backend.Domain.Entities.Break", b =>
                 {
-                    b.HasOne("ProjectR.Backend.Domain.Entities.BusinessAvailabilitySlot", "BusinessAvailabilitySlot")
+                    b.HasOne("ProjectR.Backend.Domain.Entities.BusinessAvailabilitySlot", null)
                         .WithMany("Breaks")
                         .HasForeignKey("BusinessAvailabilitySlotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("ProjectR.Backend.Domain.Entities.BusinessAvailabilitySlot", "BusinessAvailabilitySlot")
+                        .WithMany()
+                        .HasForeignKey("BusinessAvailabilitySlotId1");
 
                     b.Navigation("BusinessAvailabilitySlot");
                 });
@@ -397,10 +414,15 @@ namespace ProjectR.Backend.Persistence.Migrations
             modelBuilder.Entity("ProjectR.Backend.Domain.Entities.BusinessAvailabilitySlot", b =>
                 {
                     b.HasOne("ProjectR.Backend.Domain.Entities.BusinessAvailability", "BusinessAvailability")
-                        .WithMany("Slots")
+                        .WithMany()
                         .HasForeignKey("BusinessAvailabilityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("ProjectR.Backend.Domain.Entities.BusinessAvailability", null)
+                        .WithMany("Slots")
+                        .HasForeignKey("BusinessAvailabilityId1")
+                        .HasConstraintName("FK_BusinessAvailabilitySlot_BusinessAvailability_BusinessAvai~1");
 
                     b.Navigation("BusinessAvailability");
                 });

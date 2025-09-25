@@ -30,9 +30,9 @@ services:
       - WhatsApp__BusinessAccountId=${WhatsApp__BusinessAccountId}
       - WhatsApp__UseMock=${WhatsApp__UseMock}
 
-      - Cloudinary__CloudName=${Cloudinary__CloudName}
-      - Cloudinary__ApiKey=${Cloudinary__ApiKey}
-      - Cloudinary__ApiSecret=${Cloudinary__ApiSecret}
+      # - Cloudinary__CloudName=${Cloudinary__CloudName}
+      # - Cloudinary__ApiKey=${Cloudinary__ApiKey}
+      # - Cloudinary__ApiSecret=${Cloudinary__ApiSecret}
 
       # Serilog Seq config
       - Serilog__WriteTo__0__Name=Seq
