@@ -37,6 +37,8 @@ namespace ProjectR.Backend.Application.Models
 
         [Required]
         public TimeOnly? EndTime { get; set; }
+
+        public List<AddBreakModel> Breaks { get; set; } = [];
     }
 }
 

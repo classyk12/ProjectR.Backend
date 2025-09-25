@@ -5,6 +5,7 @@ using ProjectR.Backend.Persistence.DatabaseContext;
 using ProjectR.Backend.Application.Models;
 using ProjectR.Backend.Shared.Mappers;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using ProjectR.Backend.Shared;
 
 namespace ProjectR.Backend.Persistence.Repository
 {
@@ -22,7 +23,7 @@ namespace ProjectR.Backend.Persistence.Repository
             BusinessAvailability? availability = await _appDbContext.BusinessAvailabilities
                 .Include(x => x.Slots)!
                     .ThenInclude(s => s.Breaks)
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id && x.RecordStatus == RecordStatus.Active);
 
             if (availability == null)
             {
@@ -89,6 +90,15 @@ namespace ProjectR.Backend.Persistence.Repository
                 .ToListAsync();
 
             return availabilities.Select(c => Mapper.Map<BusinessAvailability, BusinessAvailabilityModel>(c)).ToArray();
+        }
+
+        public async Task<bool> HasActiveAvailabilityAsync(Guid businessId, DateOnly startDate, DateOnly endDate)
+        {
+            return await _appDbContext.BusinessAvailabilities
+                .AnyAsync(x => x.BusinessId == businessId
+                    && x.RecordStatus == RecordStatus.Active
+                    && x.StartDate <= endDate
+                    && x.EndDate >= startDate);
         }
     }
 }

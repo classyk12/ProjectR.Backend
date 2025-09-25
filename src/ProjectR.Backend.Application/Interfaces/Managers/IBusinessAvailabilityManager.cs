@@ -4,11 +4,15 @@ namespace ProjectR.Backend.Application.Interfaces.Managers
 {
     public interface IBusinessAvailabilityManager
     {
-        Task<BusinessAvailabilityModel[]> GetByBusinessIdAsync();
         Task<ResponseModel<BusinessAvailabilityModel>> GetByIdAsync(Guid id);
         Task<ResponseModel<BusinessAvailabilityModel>> AddAsync(AddBusinessAvailabilityModel model);
-        Task<ResponseModel<BusinessAvailabilityModel>> UpdateAsync(UpdateBusinessAvailabilityModel user);
-        Task<BaseResponseModel?> DeleteAsync(Guid Id);
+        Task<ResponseModel<BusinessAvailabilityModel>> UpdateAsync(Guid id, UpdateBusinessAvailabilityModel model);
         Task<BusinessAvailabilityModel[]> GetByBusinessId(Guid businessId);
+        /// <summary>
+        /// Check if the business has any availability set already within a date range
+        /// </summary>
+        /// <param name="businessId"></param>
+        /// <returns></returns>
+        Task<bool> HasActiveAvailabilityAsync(Guid businessId, DateOnly startDate, DateOnly endDate);
     }
 }

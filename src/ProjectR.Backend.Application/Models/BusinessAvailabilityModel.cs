@@ -36,8 +36,6 @@ namespace ProjectR.Backend.Application.Models
         public DateOnly? EndDate { get; set; }
 
         public List<AddBusinessAvailabilitySlotModel> Slots { get; set; } = [];
-
-        public List<AddBreakModel> Breaks { get; set; } = [];
     }
 
     public class UpdateBusinessAvailabilityModel
@@ -47,8 +45,6 @@ namespace ProjectR.Backend.Application.Models
 
         [Required, MinLength(1, ErrorMessage = "At least one slot is required")]
         public List<AddBusinessAvailabilitySlotModel>? Slots { get; set; }
-
-        public List<AddBreakModel>? Breaks { get; set; }
     }
 }
 

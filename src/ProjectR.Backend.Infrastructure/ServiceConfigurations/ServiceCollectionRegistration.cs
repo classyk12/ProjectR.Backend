@@ -1,4 +1,5 @@
 using CloudinaryDotNet;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ using ProjectR.Backend.Application.Interfaces.Providers;
 using ProjectR.Backend.Application.Interfaces.Repository;
 using ProjectR.Backend.Application.Interfaces.Utility;
 using ProjectR.Backend.Application.Settings;
+using ProjectR.Backend.Application.Validators;
 using ProjectR.Backend.Infrastructure.Managers;
 using ProjectR.Backend.Infrastructure.Providers;
 using ProjectR.Backend.Infrastructure.Utility;
@@ -34,6 +36,11 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.Configure<TwilioSettings>(configuration.GetSection("Twilio"));
             services.Configure<OtpSettings>(configuration.GetSection("Otp"));
             services.Configure<CloudinarySettings>(configuration.GetSection("Cloudinary"));
+            services.Configure<CloudinarySettings>(configuration.GetSection("BusinessAvailability"));
+            #endregion
+
+            #region Validators
+            services.AddValidatorsFromAssemblyContaining<BusinessAvailabilityValidator>();
             #endregion
 
             #region  Providers
