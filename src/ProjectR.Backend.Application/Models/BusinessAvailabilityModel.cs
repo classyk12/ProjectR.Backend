@@ -12,10 +12,10 @@ namespace ProjectR.Backend.Application.Models
         public Guid BusinessId { get; set; }
 
         [Required]
-        public DateOnly? StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
         [Required]
-        public DateOnly? EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         [Required, MinLength(1, ErrorMessage = "At least one slot is required")]
         public ICollection<BusinessAvailabilitySlotModel>? Slots { get; set; }
@@ -30,10 +30,10 @@ namespace ProjectR.Backend.Application.Models
         public Guid BusinessId { get; set; }
 
         [DataType(DataType.Date, ErrorMessage = "Invalid date format")]
-        public DateOnly? StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
         [DataType(DataType.Date, ErrorMessage = "Invalid date format")]
-        public DateOnly? EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         public List<AddBusinessAvailabilitySlotModel> Slots { get; set; } = [];
     }

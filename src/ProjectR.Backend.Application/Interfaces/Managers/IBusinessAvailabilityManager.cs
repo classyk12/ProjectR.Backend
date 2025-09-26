@@ -13,6 +13,6 @@ namespace ProjectR.Backend.Application.Interfaces.Managers
         /// </summary>
         /// <param name="businessId"></param>
         /// <returns></returns>
-        Task<bool> HasActiveAvailabilityAsync(Guid businessId, DateOnly startDate, DateOnly endDate);
+        Task<bool> HasActiveAvailabilityAsync(Guid businessId, DateTime startDate, DateTime endDate);
     }
 }

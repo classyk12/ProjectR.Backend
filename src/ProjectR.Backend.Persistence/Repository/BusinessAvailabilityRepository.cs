@@ -92,13 +92,13 @@ namespace ProjectR.Backend.Persistence.Repository
             return availabilities.Select(c => Mapper.Map<BusinessAvailability, BusinessAvailabilityModel>(c)).ToArray();
         }
 
-        public async Task<bool> HasActiveAvailabilityAsync(Guid businessId, DateOnly startDate, DateOnly endDate)
+        public async Task<bool> HasActiveAvailabilityAsync(Guid businessId, DateTime startDate, DateTime endDate)
         {
             return await _appDbContext.BusinessAvailabilities
                 .AnyAsync(x => x.BusinessId == businessId
                     && x.RecordStatus == RecordStatus.Active
-                    && x.StartDate <= endDate
-                    && x.EndDate >= startDate);
+                    && x.StartDate!.Value.Date <= endDate
+                    && x.EndDate!.Value.Date >= startDate);
         }
     }
 }

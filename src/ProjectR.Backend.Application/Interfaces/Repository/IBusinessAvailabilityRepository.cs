@@ -8,6 +8,6 @@ namespace ProjectR.Backend.Application.Interfaces.Repository
         Task<BusinessAvailabilityModel[]> GetAllByBusinessIdAsync(Guid id);
         Task<BusinessAvailabilityModel> AddAsync(BusinessAvailabilityModel model);
         Task<BusinessAvailabilityModel> UpdateAsync(Guid id, UpdateBusinessAvailabilityModel model);
-        Task<bool> HasActiveAvailabilityAsync(Guid businessId, DateOnly startDate, DateOnly endDate);
+        Task<bool> HasActiveAvailabilityAsync(Guid businessId, DateTime startDate, DateTime endDate);
     }
 }

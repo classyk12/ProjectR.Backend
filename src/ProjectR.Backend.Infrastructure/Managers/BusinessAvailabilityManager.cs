@@ -13,13 +13,11 @@ namespace ProjectR.Backend.Infrastructure.Managers
     {
         public readonly IBusinessAvailabilityRepository _repository;
         public readonly IBusinessManager _businessManager;
-        private readonly BusinessAvailabilitySettings _options;
         private readonly IValidator<AddBusinessAvailabilityModel> _validator;
 
-        public BusinessAvailabilityManager(IBusinessAvailabilityRepository repository, IOptions<BusinessAvailabilitySettings> options, IValidator<AddBusinessAvailabilityModel> validator, IBusinessManager businessManager)
+        public BusinessAvailabilityManager(IBusinessAvailabilityRepository repository, IValidator<AddBusinessAvailabilityModel> validator, IBusinessManager businessManager)
         {
             _repository = repository;
-            _options = options.Value ?? throw new ArgumentNullException(nameof(options));
             _businessManager = businessManager ?? throw new ArgumentNullException(nameof(businessManager));
             _validator = validator ?? throw new ArgumentNullException(nameof(validator));
         }
@@ -58,7 +56,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
             return new ResponseModel<BusinessAvailabilityModel>(message: result != null ? "Business Availability retrieved successfully" : "Business Availability not found", data: result, status: result != null);
         }
 
-        public async Task<bool> HasActiveAvailabilityAsync(Guid businessId, DateOnly startDate, DateOnly endDate)
+        public async Task<bool> HasActiveAvailabilityAsync(Guid businessId, DateTime startDate, DateTime endDate)
         {
             return await _repository.HasActiveAvailabilityAsync(businessId, startDate, endDate);
         }

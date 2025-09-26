@@ -51,8 +51,8 @@ namespace ProjectR.Backend.Application.Validators
                 {
                     if (x.StartDate.HasValue && x.EndDate.HasValue)
                     {
-                        TimeSpan diff = x.EndDate.Value.ToDateTime(TimeOnly.MinValue)
-                                 - x.StartDate.Value.ToDateTime(TimeOnly.MinValue);
+                        TimeSpan diff = x.EndDate.Value
+                                 - x.StartDate.Value;
                         return diff.Days <= _settings.MaxAdvanceBookingInDays;
                     }
 
