@@ -81,14 +81,27 @@ namespace ProjectR.Backend.Persistence.Repository
             return Mapper.Map<BusinessAvailability, BusinessAvailabilityModel>(availability);
         }
 
-        public async Task<BusinessAvailabilityModel[]> GetAllByBusinessIdAsync(Guid id)
+        public async Task<BusinessAvailabilityModel[]> GetAllByBusinessIdAsync(Guid id, bool includeAll = false)
         {
-            List<BusinessAvailability> availabilities = await _appDbContext.BusinessAvailabilities
-                .Include(x => x.Slots)!
-                    .ThenInclude(s => s.Breaks)
-                .Where(x => x.BusinessId == id)
-                .ToListAsync();
+            IQueryable<BusinessAvailability> query = _appDbContext.BusinessAvailabilities;
 
+            if (includeAll)
+            {
+                query = query.Where(x => x.BusinessId == id);
+            }
+            else
+            {
+                query = query.Where(x => x.BusinessId == id && x.RecordStatus == RecordStatus.Active);
+            }
+
+            // Conditionally include related entities only if needed
+            if (includeAll)
+            {
+                query = query.Include(x => x.Slots!)
+                             .ThenInclude(s => s.Breaks);
+            }
+
+            List<BusinessAvailability> availabilities = await query.ToListAsync();
             return availabilities.Select(c => Mapper.Map<BusinessAvailability, BusinessAvailabilityModel>(c)).ToArray();
         }
 

@@ -44,7 +44,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
             return new ResponseModel<BusinessAvailabilityModel>(message: "Business Availability created successfully", data: newAvailability, status: true);
         }
 
-        public async Task<BusinessAvailabilityModel[]> GetByBusinessId(Guid businessId)
+        public async Task<BusinessAvailabilityModel[]> GetByBusinessId(Guid businessId, bool includeAll = false)
         {
             BusinessAvailabilityModel[] result = await _repository.GetAllByBusinessIdAsync(businessId);
             return result;

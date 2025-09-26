@@ -20,9 +20,9 @@ namespace ProjectR.Backend.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BusinessAvailabilityModel[]))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BusinessAvailabilityModel[]))]
         [HttpGet("GetByBusiness/{id:guid}")]
-        public async Task<IActionResult> GetByBusiness(Guid Id)
+        public async Task<IActionResult> GetByBusiness(Guid Id, [FromQuery] bool includeAll = false)
         {
-            BusinessAvailabilityModel[] result = await _manager.GetByBusinessId(Id);
+            BusinessAvailabilityModel[] result = await _manager.GetByBusinessId(Id, includeAll);
             return Ok(result);
         }
 
