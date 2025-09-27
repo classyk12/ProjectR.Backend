@@ -14,10 +14,10 @@ namespace ProjectR.Backend.Domain.Entities
         public BusinessAvailabilitySlot? BusinessAvailabilitySlot { get; set; }
 
         [DataType(DataType.Time, ErrorMessage = "Invalid time format")]
-        public DateTime? StartTime { get; set; }
+        public DateTimeOffset? StartTime { get; set; }
 
         [DataType(DataType.Time, ErrorMessage = "Invalid time format")]
-        public DateTime? EndTime { get; set; }
+        public DateTimeOffset? EndTime { get; set; }
     }
 
     public class AddBreakModel

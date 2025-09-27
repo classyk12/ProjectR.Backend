@@ -14,7 +14,7 @@ namespace ProjectR.Backend.Application.Models
         public BusinessAvailabilityModel? BusinessAvailability { get; set; }
 
         [DataType(DataType.Time, ErrorMessage = "Invalid time format")]
-        public TimeOnly? StartTime { get; set; }
+        public DateTimeOffset? StartTime { get; set; }
 
         [DataType(DataType.Time, ErrorMessage = "Invalid time format")]
         public DateTimeOffset? EndTime { get; set; }

@@ -11,9 +11,9 @@ namespace ProjectR.Backend.Domain.Entities
         public Guid BusinessAvailabilitySlotId { get; set; }
         public BusinessAvailabilitySlot? BusinessAvailabilitySlot { get; set; }
         [Required]
-        public TimeOnly? StartTime { get; set; }
+        public DateTimeOffset? StartTime { get; set; }
         [Required]
-        public TimeOnly? EndTime { get; set; }
+        public DateTimeOffset? EndTime { get; set; }
     }
 }
 

@@ -11,9 +11,9 @@ namespace ProjectR.Backend.Domain.Entities
         public Guid BusinessAvailabilityId { get; set; }
         public BusinessAvailability? BusinessAvailability { get; set; }
         [Required]
-        public TimeOnly? StartTime { get; set; }
+        public DateTimeOffset? StartTime { get; set; }
         [Required]
-        public TimeOnly? EndTime { get; set; }
+        public DateTimeOffset? EndTime { get; set; }
         public DayOfWeek DayOfWeek { get; set; }
         /// <summary>
         /// The specific date for this slot. Slots are generally recurring weekly but this date represents the specific date for this slot
