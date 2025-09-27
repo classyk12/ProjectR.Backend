@@ -13,15 +13,15 @@ namespace ProjectR.Backend.Application.Models
 
         public BusinessAvailabilityModel? BusinessAvailability { get; set; }
 
-        [Required]
+        [DataType(DataType.Time, ErrorMessage = "Invalid time format")]
         public TimeOnly? StartTime { get; set; }
 
-        [Required]
-        public TimeOnly? EndTime { get; set; }
+        [DataType(DataType.Time, ErrorMessage = "Invalid time format")]
+        public DateTimeOffset? EndTime { get; set; }
 
         public DayOfWeek DayOfWeek { get; set; }
 
-        [Required]
+        [DataType(DataType.Date, ErrorMessage = "Invalid date format")]
         public DateTimeOffset Date { get; set; }
 
         public List<BreakModel>? Breaks { get; set; }
@@ -29,14 +29,20 @@ namespace ProjectR.Backend.Application.Models
 
     public class AddBusinessAvailabilitySlotModel
     {
-        [Required]
-        public DateTime Date { get; set; }
+        [DataType(DataType.Date, ErrorMessage = "Invalid date format")]
+        public DateTimeOffset Date { get; set; }
 
-        [Required]
-        public TimeOnly? StartTime { get; set; }
+        [DataType(DataType.Time, ErrorMessage = "Invalid time format")]
+        public DateTimeOffset? StartTime { get; set; }
 
-        [Required]
-        public TimeOnly? EndTime { get; set; }
+        [DataType(DataType.Time, ErrorMessage = "Invalid time format")]
+        public DateTimeOffset? EndTime { get; set; }
+
+        // [JsonIgnore]
+        // public TimeOnly? StartTimeInternal => TimeOnly.FromDateTime(StartTime!.Value);
+
+        // [JsonIgnore]
+        // public TimeOnly? EndTimeInternal => TimeOnly.FromDateTime(EndTime!.Value);
 
         public List<AddBreakModel> Breaks { get; set; } = [];
     }

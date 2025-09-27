@@ -40,14 +40,14 @@ namespace ProjectR.Backend.Controllers
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ResponseModel<BusinessAvailabilityModel>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<BusinessAvailabilityModel>))]
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] AddBusinessAvailabilityModel business)
+        public async Task<IActionResult> Add([FromBody] AddBusinessAvailabilityModel model)
         {
-            if (business == null || !ModelState.IsValid)
+            if (model == null || !ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            ResponseModel<BusinessAvailabilityModel> result = await _manager.AddAsync(business);
+            
+            ResponseModel<BusinessAvailabilityModel> result = await _manager.AddAsync(model);
             return result.Status ? Ok(result) : BadRequest(result);
         }
 

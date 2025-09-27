@@ -57,6 +57,7 @@ namespace ProjectR.Backend.Controllers
                 return BadRequest(ModelState);
             }
 
+            business.UserId = UserId;
             ResponseModel<BusinessModel> result = await _businessManager.AddAsync(business);
             return result.Status ? Ok(result) : BadRequest(result);
         }

@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 
 namespace ProjectR.Backend.Application.Models
 {
     public class BusinessModel
     {
+        [JsonIgnore]
         public Guid UserId { get; set; }
         public Guid Id { get; set; }
         public string? Name { get; set; }
@@ -23,12 +23,16 @@ namespace ProjectR.Backend.Application.Models
 
     public class AddBusinessModel
     {
+        [JsonIgnore]
         public Guid UserId { get; set; }
+
         [Required(ErrorMessage = "Name is required")]
         public string? Name { get; set; }
         public string? Type { get; set; }
+
         [Required(ErrorMessage = "Phone Code is required")]
         public string? PhoneCode { get; set; }
+
         [Required(ErrorMessage = "Phone Number is required")]
         public string? PhoneNumber { get; set; }
         public string? Industry { get; set; }

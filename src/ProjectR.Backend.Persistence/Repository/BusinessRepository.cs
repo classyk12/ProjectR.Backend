@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ProjectR.Backend.Application.Interfaces.Repository;
 using ProjectR.Backend.Application.Models;
 using ProjectR.Backend.Domain.Entities;
@@ -69,7 +70,8 @@ namespace ProjectR.Backend.Persistence.Repository
                 Logo = businessModel.Logo
             };
 
-            await _context.Businesses.AddAsync(entity);
+            EntityEntry<Business> result = await _context.Businesses.AddAsync(entity);
+            result.Entity.Id = entity.Id;
             await _context.SaveChangesAsync();
             return businessModel;
         }

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ProjectR.Backend.Domain.Entities
 {
@@ -9,19 +10,23 @@ namespace ProjectR.Backend.Domain.Entities
     {
         [Required]
         public Guid BusinessAvailabilitySlotId { get; set; }
+
         public BusinessAvailabilitySlot? BusinessAvailabilitySlot { get; set; }
-        [Required]
-        public TimeOnly? StartTime { get; set; }
-        [Required]
-        public TimeOnly? EndTime { get; set; }
+
+        [DataType(DataType.Time, ErrorMessage = "Invalid time format")]
+        public DateTime? StartTime { get; set; }
+
+        [DataType(DataType.Time, ErrorMessage = "Invalid time format")]
+        public DateTime? EndTime { get; set; }
     }
 
     public class AddBreakModel
     {
-        [Required]
-        public TimeOnly? StartTime { get; set; }
-        [Required]
-        public TimeOnly? EndTime { get; set; }
+        [DataType(DataType.Time, ErrorMessage = "Invalid time format")]
+        public DateTimeOffset? StartTime { get; set; }
+
+        [DataType(DataType.Time, ErrorMessage = "Invalid time format")]
+        public DateTimeOffset? EndTime { get; set; }
     }
 }
 

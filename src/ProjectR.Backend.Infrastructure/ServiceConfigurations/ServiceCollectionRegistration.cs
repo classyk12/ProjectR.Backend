@@ -55,6 +55,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IBusinessRepository, BusinessRepository>();
             services.AddScoped<IOtpRepository, OtpRepository>();
             services.AddScoped<IIndustryRepository, IndustryRepository>();
+            services.AddScoped<IBusinessAvailabilityRepository, BusinessAvailabilityRepository>();
             #endregion
 
             #region Managers
@@ -69,6 +70,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IOtpManager, OtpManager>();
             services.AddScoped<IIndustryManager, IndustryManager>();
             services.AddScoped<IAuthManager, AuthManager>();
+            services.AddScoped<IBusinessAvailabilityManager, BusinessAvailabilityManager>();
             #endregion
 
             #region Services
