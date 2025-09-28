@@ -18,7 +18,7 @@ namespace ProjectR.Backend.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] IndustryModel industry)
         {
-            var id = await _manager.CreateIndustryAsync(industry.Name, industry.Description);
+            var id = await _manager.CreateIndustryAsync(industry.Name!, industry.Description);
             return CreatedAtAction(nameof(GetById), new { id }, null);
         }
 
@@ -43,7 +43,7 @@ namespace ProjectR.Backend.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] IndustryModel industry)
         {
-            await _manager.UpdateIndustryAsync(id, industry.Name, industry.Description);
+            await _manager.UpdateIndustryAsync(id, industry.Name!, industry.Description);
             return NoContent();
         }
 
