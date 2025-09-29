@@ -5,6 +5,7 @@ using ProjectR.Backend.Infrastructure.ServiceConfigurations;
 using ProjectR.Backend.Middleware;
 using ProjectR.Backend.Persistence.DatabaseContext;
 using Serilog;
+using System.Globalization;
 
 namespace ProjectR.Backend
 {
@@ -12,6 +13,9 @@ namespace ProjectR.Backend
     {
         private static void Main(string[] args)
         {
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
             builder.Host.UseSerilog((context, services, loggerConfig) =>
             {
