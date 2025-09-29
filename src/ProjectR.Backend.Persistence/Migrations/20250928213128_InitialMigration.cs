@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectR.Backend.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -59,26 +59,6 @@ namespace ProjectR.Backend.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WebhookMessages",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Source = table.Column<int>(type: "int", nullable: false),
-                    Payload = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsProcessed = table.Column<bool>(type: "bit", nullable: false),
-                    LastProcessedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LastProcessedResult = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RecordStatus = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WebhookMessages", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "users",
                 columns: table => new
                 {
@@ -96,6 +76,26 @@ namespace ProjectR.Backend.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WebhookMessages",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Source = table.Column<int>(type: "int", nullable: false),
+                    Payload = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsProcessed = table.Column<bool>(type: "bit", nullable: false),
+                    LastProcessedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LastProcessedResult = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RecordStatus = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WebhookMessages", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(

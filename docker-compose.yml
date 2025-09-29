@@ -1,3 +1,4 @@
+
 services:
   projectr.backend:
     build:
@@ -11,12 +12,12 @@ services:
       seq:
         condition: service_started
 
-    networks:       
+    networks:
       - mynetwork
 
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection= Server=sqlserver_db;Database=projectr;User Id=SA;Password=YourStrongPassword123!;TrustServerCertificate=True; # Update with your database name and password
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=projectr;Username=postgres;Password=password
 
       - Google__Android=${Google__Android}
       - Google__Ios=${Google__Ios}
@@ -42,25 +43,36 @@ services:
       - "5001:5001"
      
   db:
-    image: postgres:15
-    container_name: postgres
-    restart: always
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: projectr
-
-    ports:
-      - "4400:80"
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Test@1234
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      # test: ["CMD-SHELL", "timeout 5 bash -c '</dev/tcp/127.0.0.1/1433'"]
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -U sa -P 'Test@1234' -Q 'SELECT 1'"]
       interval: 10s
       retries: 5
       start_period: 30s
-      timeout: 10s
+      timeout: 30s
+
+    # ports:
+    #   - "1433:1433"
+    # volumes:
+    #   - sqlserver_data:/var/opt/mssql
+    # restart: always
+
+    # ports:
+    #   - "4400:80"
+    #   - "5432:5432"
+    # volumes:
+    #   - postgres_data:/var/lib/postgresql/data
+    # healthcheck:
+    #   test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+    #   interval: 10s
+    #   retries: 5
+    #   start_period: 30s
+    #   timeout: 10s
 
     networks:
       - mynetwork
@@ -80,7 +92,7 @@ services:
       - mynetwork
 
 volumes:
-  postgres_data:
+  sqlserver_data:
   seq_data:
 
 networks:

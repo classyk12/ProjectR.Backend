@@ -12,8 +12,8 @@ using ProjectR.Backend.Persistence.DatabaseContext;
 namespace ProjectR.Backend.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250928100050_Initial")]
-    partial class Initial
+    [Migration("20250928213128_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

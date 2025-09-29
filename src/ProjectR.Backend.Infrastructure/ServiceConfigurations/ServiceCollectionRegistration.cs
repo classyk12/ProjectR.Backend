@@ -147,9 +147,9 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
         {
             string connectionString = configuration.GetConnectionString("DefaultConnection")!;
             services.AddDbContext<AppDbContext>(options =>
-              options.UseNpgsql(connectionString, options =>
+              options.UseSqlServer(connectionString, options =>
               {
-                  options.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorCodesToAdd: []);
+                  options.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorNumbersToAdd: []);
               }));
         }
         public static void RegisterHttpClients(this IServiceCollection services, IConfiguration configuration)
