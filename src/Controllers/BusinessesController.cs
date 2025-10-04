@@ -97,5 +97,16 @@ namespace ProjectR.Backend.Controllers
             BaseResponseModel result = await _businessManager.GetByUserId(UserId);
             return result.Status ? Ok(result) : BadRequest(result);
         }
+
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseModel<BusinessModel>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseModel<BusinessModel>))]
+        [HttpGet("{id:guid}/businesses")]
+        public async Task<IActionResult> GetUserBusinesses(Guid id)
+        {
+            BusinessModel[] result = await _businessManager.GetUserBusinessesAsync(id);
+            return Ok(result);
+        }
+
     }
 }

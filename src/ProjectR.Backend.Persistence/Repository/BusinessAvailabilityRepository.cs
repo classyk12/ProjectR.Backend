@@ -22,7 +22,7 @@ namespace ProjectR.Backend.Persistence.Repository
         {
             BusinessAvailability? availability = await _appDbContext.BusinessAvailabilities
                 .Include(x => x.Slots)!
-                    .ThenInclude(s => s.Breaks)
+                .ThenInclude(s => s.Breaks)
                 .FirstOrDefaultAsync(x => x.Id == id && x.RecordStatus == RecordStatus.Active);
 
             if (availability == null)
@@ -32,24 +32,6 @@ namespace ProjectR.Backend.Persistence.Repository
 
             BusinessAvailabilityModel result = Mapper.Map<BusinessAvailability, BusinessAvailabilityModel>(availability);
             return result;
-            // return new BusinessAvailabilityModel
-            // {
-            //     Id = availability.Id,
-            //     BusinessId = availability.BusinessId,
-            //     Slots = availability.Slots?.Select(slot => new BusinessAvailabilitySlotModel
-            //     {
-            //         BusinessAvailabilityId = availability.Id,
-            //         DayOfWeek = slot.DayOfWeek,
-            //         StartTime = slot.StartTime,
-            //         EndTime = slot.EndTime,
-            //         Breaks = slot.Breaks?.Select(b => new BreakModel
-            //         {
-            //             Id = b.Id,
-            //             StartTime = b.StartTime,
-            //             EndTime = b.EndTime
-            //         }).ToList()
-            //     }).ToList()
-            // };
         }
 
         public async Task<BusinessAvailabilityModel> AddAsync(BusinessAvailabilityModel model)
@@ -74,11 +56,32 @@ namespace ProjectR.Backend.Persistence.Repository
                 return null!;
             }
 
-            //remove all existing slots and breaks
-            _appDbContext.BusinessAvailabilitySlots.RemoveRange(availability.Slots!);
-            _appDbContext.AddRange(model.Slots!);
+            if (availability.Slots != null && availability.Slots.Any())
+            {
+                _appDbContext.BusinessAvailabilitySlots.RemoveRange(availability.Slots);
+            }
+
+            List<BusinessAvailabilitySlot> newSlots = model.Slots?.Select(s => Mapper.Map<AddBusinessAvailabilitySlotModel, BusinessAvailabilitySlot>(s)).ToList()
+                           ?? new List<BusinessAvailabilitySlot>();
+
+            foreach (BusinessAvailabilitySlot slot in newSlots)
+            {
+                slot.BusinessAvailabilityId = availability.Id;
+            }
+
+            if (newSlots.Any())
+            {
+                await _appDbContext.BusinessAvailabilitySlots.AddRangeAsync(newSlots);
+            }
+
             await _appDbContext.SaveChangesAsync();
-            return Mapper.Map<BusinessAvailability, BusinessAvailabilityModel>(availability);
+
+            BusinessAvailability updatedAvailability = await _appDbContext.BusinessAvailabilities
+                .Include(x => x.Slots)!
+                    .ThenInclude(s => s.Breaks)
+                .FirstAsync(x => x.Id == id);
+
+            return Mapper.Map<BusinessAvailability, BusinessAvailabilityModel>(updatedAvailability);
         }
 
         public async Task<BusinessAvailabilityModel[]> GetAllByBusinessIdAsync(Guid id, bool includeAll = false)
@@ -94,7 +97,6 @@ namespace ProjectR.Backend.Persistence.Repository
                 query = query.Where(x => x.BusinessId == id && x.RecordStatus == RecordStatus.Active);
             }
 
-            // Conditionally include related entities only if needed
             if (includeAll)
             {
                 query = query.Include(x => x.Slots!)

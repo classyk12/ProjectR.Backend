@@ -127,9 +127,19 @@ namespace ProjectR.Backend.Infrastructure.Managers
             return new ResponseModel<BusinessModel>(message: result != null ? "Business retrieved successfully" : "Business not found", data: result, status: result != null);
         }
 
+        public async Task<BusinessModel[]> GetUserBusinessesAsync(Guid UserId)
+        {
+            return await _businessRepository.GetUserBusinessesAsync(UserId);
+        }
+
         public async Task<bool> IsBusinessExist(Guid userId)
         {
             return await _businessRepository.IsBusinessExist(userId);
+        }
+
+        public async Task<bool> IsBusinessExist(Guid userId, Guid BusinessId)
+        {
+            return await _businessRepository.IsBusinessExist(userId,BusinessId);
         }
 
         public async Task<ResponseModel<BusinessModel>> UpdateAsync(BusinessModel business)

@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ProjectR.Backend.Application.Interfaces.Repository;
 using ProjectR.Backend.Application.Models;
@@ -216,11 +216,6 @@ namespace ProjectR.Backend.Persistence.Repository
         public async Task<bool> IsBusinessExist(Guid userId)
         {
             return await _context.Businesses.AnyAsync(c => c.UserId == userId);
-        }
-
-        public async Task<bool> IsBusinessExist(Guid userId, Guid BusinessId)
-        {
-            return await _context.Businesses.AnyAsync(c => c.UserId == userId && c.Id == BusinessId) ;
         }
 
         public async Task<BusinessModel[]> GetUserBusinessesAsync(Guid UserId)

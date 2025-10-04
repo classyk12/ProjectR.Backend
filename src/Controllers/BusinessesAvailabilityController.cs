@@ -19,7 +19,7 @@ namespace ProjectR.Backend.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BusinessAvailabilityModel[]))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(BusinessAvailabilityModel[]))]
-        [HttpGet("GetByBusiness/{id:guid}")]
+        [HttpGet("GetByBusiness/{Id:guid}")]
         public async Task<IActionResult> GetByBusiness(Guid Id, [FromQuery] bool includeAll = false)
         {
             BusinessAvailabilityModel[] result = await _manager.GetByBusinessId(Id, includeAll);

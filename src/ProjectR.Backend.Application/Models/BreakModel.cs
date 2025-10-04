@@ -11,7 +11,7 @@ namespace ProjectR.Backend.Domain.Entities
         [Required]
         public Guid BusinessAvailabilitySlotId { get; set; }
 
-        public BusinessAvailabilitySlot? BusinessAvailabilitySlot { get; set; }
+        //public BusinessAvailabilitySlot? BusinessAvailabilitySlot { get; set; }
 
         [DataType(DataType.Time, ErrorMessage = "Invalid time format")]
         public DateTimeOffset? StartTime { get; set; }

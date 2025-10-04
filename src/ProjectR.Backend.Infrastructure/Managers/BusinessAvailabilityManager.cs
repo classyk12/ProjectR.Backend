@@ -46,7 +46,7 @@ namespace ProjectR.Backend.Infrastructure.Managers
 
         public async Task<BusinessAvailabilityModel[]> GetByBusinessId(Guid businessId, bool includeAll = false)
         {
-            BusinessAvailabilityModel[] result = await _repository.GetAllByBusinessIdAsync(businessId);
+            BusinessAvailabilityModel[] result = await _repository.GetAllByBusinessIdAsync(businessId, includeAll);
             return result;
         }
 

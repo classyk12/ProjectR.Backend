@@ -45,6 +45,11 @@ namespace ProjectR.Backend.Application.Validators
                 .When(x => x.StartDate.HasValue && x.EndDate.HasValue)
                 .WithMessage("End date must be after or equal to start date.");
 
+            //Rule: Cannot add dates in the past
+            RuleFor(x => x.StartDate)
+                .GreaterThanOrEqualTo(x => DateTime.UtcNow)
+                .WithMessage("Start Date cannot be in the past");
+
             // Rule: Gap must not exceed settings.MaxAdvanceBookingInDays
             RuleFor(x => x)
                 .Must(x =>
@@ -192,6 +197,12 @@ namespace ProjectR.Backend.Application.Validators
                 .Must(x => x.StartTime.HasValue && x.EndTime.HasValue && x.EndTime > x.StartTime)
                 .WithMessage("Slot end time must be after start time.");
 
+
+            //Rule: Cannot add times in the past
+            RuleFor(x => x.StartTime)
+                .GreaterThanOrEqualTo(x => DateTime.UtcNow)
+                .WithMessage("Slot StartTime cannot be in the past");
+
             RuleForEach(x => x.Breaks).SetValidator(new AddBreakValidator());
         }
     }
@@ -209,6 +220,11 @@ namespace ProjectR.Backend.Application.Validators
             RuleFor(x => x)
                 .Must(x => x.StartTime.HasValue && x.EndTime.HasValue && x.EndTime > x.StartTime)
                 .WithMessage("Break end time must be after start time.");
+
+            //Rule: Cannot add time in the past
+            RuleFor(x => x.StartTime)
+                .GreaterThanOrEqualTo(x => DateTime.UtcNow)
+                .WithMessage("Break StartTime cannot be in the past");
         }
     }
 }

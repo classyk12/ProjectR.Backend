@@ -1,3 +1,5 @@
+using ProjectR.Backend.Shared;
+
 namespace ProjectR.Backend.Domain.Entities
 {
     /// <summary>
@@ -10,6 +12,7 @@ namespace ProjectR.Backend.Domain.Entities
         public DateTimeOffset? StartDate { get; set; }
         public DateTimeOffset? EndDate { get; set; }
         public ICollection<BusinessAvailabilitySlot>? Slots { get; set; }
+        //RecordStatus
     }
 }
 

@@ -11,7 +11,7 @@ namespace ProjectR.Backend.Application.Models
         [Required]
         public Guid BusinessAvailabilityId { get; set; }
 
-        public BusinessAvailabilityModel? BusinessAvailability { get; set; }
+        //public BusinessAvailabilityModel? BusinessAvailability { get; set; }
 
         [DataType(DataType.Time, ErrorMessage = "Invalid time format")]
         public DateTimeOffset? StartTime { get; set; }

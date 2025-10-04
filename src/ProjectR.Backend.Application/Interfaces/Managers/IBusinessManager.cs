@@ -7,6 +7,7 @@ namespace ProjectR.Backend.Application.Interfaces.Managers
         Task<ResponseModel<BusinessModel>> GetByIdAsync(Guid id);
         Task<ResponseModel<BusinessModel>> GetBySlugAsync(string slug);
         Task<BusinessModel[]> GetAllAsync();
+        Task<BusinessModel[]> GetUserBusinessesAsync(Guid UserId);
         Task<ResponseModel<BusinessModel[]>> AddAsync(AddBusinessModel[] businesses);
         Task<ResponseModel<BusinessModel>> AddAsync(AddBusinessModel business);
         Task<ResponseModel<BusinessModel>> UpdateAsync(BusinessModel business);
@@ -15,5 +16,6 @@ namespace ProjectR.Backend.Application.Interfaces.Managers
         Task<BaseResponseModel> DeleteAsync(Guid id);
         Task<ResponseModel<BusinessModel>> GetByUserId(Guid userId);
         Task<bool> IsBusinessExist(Guid userId);
+        Task<bool> IsBusinessExist(Guid userId, Guid BusinessId);
     }
 }

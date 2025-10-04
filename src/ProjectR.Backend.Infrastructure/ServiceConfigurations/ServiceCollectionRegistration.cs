@@ -36,7 +36,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.Configure<TwilioSettings>(configuration.GetSection("Twilio"));
             services.Configure<OtpSettings>(configuration.GetSection("Otp"));
             services.Configure<CloudinarySettings>(configuration.GetSection("Cloudinary"));
-            services.Configure<CloudinarySettings>(configuration.GetSection("BusinessAvailability"));
+            services.Configure<BusinessAvailabilitySettings>(configuration.GetSection("BusinessAvailability"));
             #endregion
 
             #region Validators

@@ -8,6 +8,6 @@ namespace ProjectR.Backend.Domain.Entities
         public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
         public DateTimeOffset UpdatedAt { get; set; }
         public string? UpdatedBy { get; set; }
-        public RecordStatus? RecordStatus { get; set; }
+        public RecordStatus? RecordStatus { get; set; } = Shared.RecordStatus.Active;
     }
 }
