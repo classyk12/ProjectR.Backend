@@ -38,12 +38,6 @@ namespace ProjectR.Backend.Application.Models
         [DataType(DataType.Time, ErrorMessage = "Invalid time format")]
         public DateTimeOffset? EndTime { get; set; }
 
-        // [JsonIgnore]
-        // public TimeOnly? StartTimeInternal => TimeOnly.FromDateTime(StartTime!.Value);
-
-        // [JsonIgnore]
-        // public TimeOnly? EndTimeInternal => TimeOnly.FromDateTime(EndTime!.Value);
-
         public List<AddBreakModel> Breaks { get; set; } = [];
     }
 }

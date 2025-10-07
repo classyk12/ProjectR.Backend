@@ -193,25 +193,6 @@ namespace ProjectR.Backend.Persistence.Repository
             return businessModel;
         }
 
-        public async Task<BusinessModel?> GetByUserId(Guid userId)
-        {
-            Business? result = await _context.Businesses.SingleOrDefaultAsync(c => c.UserId == userId);
-            return result == null ? null : new BusinessModel
-            {
-                UserId = result!.UserId,
-                Id = result.Id,
-                Name = result?.Name,
-                Type = result?.Type,
-                PhoneCode = result?.PhoneCode,
-                PhoneNumber = result?.PhoneNumber,
-                Industry = result?.Industry,
-                About = result?.About,
-                Location = result?.Location,
-                Longitude = result?.Longitude,
-                Latitude = result?.Latitude,
-                Logo = result?.Logo
-            };
-        }
 
         public async Task<bool> IsBusinessExist(Guid userId)
         {
@@ -223,7 +204,7 @@ namespace ProjectR.Backend.Persistence.Repository
             return await _context.Businesses.AnyAsync(c => c.UserId == userId && c.Id == BusinessId) ;
         }
 
-        public async Task<BusinessModel[]> GetUserBusinessesAsync(Guid UserId)
+        public async Task<BusinessModel[]> GetBusinessByUserAsync(Guid UserId)
         {
             List<Business> entities = await _context.Businesses.Where(b => b.UserId == UserId).ToListAsync();
             return entities.Select(e => new BusinessModel

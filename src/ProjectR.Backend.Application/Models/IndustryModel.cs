@@ -6,9 +6,17 @@ namespace ProjectR.Backend.Application.Models
     {
             public Guid Id { get; set; }
 
-            [Required(ErrorMessage = "Industry Name is Required")]
             public string? Name { get; set; }
 
             public string? Description { get; set; }
+    }
+
+    public class AddIndustryModel
+    {
+
+        [Required(ErrorMessage = "Industry Name is Required")]
+        public string? Name { get; set; }
+
+        public string? Description { get; set; }
     }
 }
