@@ -4,15 +4,17 @@ namespace ProjectR.Backend.Application.Models
     {
         public bool Status { get; private set; }
         public string? Message { get; private set; }
-        public BaseResponseModel(string? message = "", bool status = true)
+        public string[] Errors { get; private set; }
+        public BaseResponseModel(string? message = "", bool status = true, string[]? errors = null)
         {
             Message = message;
             Status = status;
+            Errors = errors ?? Array.Empty<string>();
         }
     }
     public class ResponseModel<T> : BaseResponseModel
     {
-        public ResponseModel(string? message, T? data, bool status = true) : base(message, status)
+        public ResponseModel(string? message, T? data, bool status = true, string[]? errors = null) : base(message, status, errors)
         {
             Data = data;
         }

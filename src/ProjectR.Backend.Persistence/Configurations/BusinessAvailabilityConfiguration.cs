@@ -8,21 +8,26 @@ namespace ProjectR.Backend.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<BusinessAvailability> builder)
         {
-            builder.HasKey(e => e.Id);
-            builder.Property(e => e.BusinessId).IsRequired();
-            builder.Property(e => e.StartDate).IsRequired();
-            builder.Property(e => e.EndDate).IsRequired();
-            builder.Property(e => e.ValidFrom);
-            builder.Property(e => e.ValidTo);
+            builder.HasKey(x => x.Id);
 
-            builder.HasOne(e => e.Business)
-                  .WithMany()
-                  .HasForeignKey(e => e.BusinessId)
-                  .OnDelete(DeleteBehavior.Cascade);
+            builder.Property(x => x.BusinessId)
+                .IsRequired();
 
-            builder.HasMany(e => e.Slots)
-                  .WithOne()
-                  .HasForeignKey(e => e.BusinessAvailabilityId);
+            builder.HasOne(x => x.Business)
+                .WithMany()
+                .HasForeignKey(x => x.BusinessId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Property(x => x.StartDate)
+                .IsRequired();
+
+            builder.Property(x => x.EndDate)
+                .IsRequired();
+
+            builder.HasMany(x => x.Slots)
+                .WithOne(x => x.BusinessAvailability)
+                .HasForeignKey(x => x.BusinessAvailabilityId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

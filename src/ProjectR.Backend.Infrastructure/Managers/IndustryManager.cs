@@ -1,66 +1,67 @@
 ﻿using ProjectR.Backend.Application.Interfaces.Managers;
-using ProjectR.Backend.Application.Models;
 using ProjectR.Backend.Application.Interfaces.Repository;
+using ProjectR.Backend.Application.Models;
 using ProjectR.Backend.Domain.Entities;
+using ProjectR.Backend.Persistence.Repository;
 
 namespace ProjectR.Backend.Infrastructure.Managers
 {
     public class IndustryManager : IIndustryManager
     {
-        private readonly IIndustryRepository _repository;
+        private readonly IIndustryRepository _industryRepository;
 
         public IndustryManager(IIndustryRepository repository)
         {
-            _repository = repository;
+            _industryRepository = repository;
         }
 
-        public async Task<Guid> CreateIndustryAsync(string name, string? description)
+        public async Task<ResponseModel<IndustryModel>> AddAsync(AddIndustryModel model)
         {
-            var industry = new Industry
-            { 
-                Id = Guid.NewGuid(), 
-                Name = name,
-                Description = description
-            };
-            return await _repository.CreateAsync(industry);
-        }
-
-        public async Task<Industry?> GetIndustryByIdAsync(Guid id)
-        {
-            var industry = await _repository.GetByIdAsync(id);
-            return industry == null ? null : new Industry
-            { 
-                Id = industry.Id, 
-                Name = industry.Name ,
-                Description = industry.Description
-            };
-        }
-
-        public async Task<List<Industry>> GetAllIndustriesAsync()
-        {
-            var industries = await _repository.GetAllAsync();
-            return industries.Select(i => new Industry 
-            { 
-                Id = i.Id, 
-                Name = i.Name, 
-                Description = i.Description
-            }).ToList();
-        }
-
-        public async Task UpdateIndustryAsync(Guid id, string name, string? description)
-        {
-            var industry = await _repository.GetByIdAsync(id);
-            if (industry != null)
+            IndustryModel entity = new()
             {
-                industry.Name = name;
-                industry.Description = description;
-                await _repository.UpdateAsync(industry);
-            }
+                Name = model.Name,
+                Description = model.Description,
+            };
+            IndustryModel result = await _industryRepository.AddAsync(entity);
+            return new ResponseModel<IndustryModel>(message: "Business Added Successfully", data: result, status: true);
         }
 
-        public async Task DeleteIndustryAsync(Guid id)
+        public async Task<ResponseModel<IndustryModel>> GetByIdAsync(Guid id)
         {
-            await _repository.DeleteAsync(id);
+            IndustryModel? result = await _industryRepository.GetByIdAsync(id);
+            return new ResponseModel<IndustryModel>(message: result != null ? "Industry retrieved successfully" : "Industry not found", data: result, status: result != null);
+
+        }
+
+        public async Task<IndustryModel[]> GetAllAsync()
+        {
+            return await _industryRepository.GetAllAsync();
+        }
+
+        public async Task<BaseResponseModel> DeleteAsync(Guid id)
+        {
+            IndustryModel? existingIndustry = await _industryRepository.GetByIdAsync(id);
+            if (existingIndustry == null) 
+            {
+                return new BaseResponseModel(message: "Industry not found", status: false);
+            }
+
+            await _industryRepository.DeleteAsync(existingIndustry);
+            return new BaseResponseModel(message: "Industry succesfully deleted", status: true);
+        }
+
+      
+
+        public async Task<ResponseModel<IndustryModel>> UpdateAsync(IndustryModel industry)
+        {
+            IndustryModel? existingIndustry = await _industryRepository.GetByIdAsync(industry.Id);
+            if (existingIndustry == null)
+            {
+                return new ResponseModel<IndustryModel>(message: "Industry not found", data: default, status: false);
+            }
+
+            IndustryModel result = await _industryRepository.UpdateAsync(industry);
+            return new ResponseModel<IndustryModel>(message: "Business updated successfully", data: result, status: true);
         }
     }
 }

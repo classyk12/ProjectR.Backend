@@ -1,4 +1,5 @@
 using CloudinaryDotNet;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ using ProjectR.Backend.Application.Interfaces.Providers;
 using ProjectR.Backend.Application.Interfaces.Repository;
 using ProjectR.Backend.Application.Interfaces.Utility;
 using ProjectR.Backend.Application.Settings;
+using ProjectR.Backend.Application.Validators;
 using ProjectR.Backend.Infrastructure.Managers;
 using ProjectR.Backend.Infrastructure.Providers;
 using ProjectR.Backend.Infrastructure.Utility;
@@ -34,6 +36,11 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.Configure<TwilioSettings>(configuration.GetSection("Twilio"));
             services.Configure<OtpSettings>(configuration.GetSection("Otp"));
             services.Configure<CloudinarySettings>(configuration.GetSection("Cloudinary"));
+            services.Configure<BusinessAvailabilitySettings>(configuration.GetSection("BusinessAvailability"));
+            #endregion
+
+            #region Validators
+            services.AddValidatorsFromAssemblyContaining<BusinessAvailabilityValidator>();
             #endregion
 
             #region  Providers
@@ -48,6 +55,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IBusinessRepository, BusinessRepository>();
             services.AddScoped<IOtpRepository, OtpRepository>();
             services.AddScoped<IIndustryRepository, IndustryRepository>();
+            services.AddScoped<IBusinessAvailabilityRepository, BusinessAvailabilityRepository>();
             #endregion
 
             #region Managers
@@ -62,6 +70,7 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
             services.AddScoped<IOtpManager, OtpManager>();
             services.AddScoped<IIndustryManager, IndustryManager>();
             services.AddScoped<IAuthManager, AuthManager>();
+            services.AddScoped<IBusinessAvailabilityManager, BusinessAvailabilityManager>();
             #endregion
 
             #region Services
@@ -138,9 +147,9 @@ namespace ProjectR.Backend.Infrastructure.ServiceConfigurations
         {
             string connectionString = configuration.GetConnectionString("DefaultConnection")!;
             services.AddDbContext<AppDbContext>(options =>
-              options.UseNpgsql(connectionString, options =>
+              options.UseSqlServer(connectionString, options =>
               {
-                  options.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorCodesToAdd: []);
+                  options.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorNumbersToAdd: []);
               }));
         }
         public static void RegisterHttpClients(this IServiceCollection services, IConfiguration configuration)

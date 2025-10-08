@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ProjectR.Backend.Domain.Entities
 {
     /// <summary>
-    /// This is the avaibility for a business for a given period
+    /// This is the avaibility slot for a business for a given period and represents a day in the week
     /// </summary>
     public class BusinessAvailabilitySlot : BaseObject
     {
@@ -11,16 +11,15 @@ namespace ProjectR.Backend.Domain.Entities
         public Guid BusinessAvailabilityId { get; set; }
         public BusinessAvailability? BusinessAvailability { get; set; }
         [Required]
-        public TimeOnly? StartTime { get; set; }
+        public DateTimeOffset? StartTime { get; set; }
         [Required]
-        public TimeOnly? EndTime { get; set; }
-        public DayOfWeek DayOfWeek { get; set; } 
-
+        public DateTimeOffset? EndTime { get; set; }
+        public DayOfWeek DayOfWeek { get; set; }
         /// <summary>
-        /// keeping the breaks here as a list of time(may be better to extract and compre that way)
-        /// This is subject to restructuring if need be in the future
+        /// The specific date for this slot. Slots are generally recurring weekly but this date represents the specific date for this slot
         /// </summary>
-        public List<TimeOnly>? Breaks { get; set; }
+        public DateTimeOffset Date { get; set; }
+        public ICollection<Break>? Breaks { get; set; }
     }
 }
 
