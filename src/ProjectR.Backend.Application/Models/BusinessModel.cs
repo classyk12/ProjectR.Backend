@@ -42,4 +42,9 @@ namespace ProjectR.Backend.Application.Models
         public string? Latitude { get; set; }
         public string? Logo { get; set; }
     }
+
+    public class UploadLogoModel
+    {
+        public IFormFile File { get; set; }
+    }
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using ProjectR.Backend.Application.Interfaces.Managers;
 using ProjectR.Backend.Application.Interfaces.Repository;
 using ProjectR.Backend.Application.Interfaces.Utility;
@@ -175,6 +176,30 @@ namespace ProjectR.Backend.Infrastructure.Managers
             BusinessModel[] result = await _businessRepository.UpdateAsync(businesses);
             return new ResponseModel<BusinessModel[]>(message: "Business updated successfully", data: result, status: true);
 
+        }
+
+        public async Task<ResponseModel<BusinessModel>> UploadLogoAsync(Guid id, IFormFile file)
+        {
+            BusinessModel? business = await _businessRepository.GetByIdAsync(id);
+            if (business == null)
+            {
+                return new ResponseModel<BusinessModel>(message: "Business not found", data: default, status: false);
+            }
+
+            var upload = await _cloudinaryService.UploadImageAsync(file, $"business/{id}");
+
+            if (!upload.IsSuccess)
+            {
+                    return new ResponseModel<BusinessModel>(
+                        message: $"Logo upload failed: {upload.ErrorMessage}",
+                        data: default,
+                        status: false
+                    );
+            }
+            business.Logo = upload?.SecureUrl?.ToString() ?? upload?.Url.ToString();
+
+            BusinessModel updatedBusiness = await _businessRepository.UpdateAsync(business);
+            return new ResponseModel<BusinessModel>(message: "Logo Updated Successfully", data: updatedBusiness, status: true);
         }
     }
 }

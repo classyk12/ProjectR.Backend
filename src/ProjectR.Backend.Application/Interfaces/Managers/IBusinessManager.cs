@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using ProjectR.Backend.Application.Models;
 
 namespace ProjectR.Backend.Application.Interfaces.Managers
